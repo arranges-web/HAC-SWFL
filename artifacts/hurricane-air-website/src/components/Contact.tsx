@@ -33,8 +33,7 @@ export function Contact() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  function onSubmit(_values: z.infer<typeof formSchema>) {
     toast({
       title: "Request Received!",
       description: "We'll be in touch within 1 business hour to confirm your appointment.",

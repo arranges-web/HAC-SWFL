@@ -11,6 +11,7 @@ import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { Stats } from "@/components/Stats";
 import { About } from "@/components/About";
 import { Membership } from "@/components/Membership";
+import { Financing } from "@/components/Financing";
 import { Testimonials } from "@/components/Testimonials";
 import { ServiceArea } from "@/components/ServiceArea";
 import { Accreditations } from "@/components/Accreditations";
@@ -31,6 +32,7 @@ function Home() {
         <Stats />
         <About />
         <Membership />
+        <Financing />
         <Testimonials />
         <ServiceArea />
         <Contact />

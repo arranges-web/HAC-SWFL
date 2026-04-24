@@ -69,9 +69,11 @@ export function Membership() {
                 </div>
               </div>
 
-              <Button className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-14 text-lg shadow-[0_0_20px_rgba(49,232,67,0.3)] hover:shadow-[0_0_30px_rgba(49,232,67,0.5)] transition-all">
-                Become a Member
-              </Button>
+              <a href="#contact" className="block">
+                <Button className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-14 text-lg shadow-[0_0_20px_rgba(49,232,67,0.3)] hover:shadow-[0_0_30px_rgba(49,232,67,0.5)] transition-all">
+                  Become a Member
+                </Button>
+              </a>
               
               <p className="text-center text-xs text-zinc-500 mt-4">
                 Renews automatically. Cancel anytime.

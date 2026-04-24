@@ -75,9 +75,11 @@ export function Header() {
                 </span>
               </div>
             </a>
-            <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold px-6 shadow-[0_0_15px_rgba(49,232,67,0.3)] hover:shadow-[0_0_25px_rgba(49,232,67,0.5)] transition-all">
-              Schedule Now
-            </Button>
+            <a href="#contact">
+              <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold px-6 shadow-[0_0_15px_rgba(49,232,67,0.3)] hover:shadow-[0_0_25px_rgba(49,232,67,0.5)] transition-all">
+                Schedule Now
+              </Button>
+            </a>
           </div>
 
           {/* Mobile CTA + Nav Toggle (always visible) */}
@@ -89,12 +91,14 @@ export function Header() {
             >
               <Phone className="h-5 w-5 text-secondary" />
             </a>
-            <Button
-              size="sm"
-              className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-10 px-4 text-sm shadow-[0_0_15px_rgba(49,232,67,0.3)]"
-            >
-              Schedule
-            </Button>
+            <a href="#contact">
+              <Button
+                size="sm"
+                className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-10 px-4 text-sm shadow-[0_0_15px_rgba(49,232,67,0.3)]"
+              >
+                Schedule
+              </Button>
+            </a>
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="text-foreground" aria-label="Open menu">
@@ -120,9 +124,11 @@ export function Header() {
                       <Phone className="h-5 w-5 text-secondary" />
                       <span className="text-lg font-bold">(239) 748-1815</span>
                     </a>
-                    <Button className="bg-secondary text-secondary-foreground font-bold w-full h-12 text-lg">
-                      Schedule Now
-                    </Button>
+                    <a href="#contact" className="block">
+                      <Button className="bg-secondary text-secondary-foreground font-bold w-full h-12 text-lg">
+                        Schedule Now
+                      </Button>
+                    </a>
                   </div>
                 </div>
               </SheetContent>
