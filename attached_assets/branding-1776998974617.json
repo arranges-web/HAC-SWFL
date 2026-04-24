@@ -1,0 +1,146 @@
+{
+  "colorScheme": "light",
+  "fonts": [
+    {
+      "family": "Montserrat",
+      "role": "heading"
+    },
+    {
+      "family": "Inter",
+      "role": "body"
+    }
+  ],
+  "colors": {
+    "primary": "#011669",
+    "secondary": "#31E843",
+    "accent": "#F4951F",
+    "background": "#FFFFFF",
+    "textPrimary": "#333333",
+    "link": "#F4951F"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "Inter",
+      "heading": "Montserrat"
+    },
+    "fontStacks": {
+      "heading": [
+        "Plus Jakarta Sans",
+        "sans-serif"
+      ],
+      "body": [
+        "Montserrat",
+        "sans-serif"
+      ],
+      "paragraph": [
+        "Montserrat",
+        "sans-serif"
+      ]
+    },
+    "fontSizes": {
+      "h1": "25px",
+      "h2": "60px",
+      "body": "16px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 4,
+    "borderRadius": "3px"
+  },
+  "components": {
+    "input": {
+      "background": "#FFFFFF",
+      "textColor": "#4D4D4D",
+      "borderColor": "#666666",
+      "borderRadius": "3px",
+      "borderRadiusCorners": {
+        "topLeft": "3px",
+        "topRight": "3px",
+        "bottomRight": "3px",
+        "bottomLeft": "3px"
+      },
+      "shadow": "none"
+    },
+    "buttonPrimary": {
+      "background": "#31E843",
+      "textColor": "#011669",
+      "borderColor": "#31E843",
+      "borderRadius": "5px",
+      "borderRadiusCorners": {
+        "topLeft": "5px",
+        "topRight": "5px",
+        "bottomRight": "5px",
+        "bottomLeft": "5px"
+      },
+      "shadow": "rgba(0, 0, 0, 0.5) 0px 0px 0px 0px"
+    },
+    "buttonSecondary": {
+      "background": "#011669",
+      "textColor": "#FFFFFF",
+      "borderRadius": "5px",
+      "borderRadiusCorners": {
+        "topLeft": "5px",
+        "topRight": "5px",
+        "bottomRight": "5px",
+        "bottomLeft": "5px"
+      },
+      "shadow": "rgba(0, 0, 0, 0.5) 0px 0px 0px 0px"
+    }
+  },
+  "images": {
+    "logo": "File saved at: attached_assets/logo.webp",
+    "favicon": "File saved at: attached_assets/favicon.png",
+    "ogImage": null,
+    "logoHref": "https://hurricaneairconditioning.com",
+    "logoAlt": "Logo for Hurricane Air Conditioning of SWFL, Inc. featuring bold text and abstract swirls in green, blue, and gray."
+  },
+  "__llm_logo_reasoning": {
+    "selectedIndex": 0,
+    "reasoning": "Selected #0 because it is visible, located in the header, links to the homepage, and matches the brand name 'Hurricane Air Conditioning of SWFL, Inc.'.",
+    "confidence": 0.9,
+    "source": "llm"
+  },
+  "__llm_button_reasoning": {
+    "primary": {
+      "index": 4,
+      "text": "Schedule Now",
+      "reasoning": "Button #3 'Schedule Now' is a strong call-to-action with a vibrant green color, indicating urgency and importance, making it the primary CTA."
+    },
+    "secondary": {
+      "index": 10,
+      "text": "Learn More",
+      "reasoning": "Button #0 'Learn More' is in a different color group (blue) and serves as a secondary action, providing additional information."
+    },
+    "confidence": 0.95
+  },
+  "personality": {
+    "tone": "professional",
+    "energy": "medium",
+    "targetAudience": "homeowners in Southwest Florida seeking HVAC services"
+  },
+  "designSystem": {
+    "framework": "custom",
+    "componentLibrary": ""
+  },
+  "confidence": {
+    "buttons": 0.95,
+    "colors": 0.9,
+    "overall": 0.925
+  },
+  "__llm_metadata": {
+    "logoSelection": {
+      "llmCalled": true,
+      "llmSucceeded": true,
+      "finalSource": "llm",
+      "rawLogoSelection": {
+        "selectedLogoIndex": 0,
+        "selectedLogoReasoning": "Selected #0 because it is visible, located in the header, links to the homepage, and matches the brand name 'Hurricane Air Conditioning of SWFL, Inc.'.",
+        "confidence": 0.9
+      }
+    },
+    "buttonClassification": {
+      "llmCalled": true,
+      "llmSucceeded": true
+    }
+  }
+}
