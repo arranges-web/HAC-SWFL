@@ -58,19 +58,22 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex flex-col">
       {/* Top Utility Bar */}
-      <div className="bg-primary text-primary-foreground py-2 px-4 text-xs sm:text-sm">
+      <div className="bg-primary text-primary-foreground py-1.5 sm:py-2 px-4 text-[11px] sm:text-sm">
         <div className="flex justify-between items-center max-w-7xl mx-auto w-full">
-          <div className="flex items-center gap-2">
-            <MapPin className="h-4 w-4 text-secondary" />
+          <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-secondary shrink-0" />
             <span className="hidden sm:inline">Serving Lee, Collier, Charlotte & Sarasota Counties</span>
-            <span className="sm:hidden">SWFL Service Area</span>
+            <span className="sm:hidden truncate">SWFL Service Area</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary" />
             </span>
-            <span className="font-semibold text-secondary">24/7 Emergency Service</span>
+            <span className="font-semibold text-secondary">
+              <span className="sm:hidden">24/7 Emergency</span>
+              <span className="hidden sm:inline">24/7 Emergency Service</span>
+            </span>
           </div>
         </div>
       </div>
@@ -79,8 +82,8 @@ export function Header() {
       <div
         className={`relative w-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           isScrolled
-            ? "bg-background/75 backdrop-blur-2xl border-b border-border/60 shadow-sm py-3"
-            : "bg-background/40 backdrop-blur-md py-5"
+            ? "bg-background/75 backdrop-blur-2xl border-b border-border/60 shadow-sm py-2 sm:py-3"
+            : "bg-background/40 backdrop-blur-md py-3 sm:py-5"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
@@ -88,7 +91,7 @@ export function Header() {
             <img
               src="/logo.webp"
               alt="Hurricane Air Logo"
-              className="h-10 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_hsl(126_80%_55%/0.5)]"
+              className="h-9 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_hsl(126_80%_55%/0.5)]"
             />
           </Link>
 

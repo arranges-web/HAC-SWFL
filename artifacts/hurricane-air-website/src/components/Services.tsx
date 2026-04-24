@@ -61,7 +61,7 @@ function MagneticTilt({ children, className = "" }: { children: React.ReactNode;
 
 export function Services() {
   return (
-    <section id="services" className="relative py-24 sm:py-32 bg-background overflow-hidden">
+    <section id="services" className="relative py-14 sm:py-20 lg:py-28 bg-background overflow-hidden">
       {/* Soft brand glow background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 -right-32 w-[500px] h-[500px] bg-secondary/5 blur-[120px] rounded-full" />
@@ -69,13 +69,13 @@ export function Services() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 lg:mb-16">
           <div className="inline-flex items-center gap-2 mb-4">
             <span className="h-px w-8 bg-secondary" />
             <h2 className="text-xs font-bold tracking-[0.3em] text-secondary uppercase">Our Services</h2>
             <span className="h-px w-8 bg-secondary" />
           </div>
-          <h3 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-foreground mb-6 tracking-tight leading-[1.05]">
+          <h3 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-foreground mb-5 sm:mb-6 tracking-tight leading-[1.05]">
             Comprehensive cooling for the <span className="text-secondary">SWFL heat.</span>
           </h3>
           <p className="text-muted-foreground text-lg leading-relaxed">
@@ -92,7 +92,7 @@ export function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="relative h-full overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-[#021a8a] to-primary text-white p-8 sm:p-10 flex flex-col shadow-xl noise"
+              className="relative h-full overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-[#021a8a] to-primary text-white p-6 sm:p-9 lg:p-10 flex flex-col shadow-xl noise"
             >
               {/* Hurricane swirl overlay */}
               <div className="absolute -right-24 -bottom-24 w-[500px] h-[500px] opacity-20 pointer-events-none">
@@ -160,7 +160,7 @@ export function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.5, delay: 0.05 + index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className={`relative h-full overflow-hidden rounded-3xl bg-card border border-card-border p-7 flex flex-col shadow-sm hover:shadow-lg transition-shadow duration-500`}
+                className={`relative h-full overflow-hidden rounded-3xl bg-card border border-card-border p-5 sm:p-6 lg:p-7 flex flex-col shadow-sm hover:shadow-lg transition-shadow duration-500`}
               >
                 {/* Gradient sheen on hover */}
                 <div
@@ -203,7 +203,7 @@ export function Services() {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
+        <div className="mt-10 sm:mt-14 lg:mt-16 text-center">
           <a
             href="#contact"
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-card border border-card-border text-foreground font-bold text-sm shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 press"

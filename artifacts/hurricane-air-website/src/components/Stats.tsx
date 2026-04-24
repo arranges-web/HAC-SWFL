@@ -42,7 +42,7 @@ const stats = [
 
 export function Stats() {
   return (
-    <section className="relative py-24 sm:py-28 bg-primary text-primary-foreground overflow-hidden noise">
+    <section className="relative py-14 sm:py-20 lg:py-24 bg-primary text-primary-foreground overflow-hidden noise">
       {/* Background atmosphere */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[url('/hero-bg.png')] opacity-[0.04] bg-cover bg-center mix-blend-overlay" />
@@ -71,7 +71,7 @@ export function Stats() {
 
       <div className="relative max-w-7xl mx-auto px-4">
         {/* Heading */}
-        <div className="text-center mb-14 sm:mb-20 max-w-2xl mx-auto">
+        <div className="text-center mb-10 sm:mb-14 lg:mb-20 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="h-px w-8 bg-secondary/60" />
             <span className="text-xs font-bold tracking-[0.3em] uppercase text-secondary">By the Numbers</span>
@@ -90,7 +90,7 @@ export function Stats() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="glass-tile rounded-3xl p-6 sm:p-8 flex flex-col group hover:bg-white/[0.08] transition-colors duration-500"
+              className="glass-tile rounded-3xl p-5 sm:p-7 lg:p-8 flex flex-col group hover:bg-white/[0.08] transition-colors duration-500"
             >
               <div className="flex items-center gap-2 mb-4">
                 <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} />
@@ -99,7 +99,7 @@ export function Stats() {
                 </span>
               </div>
 
-              <div className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-none tracking-tight">
+              <div className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white leading-none tracking-tight">
                 <Counter target={s.value} suffix={s.suffix} />
               </div>
 

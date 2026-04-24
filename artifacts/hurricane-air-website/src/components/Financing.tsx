@@ -91,7 +91,7 @@ export function Financing() {
   return (
     <section
       id="financing"
-      className="relative py-24 sm:py-32 bg-gradient-to-br from-[#F4951F] via-[#F4951F] to-[#E07F0A] text-white overflow-hidden noise"
+      className="relative py-14 sm:py-20 lg:py-28 bg-gradient-to-br from-[#F4951F] via-[#F4951F] to-[#E07F0A] text-white overflow-hidden noise"
     >
       <div className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full bg-white/10 blur-[140px] pointer-events-none animate-glow-pulse" />
       <div className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full bg-primary/30 blur-[140px] pointer-events-none" />
@@ -112,7 +112,7 @@ export function Financing() {
               <span className="text-[11px] font-extrabold tracking-[0.2em] uppercase">Financing Available</span>
             </div>
 
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.02] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold leading-[1.02] tracking-tight">
               Cool comfort,
               <br />
               <span className="relative inline-block">

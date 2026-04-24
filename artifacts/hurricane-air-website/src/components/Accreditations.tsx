@@ -104,7 +104,7 @@ export function Accreditations() {
   ];
 
   return (
-    <section className="relative py-12 bg-gradient-to-b from-primary to-[#020c4a] text-white overflow-hidden border-y border-white/5">
+    <section className="relative py-8 sm:py-12 bg-gradient-to-b from-primary to-[#020c4a] text-white overflow-hidden border-y border-white/5">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-secondary/10 blur-[100px] rounded-full" />
       </div>

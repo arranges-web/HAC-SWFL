@@ -55,20 +55,20 @@ export function Testimonials() {
   }
 
   return (
-    <section id="testimonials" className="relative py-24 sm:py-32 bg-zinc-50 overflow-hidden">
+    <section id="testimonials" className="relative py-14 sm:py-20 lg:py-28 bg-zinc-50 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/8 blur-[140px] rounded-full" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 blur-[140px] rounded-full" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 lg:mb-16">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="h-px w-8 bg-secondary" />
             <h2 className="text-xs font-bold tracking-[0.3em] text-secondary uppercase">Real Reviews</h2>
             <span className="h-px w-8 bg-secondary" />
           </div>
-          <h3 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight leading-[1.05] mb-5">
+          <h3 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-foreground tracking-tight leading-[1.05] mb-4 sm:mb-5">
             Loved by your <span className="text-secondary">SWFL neighbors.</span>
           </h3>
           <p className="text-muted-foreground text-lg leading-relaxed">
@@ -82,7 +82,7 @@ export function Testimonials() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="relative bg-white rounded-3xl shadow-xl border border-zinc-100 p-8 sm:p-12 lg:p-16 overflow-hidden"
+          className="relative bg-white rounded-3xl shadow-xl border border-zinc-100 p-6 sm:p-10 lg:p-14 overflow-hidden"
         >
           {/* Big ghosted quote glyph */}
           <Quote className="absolute -top-6 -left-4 w-44 h-44 text-zinc-100" strokeWidth={1.2} />
@@ -99,7 +99,7 @@ export function Testimonials() {
                 </span>
               </div>
 
-              <p className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold text-foreground leading-[1.25] tracking-tight">
+              <p className="text-xl sm:text-2xl lg:text-[2.25rem] font-bold text-foreground leading-[1.25] tracking-tight">
                 "{current.text}"
               </p>
 
@@ -153,7 +153,7 @@ export function Testimonials() {
         </motion.div>
 
         {/* Secondary scrolling marquee of short quotes */}
-        <div className="relative mt-12 overflow-hidden">
+        <div className="relative mt-8 sm:mt-12 overflow-hidden">
           <div className="marquee" style={{ ["--marquee-duration" as string]: "60s" }}>
             {[...shortQuotes, ...shortQuotes].map((q, i) => (
               <div

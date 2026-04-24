@@ -18,13 +18,13 @@ export function BrandRibbon({ variant = "dark" }: BrandRibbonProps) {
       }`}
     >
       <div
-        className="marquee py-5 sm:py-7"
+        className="marquee py-3.5 sm:py-5 lg:py-7"
         style={{ ["--marquee-duration" as string]: "55s" }}
       >
         {[...VOWS, ...VOWS].map((word, i) => (
-          <div key={i} className="flex items-center gap-6 sm:gap-10 px-6 sm:px-10 shrink-0">
+          <div key={i} className="flex items-center gap-5 sm:gap-10 px-5 sm:px-10 shrink-0">
             <span
-              className={`font-extrabold tracking-tight uppercase text-3xl sm:text-5xl lg:text-6xl ${
+              className={`font-extrabold tracking-tight uppercase text-2xl sm:text-4xl lg:text-6xl ${
                 i % 3 === 1
                   ? isDark
                     ? "text-secondary"
@@ -46,7 +46,7 @@ export function BrandRibbon({ variant = "dark" }: BrandRibbonProps) {
               {word}
             </span>
             <Zap
-              className={`h-6 w-6 sm:h-8 sm:w-8 shrink-0 ${
+              className={`h-5 w-5 sm:h-7 sm:w-7 lg:h-8 lg:w-8 shrink-0 ${
                 isDark ? "text-secondary/80" : "text-accent"
               } fill-current`}
             />

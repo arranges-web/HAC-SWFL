@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export function About() {
   return (
-    <section id="about" className="relative py-24 sm:py-32 bg-background overflow-hidden">
+    <section id="about" className="relative py-14 sm:py-20 lg:py-28 bg-background overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 -left-40 w-[400px] h-[400px] bg-secondary/5 blur-[120px] rounded-full" />
       </div>
@@ -64,7 +64,7 @@ export function About() {
               <h2 className="text-xs font-bold tracking-[0.3em] text-secondary uppercase">About Us</h2>
             </div>
 
-            <h3 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-foreground leading-[1.05] tracking-tight">
+            <h3 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-foreground leading-[1.05] tracking-tight">
               Family owned. Locally operated. <span className="text-secondary">Fiercely dedicated.</span>
             </h3>
 

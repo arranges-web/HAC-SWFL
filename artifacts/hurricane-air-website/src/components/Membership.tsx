@@ -29,7 +29,7 @@ export function Membership() {
   }
 
   return (
-    <section id="membership" className="relative py-24 sm:py-32 bg-zinc-950 text-white overflow-hidden noise">
+    <section id="membership" className="relative py-14 sm:py-20 lg:py-28 bg-zinc-950 text-white overflow-hidden noise">
       {/* Background atmosphere */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-32 -right-32 w-[700px] h-[700px] bg-secondary/15 rounded-full blur-[140px] animate-glow-pulse" />
@@ -53,7 +53,7 @@ export function Membership() {
                 <span className="h-px w-8 bg-secondary" />
                 <span className="text-xs font-bold tracking-[0.3em] text-secondary uppercase">Premium Protection</span>
               </div>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-tight mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold leading-[1.05] tracking-tight mb-5 sm:mb-6">
                 Stay cool all year — <span className="text-secondary">on autopilot.</span>
               </h2>
               <p className="text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-xl">
@@ -134,7 +134,7 @@ export function Membership() {
 
                   <div className="flex items-baseline gap-1 mt-7">
                     <span className="text-2xl font-bold text-secondary">$</span>
-                    <span className="text-7xl font-extrabold tracking-tight tabular-nums">189</span>
+                    <span className="text-6xl sm:text-7xl font-extrabold tracking-tight tabular-nums">189</span>
                     <span className="text-zinc-400 font-medium ml-1">/year</span>
                   </div>
 

@@ -43,7 +43,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32 bg-background overflow-hidden">
+    <section id="contact" className="relative py-14 sm:py-20 lg:py-28 bg-background overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 -left-32 w-[400px] h-[400px] bg-secondary/8 blur-[120px] rounded-full" />
         <div className="absolute bottom-0 -right-32 w-[400px] h-[400px] bg-accent/8 blur-[120px] rounded-full" />
@@ -58,7 +58,7 @@ export function Contact() {
                 <span className="h-px w-8 bg-secondary" />
                 <h2 className="text-xs font-bold tracking-[0.3em] text-secondary uppercase">Get In Touch</h2>
               </div>
-              <h3 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-foreground leading-[1.05] tracking-tight mb-6">
+              <h3 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-foreground leading-[1.05] tracking-tight mb-5 sm:mb-6">
                 Fast, reliable service is one call away.
               </h3>
               <p className="text-muted-foreground text-lg leading-relaxed">
@@ -117,7 +117,7 @@ export function Contact() {
 
           {/* Right column: form */}
           <div className="lg:col-span-3">
-            <div className="bg-card border border-card-border rounded-3xl p-8 sm:p-10 shadow-xl">
+            <div className="bg-card border border-card-border rounded-3xl p-6 sm:p-9 lg:p-10 shadow-xl">
               <h4 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Request an estimate or service</h4>
               <p className="text-sm text-muted-foreground mb-7">We respond within one business hour.</p>
 

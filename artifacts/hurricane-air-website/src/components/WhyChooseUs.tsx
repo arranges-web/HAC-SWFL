@@ -14,7 +14,7 @@ const pillars = [
 
 export function WhyChooseUs() {
   return (
-    <section className="relative py-24 sm:py-32 bg-zinc-50 overflow-hidden">
+    <section className="relative py-14 sm:py-20 lg:py-28 bg-zinc-50 overflow-hidden">
       {/* Diagonal section divider */}
       <div
         className="absolute top-0 left-0 right-0 h-32 bg-background"

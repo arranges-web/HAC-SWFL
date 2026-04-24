@@ -192,7 +192,7 @@ export function ServiceArea() {
   const activeCounty = counties.find((c) => c.key === active);
 
   return (
-    <section className="relative py-24 sm:py-32 bg-background overflow-hidden">
+    <section className="relative py-14 sm:py-20 lg:py-28 bg-background overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-32 right-0 w-[500px] h-[500px] bg-blue-500/8 blur-[140px] rounded-full" />
       </div>
@@ -210,7 +210,7 @@ export function ServiceArea() {
               <span className="h-px w-8 bg-secondary" />
               <h2 className="text-xs font-bold tracking-[0.3em] text-secondary uppercase">Service Area</h2>
             </div>
-            <h3 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-foreground leading-[1.05] tracking-tight mb-6">
+            <h3 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-foreground leading-[1.05] tracking-tight mb-5 sm:mb-6">
               Proudly serving all of <span className="text-secondary">Southwest Florida.</span>
             </h3>
             <p className="text-lg text-muted-foreground mb-10 leading-relaxed">

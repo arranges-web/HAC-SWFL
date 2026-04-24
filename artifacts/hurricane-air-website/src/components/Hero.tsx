@@ -80,7 +80,7 @@ export function Hero() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="relative min-h-[100svh] flex items-center justify-center pt-28 pb-20 overflow-hidden bg-primary noise">
+    <section className="relative sm:min-h-[100svh] flex items-start sm:items-center justify-center pt-24 sm:pt-32 pb-20 sm:pb-24 overflow-hidden bg-primary noise">
       {/* Layered atmospheric background */}
       <div className="absolute inset-0 z-0">
         <img
@@ -120,7 +120,7 @@ export function Hero() {
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-7 text-white space-y-7"
+          className="lg:col-span-7 text-white space-y-5 sm:space-y-7"
         >
           {/* Live status pill */}
           <div className="inline-flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-full glass-tile text-white/95">
@@ -134,7 +134,7 @@ export function Hero() {
           </div>
 
           {/* Headline with staggered word reveal */}
-          <h1 className="text-5xl sm:text-6xl lg:text-[5.5rem] xl:text-[6rem] font-extrabold leading-[1.02] tracking-tight">
+          <h1 className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] xl:text-[6rem] font-extrabold leading-[1.02] tracking-tight">
             {["When", "the", "storm", "hits,"].map((word, i) => (
               <motion.span
                 key={i}
@@ -189,36 +189,73 @@ export function Hero() {
             initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.05 }}
-            className="flex flex-wrap gap-3 sm:gap-4 pt-2"
+            className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 pt-2"
           >
             <Button
               asChild
               size="lg"
-              className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-14 px-7 text-base sm:text-lg glow-green hover:translate-y-[-2px] group"
+              className="w-full sm:w-auto bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-12 sm:h-14 px-6 sm:px-7 text-base sm:text-lg glow-green hover:translate-y-[-2px] group"
             >
               <a href="#contact">
                 Instant A/C Quote
                 <ArrowRight className="ml-1 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="bg-white/5 border-white/25 text-white hover:bg-white/15 hover:text-white h-14 px-7 font-bold text-base sm:text-lg backdrop-blur-md"
-            >
-              <a href="#contact">Free Second Opinion</a>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              className="bg-accent text-white hover:bg-accent/90 font-bold h-14 px-7 text-base sm:text-lg glow-orange hover:translate-y-[-2px] group"
-            >
-              <a href="#financing">
-                <CreditCard className="mr-1 h-5 w-5" />
-                Apply for Financing
-              </a>
-            </Button>
+            <div className="grid grid-cols-2 sm:contents gap-3">
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="bg-white/5 border-white/25 text-white hover:bg-white/15 hover:text-white h-12 sm:h-14 px-4 sm:px-7 font-bold text-sm sm:text-lg backdrop-blur-md"
+              >
+                <a href="#contact">Free Second Opinion</a>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                className="bg-accent text-white hover:bg-accent/90 font-bold h-12 sm:h-14 px-4 sm:px-7 text-sm sm:text-lg glow-orange hover:translate-y-[-2px] group"
+              >
+                <a href="#financing">
+                  <CreditCard className="mr-1 h-4 w-4 sm:h-5 sm:w-5" />
+                  <span className="sm:hidden">Financing</span>
+                  <span className="hidden sm:inline">Apply for Financing</span>
+                </a>
+              </Button>
+            </div>
+          </motion.div>
+
+          {/* Mobile-only compact stat strip (replaces the desktop floating cards) */}
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 1.1 }}
+            className="grid grid-cols-3 gap-2 lg:hidden"
+            aria-hidden
+          >
+            <div className="glass-tile rounded-2xl p-3 text-white">
+              <div className="flex items-center gap-1.5 mb-1">
+                <Sun className="h-3 w-3 text-accent" />
+                <span className="text-[9px] uppercase tracking-widest text-white/60 font-bold">Now</span>
+              </div>
+              <div className="text-2xl font-extrabold tabular-nums leading-none">86°</div>
+              <div className="text-[10px] text-white/60 mt-1">Fort Myers</div>
+            </div>
+            <div className="glass-tile rounded-2xl p-3 text-white">
+              <div className="flex items-center gap-1.5 mb-1">
+                <Clock className="h-3 w-3 text-secondary" />
+                <span className="text-[9px] uppercase tracking-widest text-white/60 font-bold">Dispatch</span>
+              </div>
+              <div className="text-2xl font-extrabold tabular-nums leading-none">47<span className="text-xs text-white/60 font-medium">min</span></div>
+              <div className="text-[10px] text-white/60 mt-1">Avg arrival</div>
+            </div>
+            <div className="glass-tile rounded-2xl p-3 text-white">
+              <div className="flex items-center gap-1.5 mb-1">
+                <Star className="h-3 w-3 fill-secondary text-secondary" />
+                <span className="text-[9px] uppercase tracking-widest text-white/60 font-bold">Rated</span>
+              </div>
+              <div className="text-2xl font-extrabold tabular-nums leading-none">5.0★</div>
+              <div className="text-[10px] text-white/60 mt-1">1,200+ revs</div>
+            </div>
           </motion.div>
 
           {/* Trust pill chips */}
@@ -226,7 +263,7 @@ export function Hero() {
             initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
-            className="flex flex-wrap items-center gap-2 sm:gap-3 pt-6"
+            className="hidden sm:flex flex-wrap items-center gap-2 sm:gap-3 pt-2 sm:pt-6"
           >
             {[
               { icon: ThermometerSnowflake, label: "Same-Day Service", color: "text-secondary" },
@@ -326,7 +363,7 @@ export function Hero() {
 
       {/* SWFL city marquee at the bottom */}
       <div
-        className="absolute bottom-0 left-0 right-0 z-10 py-4 border-t border-white/10 bg-gradient-to-r from-primary/80 via-primary/40 to-primary/80 backdrop-blur-md"
+        className="absolute bottom-0 left-0 right-0 z-10 py-2.5 sm:py-4 border-t border-white/10 bg-gradient-to-r from-primary/80 via-primary/40 to-primary/80 backdrop-blur-md"
         aria-hidden
       >
         <div className="marquee" style={{ ["--marquee-duration" as string]: "60s" }}>

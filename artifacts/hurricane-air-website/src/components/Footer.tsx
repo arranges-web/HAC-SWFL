@@ -48,10 +48,10 @@ export function Footer() {
       <div className="absolute -top-32 right-0 w-[500px] h-[500px] bg-secondary/15 blur-[140px] rounded-full pointer-events-none" />
       <div className="absolute -bottom-40 left-0 w-[500px] h-[500px] bg-accent/10 blur-[140px] rounded-full pointer-events-none" />
 
-      <div className="relative pt-28 sm:pt-32 pb-10">
+      <div className="relative pt-20 sm:pt-28 lg:pt-32 pb-8 sm:pb-10">
         <div className="max-w-7xl mx-auto px-4">
           {/* Top: brand + newsletter */}
-          <div className="grid lg:grid-cols-12 gap-10 mb-14 pb-10 border-b border-white/10">
+          <div className="grid lg:grid-cols-12 gap-8 sm:gap-10 mb-10 sm:mb-14 pb-8 sm:pb-10 border-b border-white/10">
             <div className="lg:col-span-6 space-y-5">
               <img src="/logo.webp" alt="Hurricane Air Logo" className="h-12 w-auto brightness-0 invert" />
               <p className="text-white/70 max-w-md text-base leading-relaxed">
@@ -127,7 +127,7 @@ export function Footer() {
           </div>
 
           {/* Middle: columns */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-14">
             <div>
               <h4 className="font-extrabold text-sm uppercase tracking-[0.2em] text-secondary mb-5">Services</h4>
               <ul className="space-y-3 text-sm">
