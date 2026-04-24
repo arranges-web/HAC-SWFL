@@ -1,0 +1,20 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "bg0jCQLGcgUga6MZwBSTv"
+uri = "file://artifacts/hurricane-air-website/public/hero-bg.png"
+type = "image"
+title = "HVAC technician working golden hour"
+
+[[generated]]
+id = "hi29A2FvyDzXEsnRS3DQ9"
+uri = "file://artifacts/hurricane-air-website/public/ac-install.png"
+type = "image"
+title = "Florida AC install outdoor"
+
+[[generated]]
+id = "-4QU81iApWmtjaZizBaQS"
+uri = "file://artifacts/hurricane-air-website/public/swfl-map.png"
+type = "image"
+title = "Stylized Southwest Florida map"

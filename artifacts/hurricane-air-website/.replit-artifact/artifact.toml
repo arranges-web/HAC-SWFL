@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Hurricane Air Conditioning"
+version = "1.0.0"
+id = "artifacts/hurricane-air-website"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19314
+
+[services.development]
+run = "pnpm --filter @workspace/hurricane-air-website run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/hurricane-air-website", "run", "build" ]
+publicDir = "artifacts/hurricane-air-website/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19314"
+BASE_PATH = "/"
