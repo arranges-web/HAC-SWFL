@@ -230,27 +230,28 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.1 }}
             className="grid grid-cols-3 gap-2 lg:hidden"
-            aria-hidden
+            role="list"
+            aria-label="Live service status: 86 degrees in Fort Myers, 47 minute average dispatch time, 5.0 star rated"
           >
-            <div className="glass-tile rounded-2xl p-3 text-white">
+            <div role="listitem" className="glass-tile rounded-2xl p-3 text-white">
               <div className="flex items-center gap-1.5 mb-1">
-                <Sun className="h-3 w-3 text-accent" />
+                <Sun className="h-3 w-3 text-accent" aria-hidden />
                 <span className="text-[9px] uppercase tracking-widest text-white/60 font-bold">Now</span>
               </div>
               <div className="text-2xl font-extrabold tabular-nums leading-none">86°</div>
               <div className="text-[10px] text-white/60 mt-1">Fort Myers</div>
             </div>
-            <div className="glass-tile rounded-2xl p-3 text-white">
+            <div role="listitem" className="glass-tile rounded-2xl p-3 text-white">
               <div className="flex items-center gap-1.5 mb-1">
-                <Clock className="h-3 w-3 text-secondary" />
+                <Clock className="h-3 w-3 text-secondary" aria-hidden />
                 <span className="text-[9px] uppercase tracking-widest text-white/60 font-bold">Dispatch</span>
               </div>
               <div className="text-2xl font-extrabold tabular-nums leading-none">47<span className="text-xs text-white/60 font-medium">min</span></div>
               <div className="text-[10px] text-white/60 mt-1">Avg arrival</div>
             </div>
-            <div className="glass-tile rounded-2xl p-3 text-white">
+            <div role="listitem" className="glass-tile rounded-2xl p-3 text-white">
               <div className="flex items-center gap-1.5 mb-1">
-                <Star className="h-3 w-3 fill-secondary text-secondary" />
+                <Star className="h-3 w-3 fill-secondary text-secondary" aria-hidden />
                 <span className="text-[9px] uppercase tracking-widest text-white/60 font-bold">Rated</span>
               </div>
               <div className="text-2xl font-extrabold tabular-nums leading-none">5.0★</div>

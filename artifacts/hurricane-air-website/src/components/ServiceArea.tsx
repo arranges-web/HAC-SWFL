@@ -62,7 +62,8 @@ function CountyMap({ active, setActive }: { active: CountyKey | null; setActive:
   return (
     <svg
       viewBox="0 0 460 640"
-      className="w-full h-full"
+      preserveAspectRatio="xMidYMid meet"
+      className="w-full h-auto max-h-[280px] sm:max-h-[420px] lg:max-h-none"
       role="img"
       aria-label="Map of Southwest Florida service area showing four counties"
     >
@@ -258,7 +259,7 @@ export function ServiceArea() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-50 to-blue-100 p-4 sm:p-6 border border-blue-100">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-50 to-blue-100 p-4 sm:p-6 border border-blue-100 flex items-center justify-center">
               <CountyMap active={active} setActive={setActive} />
             </div>
 
