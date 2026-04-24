@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { MapPin, Clock, Truck } from "lucide-react";
 
 type CountyKey = "sarasota" | "charlotte" | "lee" | "collier";
@@ -58,6 +58,7 @@ const counties: County[] = [
 ];
 
 function CountyMap({ active, setActive }: { active: CountyKey | null; setActive: (k: CountyKey | null) => void }) {
+  const reduceMotion = useReducedMotion();
   return (
     <svg
       viewBox="0 0 460 640"
@@ -153,16 +154,22 @@ function CountyMap({ active, setActive }: { active: CountyKey | null; setActive:
             opacity={active === c.key ? "1" : "0.45"}
             className="transition-opacity duration-400"
           >
-            <animate attributeName="stroke-dashoffset" from="0" to="-30" dur="1.5s" repeatCount="indefinite" />
+            {!reduceMotion && (
+              <animate attributeName="stroke-dashoffset" from="0" to="-30" dur="1.5s" repeatCount="indefinite" />
+            )}
           </line>
         );
       })}
 
       {/* HQ pin */}
       <g>
-        <circle cx={HQ.x} cy={HQ.y} r="22" fill="hsl(33 90% 54%)" opacity="0.25">
-          <animate attributeName="r" values="18;30;18" dur="3s" repeatCount="indefinite" />
-          <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite" />
+        <circle cx={HQ.x} cy={HQ.y} r={reduceMotion ? "22" : "22"} fill="hsl(33 90% 54%)" opacity="0.25">
+          {!reduceMotion && (
+            <>
+              <animate attributeName="r" values="18;30;18" dur="3s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite" />
+            </>
+          )}
         </circle>
         <circle cx={HQ.x} cy={HQ.y} r="11" fill="white" stroke="hsl(33 90% 54%)" strokeWidth="3" />
         <circle cx={HQ.x} cy={HQ.y} r="4" fill="hsl(33 90% 54%)" />
