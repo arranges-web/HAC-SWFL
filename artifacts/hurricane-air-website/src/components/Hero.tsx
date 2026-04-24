@@ -69,8 +69,9 @@ function LightningStreak({ className = "", delay = 0 }: { className?: string; de
       <path
         d="M55 5 L40 80 L62 78 L35 195 L52 110 L30 112 Z"
         fill="hsl(126 80% 55%)"
+        opacity="0.55"
         className="animate-lightning"
-        style={{ animationDelay: `${delay}s`, filter: "drop-shadow(0 0 12px hsl(126 80% 55% / 0.8))" }}
+        style={{ animationDelay: `${delay}s`, filter: "drop-shadow(0 0 6px hsl(126 80% 55% / 0.45))" }}
       />
     </svg>
   );
@@ -80,38 +81,38 @@ export function Hero() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="relative sm:min-h-[100svh] flex items-start sm:items-center justify-center pt-24 sm:pt-32 pb-20 sm:pb-24 overflow-hidden bg-primary noise">
+    <section className="relative sm:min-h-[100svh] flex items-start sm:items-center justify-center pt-32 sm:pt-40 lg:pt-44 pb-20 sm:pb-24 overflow-hidden bg-primary noise">
       {/* Layered atmospheric background */}
       <div className="absolute inset-0 z-0">
         <img
           src="/hero-bg.png"
           alt=""
           aria-hidden
-          className="w-full h-full object-cover object-center opacity-25"
+          className="w-full h-full object-cover object-center opacity-[0.12]"
         />
+        {/* Soft top vignette so the LIVE pill / headline always read clean */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-transparent to-primary/40" />
       </div>
 
-      {/* Gradient mesh */}
+      {/* Gradient mesh — softer, more ambient */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-[#011a8a]/80" />
-        <div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-secondary/20 blur-[120px] animate-glow-pulse" />
+        <div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-secondary/[0.10] blur-[160px] animate-glow-pulse" />
         <div
-          className="absolute -bottom-40 right-0 w-[600px] h-[600px] rounded-full bg-accent/15 blur-[140px] animate-glow-pulse"
+          className="absolute -bottom-40 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.08] blur-[170px] animate-glow-pulse"
           style={{ animationDelay: "2s" }}
         />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-blue-500/10 blur-[120px]" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-blue-500/[0.06] blur-[140px]" />
       </div>
 
-      {/* Hurricane swirls — multiple layers */}
+      {/* Hurricane swirls — calmer, slower, dimmer */}
       <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
-        <HurricaneSwirl className="absolute w-[140vw] h-[140vw] max-w-[1800px] max-h-[1800px] animate-spin-slower" opacity={0.15} />
-        <HurricaneSwirl className="absolute w-[80vw] h-[80vw] max-w-[900px] max-h-[900px] animate-spin-reverse" opacity={0.25} />
+        <HurricaneSwirl className="absolute w-[140vw] h-[140vw] max-w-[1800px] max-h-[1800px] animate-spin-slower" opacity={0.07} />
+        <HurricaneSwirl className="absolute w-[80vw] h-[80vw] max-w-[900px] max-h-[900px] animate-spin-reverse" opacity={0.13} />
       </div>
 
-      {/* Lightning streaks */}
-      <LightningStreak className="absolute top-10 left-[12%] w-12 h-32 z-0 pointer-events-none hidden sm:block" delay={0} />
-      <LightningStreak className="absolute top-[30%] right-[8%] w-10 h-28 z-0 pointer-events-none hidden md:block" delay={3.5} />
-      <LightningStreak className="absolute bottom-[20%] left-[8%] w-8 h-24 z-0 pointer-events-none hidden lg:block" delay={6} />
+      {/* Lightning streak — single, subtle, desktop only */}
+      <LightningStreak className="absolute top-[28%] right-[10%] w-10 h-28 z-0 pointer-events-none hidden lg:block" delay={3.5} />
 
       {/* Content grid */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 w-full grid lg:grid-cols-12 gap-10 items-center">
@@ -134,7 +135,7 @@ export function Hero() {
           </div>
 
           {/* Headline with staggered word reveal */}
-          <h1 className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] xl:text-[6rem] font-extrabold leading-[1.02] tracking-tight">
+          <h1 className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] xl:text-[6rem] font-extrabold leading-[1.05] tracking-[-0.015em]">
             {["When", "the", "storm", "hits,"].map((word, i) => (
               <motion.span
                 key={i}
@@ -164,7 +165,7 @@ export function Hero() {
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
                         transition={{ duration: 0.9, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute -bottom-1 left-0 right-0 h-[10px] bg-secondary/40 origin-left rounded-full blur-[2px]"
+                        className="absolute -bottom-1 left-0 right-0 h-[8px] bg-secondary/25 origin-left rounded-full blur-[3px]"
                       />
                     </span>
                   ) : (
@@ -179,7 +180,7 @@ export function Hero() {
             initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="text-lg sm:text-xl text-white/80 max-w-xl font-medium leading-relaxed"
+            className="text-lg sm:text-xl text-white/75 max-w-xl font-medium leading-relaxed"
           >
             Trust. Transparency. Teamwork. Same-day air conditioning repair, replacement, and 24/7 emergency service across Lee, Collier, Charlotte and Sarasota counties.
           </motion.p>
@@ -285,7 +286,7 @@ export function Hero() {
         {/* Right column: floating glass cards */}
         <div className="lg:col-span-5 hidden lg:block relative h-[480px]">
           {/* Soft glow behind cards */}
-          <div className="absolute right-10 top-1/2 -translate-y-1/2 w-80 h-80 bg-secondary/25 rounded-full blur-[100px]" />
+          <div className="absolute right-10 top-1/2 -translate-y-1/2 w-80 h-80 bg-secondary/[0.14] rounded-full blur-[120px]" />
 
           {/* Card 1: Today's conditions */}
           <motion.div
@@ -362,16 +363,16 @@ export function Hero() {
         </div>
       </div>
 
-      {/* SWFL city marquee at the bottom */}
+      {/* SWFL city marquee at the bottom — quiet ambient strip */}
       <div
-        className="absolute bottom-0 left-0 right-0 z-10 py-2.5 sm:py-4 border-t border-white/10 bg-gradient-to-r from-primary/80 via-primary/40 to-primary/80 backdrop-blur-md"
+        className="absolute bottom-0 left-0 right-0 z-10 py-2.5 sm:py-4 border-t border-white/[0.06] bg-gradient-to-r from-primary/70 via-primary/30 to-primary/70 backdrop-blur-md"
         aria-hidden
       >
-        <div className="marquee" style={{ ["--marquee-duration" as string]: "60s" }}>
+        <div className="marquee" style={{ ["--marquee-duration" as string]: "90s" }}>
           {[...SWFL_CITIES, ...SWFL_CITIES].map((city, i) => (
             <div key={i} className="flex items-center gap-3 px-6 shrink-0">
-              <span className="text-[11px] uppercase tracking-[0.3em] text-white/60 font-bold">{city}</span>
-              <span className="h-1 w-1 rounded-full bg-secondary/60" />
+              <span className="text-[11px] uppercase tracking-[0.3em] text-white/45 font-bold">{city}</span>
+              <span className="h-1 w-1 rounded-full bg-secondary/35" />
             </div>
           ))}
         </div>
