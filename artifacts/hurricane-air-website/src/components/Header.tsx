@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Menu, Phone, X, MapPin } from "lucide-react";
+import { Menu, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -80,11 +80,24 @@ export function Header() {
             </Button>
           </div>
 
-          {/* Mobile Nav Toggle */}
-          <div className="lg:hidden">
+          {/* Mobile CTA + Nav Toggle (always visible) */}
+          <div className="flex lg:hidden items-center gap-2">
+            <a
+              href="tel:2397481815"
+              className="flex items-center justify-center h-10 w-10 rounded-full bg-secondary/10 border border-secondary/30"
+              aria-label="Call (239) 748-1815"
+            >
+              <Phone className="h-5 w-5 text-secondary" />
+            </a>
+            <Button
+              size="sm"
+              className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-10 px-4 text-sm shadow-[0_0_15px_rgba(49,232,67,0.3)]"
+            >
+              Schedule
+            </Button>
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-foreground">
+                <Button variant="ghost" size="icon" className="text-foreground" aria-label="Open menu">
                   <Menu className="h-6 w-6" />
                   <span className="sr-only">Toggle menu</span>
                 </Button>
