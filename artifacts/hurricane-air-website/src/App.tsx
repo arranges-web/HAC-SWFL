@@ -17,6 +17,7 @@ import { ServiceArea } from "@/components/ServiceArea";
 import { Accreditations } from "@/components/Accreditations";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { BrandRibbon } from "@/components/BrandRibbon";
 
 const queryClient = new QueryClient();
 
@@ -30,10 +31,12 @@ function Home() {
         <Services />
         <WhyChooseUs />
         <Stats />
+        <BrandRibbon variant="dark" />
         <About />
         <Membership />
         <Financing />
         <Testimonials />
+        <BrandRibbon variant="light" />
         <ServiceArea />
         <Contact />
       </main>

@@ -1,59 +1,119 @@
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
-function Counter({ target, duration = 2, suffix = "" }: { target: number, duration?: number, suffix?: string }) {
-  const [count, setCount] = useState(0);
+function Counter({ target, suffix = "", prefix = "" }: { target: number; suffix?: string; prefix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const reduceMotion = useReducedMotion();
+  const [count, setCount] = useState(reduceMotion ? target : 0);
 
   useEffect(() => {
-    let start = 0;
-    const end = target;
-    const incrementTime = (duration * 1000) / end;
-    
-    const timer = setInterval(() => {
-      start += 1;
-      setCount(start);
-      if (start >= end) clearInterval(timer);
-    }, incrementTime);
+    if (!inView || reduceMotion) {
+      if (reduceMotion) setCount(target);
+      return;
+    }
+    const duration = 2000;
+    const start = performance.now();
+    let raf = 0;
 
-    return () => clearInterval(timer);
-  }, [target, duration]);
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3); // ease-out-cubic
+      setCount(Math.round(target * eased));
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, target, reduceMotion]);
 
-  return <>{count}{suffix}</>;
+  return (
+    <span ref={ref} className="tabular-nums">
+      {prefix}{count}{suffix}
+    </span>
+  );
 }
+
+const stats = [
+  { value: 20, suffix: "+", label: "Years in SWFL", dot: "bg-secondary", note: "Family owned since 2003" },
+  { value: 4, suffix: "", label: "Counties served", dot: "bg-accent", note: "Lee · Collier · Charlotte · Sarasota" },
+  { value: 10, suffix: "k+", label: "Homes serviced", dot: "bg-blue-400", note: "Across all four counties" },
+  { value: 5, suffix: ".0★", label: "Average rating", dot: "bg-secondary", note: "1,200+ verified reviews" },
+];
 
 export function Stats() {
   return (
-    <section className="bg-primary py-16 text-primary-foreground relative">
-      <div className="absolute inset-0 bg-[url('/hero-bg.png')] opacity-5 bg-cover bg-center mix-blend-overlay" />
-      <div className="max-w-7xl mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <div className="text-4xl sm:text-5xl font-extrabold text-secondary mb-2">
-              <Counter target={20} suffix="+" />
-            </div>
-            <div className="text-sm font-semibold uppercase tracking-wider text-white/80">Years Experience</div>
-          </motion.div>
-          
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-            <div className="text-4xl sm:text-5xl font-extrabold text-secondary mb-2">
-              <Counter target={4} />
-            </div>
-            <div className="text-sm font-semibold uppercase tracking-wider text-white/80">Counties Served</div>
-          </motion.div>
+    <section className="relative py-24 sm:py-28 bg-primary text-primary-foreground overflow-hidden noise">
+      {/* Background atmosphere */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[url('/hero-bg.png')] opacity-[0.04] bg-cover bg-center mix-blend-overlay" />
+        <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] bg-secondary/15 blur-[120px] rounded-full" />
+        <div className="absolute -bottom-40 right-1/4 w-[500px] h-[500px] bg-accent/10 blur-[140px] rounded-full" />
 
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-            <div className="text-4xl sm:text-5xl font-extrabold text-secondary mb-2">
-              <Counter target={10} suffix="k+" />
-            </div>
-            <div className="text-sm font-semibold uppercase tracking-wider text-white/80">Homes Serviced</div>
-          </motion.div>
+        {/* Faint hurricane swirl */}
+        <svg
+          viewBox="0 0 600 600"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140vw] max-w-[1400px] opacity-[0.07] animate-spin-slower"
+          fill="none"
+        >
+          {[0, 1, 2, 3, 4, 5].map((i) => (
+            <circle
+              key={i}
+              cx="300"
+              cy="300"
+              r={60 + i * 45}
+              stroke="white"
+              strokeWidth="1"
+              strokeDasharray={`${6 + i * 2} ${(6 + i * 2) * 2}`}
+            />
+          ))}
+        </svg>
+      </div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
-            <div className="text-4xl sm:text-5xl font-extrabold text-secondary mb-2 flex items-center justify-center">
-              5.0<span className="text-2xl ml-1">★</span>
-            </div>
-            <div className="text-sm font-semibold uppercase tracking-wider text-white/80">Star Rating</div>
-          </motion.div>
+      <div className="relative max-w-7xl mx-auto px-4">
+        {/* Heading */}
+        <div className="text-center mb-14 sm:mb-20 max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="h-px w-8 bg-secondary/60" />
+            <span className="text-xs font-bold tracking-[0.3em] uppercase text-secondary">By the Numbers</span>
+            <span className="h-px w-8 bg-secondary/60" />
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+            Built on two decades of <span className="text-secondary">SWFL trust.</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {stats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="glass-tile rounded-3xl p-6 sm:p-8 flex flex-col group hover:bg-white/[0.08] transition-colors duration-500"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} />
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-white/60">
+                  {s.label}
+                </span>
+              </div>
+
+              <div className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-none tracking-tight">
+                <Counter target={s.value} suffix={s.suffix} />
+              </div>
+
+              <p className="text-xs sm:text-sm text-white/60 mt-4 leading-snug">{s.note}</p>
+
+              {/* Animated bottom rule */}
+              <div className="mt-5 h-[2px] rounded-full bg-white/10 overflow-hidden">
+                <div
+                  className={`h-full ${s.dot} scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700`}
+                  style={{ width: "100%" }}
+                />
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

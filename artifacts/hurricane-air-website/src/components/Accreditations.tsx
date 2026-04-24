@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 function BBBLogo() {
   return (
     <div className="flex items-center gap-2 select-none">
@@ -7,8 +5,8 @@ function BBBLogo() {
         <span>BBB</span>
       </div>
       <div className="flex flex-col leading-tight">
-        <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-bold">Accredited</span>
-        <span className="text-base font-black text-[#0A529C]">A+ Rating</span>
+        <span className="text-[10px] uppercase tracking-wider text-white/60 font-bold">Accredited</span>
+        <span className="text-base font-black text-white">A+ Rating</span>
       </div>
     </div>
   );
@@ -22,8 +20,8 @@ function SwaccaLogo() {
         <span className="absolute -bottom-0.5 right-1 text-[8px] font-black text-[#0A529C]">★</span>
       </div>
       <div className="flex flex-col leading-tight">
-        <span className="text-base font-black text-[#0A529C] tracking-tight">SWACCA</span>
-        <span className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">Member</span>
+        <span className="text-base font-black text-white tracking-tight">SWACCA</span>
+        <span className="text-[10px] text-white/60 font-semibold uppercase tracking-wider">Member</span>
       </div>
     </div>
   );
@@ -32,12 +30,12 @@ function SwaccaLogo() {
 function ComfortmakerLogo() {
   return (
     <div className="flex items-center gap-2 select-none">
-      <div className="relative flex items-center justify-center h-12 px-3 bg-white border-2 border-zinc-800 rounded-sm">
+      <div className="relative flex items-center justify-center h-12 px-3 bg-white rounded-sm">
         <span className="text-zinc-900 font-black text-[11px] tracking-tight leading-none">ELITE</span>
       </div>
       <div className="flex flex-col leading-tight">
-        <span className="text-base font-black text-zinc-900 tracking-tight">Comfortmaker</span>
-        <span className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">Elite Dealer</span>
+        <span className="text-base font-black text-white tracking-tight">Comfortmaker</span>
+        <span className="text-[10px] text-white/60 font-semibold uppercase tracking-wider">Elite Dealer</span>
       </div>
     </div>
   );
@@ -46,14 +44,14 @@ function ComfortmakerLogo() {
 function NexstarLogo() {
   return (
     <div className="flex items-center gap-2 select-none">
-      <div className="relative flex items-center justify-center h-12 w-12 rounded-md bg-white border border-zinc-200 shadow-sm">
+      <div className="relative flex items-center justify-center h-12 w-12 rounded-md bg-white shadow-sm">
         <svg viewBox="0 0 24 24" className="h-7 w-7 text-[#F4951F]" fill="currentColor">
           <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6L12 2z" />
         </svg>
       </div>
       <div className="flex flex-col leading-tight">
-        <span className="text-base font-black text-[#0A529C] tracking-tight">NEXSTAR</span>
-        <span className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">Network</span>
+        <span className="text-base font-black text-white tracking-tight">NEXSTAR</span>
+        <span className="text-[10px] text-white/60 font-semibold uppercase tracking-wider">Network</span>
       </div>
     </div>
   );
@@ -62,7 +60,7 @@ function NexstarLogo() {
 function HomeGuideLogo() {
   return (
     <div className="flex items-center gap-2 select-none">
-      <div className="flex flex-col items-center justify-center h-12 w-14 rounded-md bg-zinc-900 px-1 shadow-sm">
+      <div className="flex flex-col items-center justify-center h-12 w-14 rounded-md bg-zinc-900 border border-zinc-700 px-1 shadow-sm">
         <div className="flex gap-[1px]">
           {[0, 1, 2, 3, 4].map((i) => (
             <svg key={i} viewBox="0 0 24 24" className="h-2 w-2 text-[#F4C84B]" fill="currentColor">
@@ -74,8 +72,8 @@ function HomeGuideLogo() {
         <span className="text-[8px] font-black text-[#F4C84B] leading-none">2024</span>
       </div>
       <div className="flex flex-col leading-tight">
-        <span className="text-base font-black text-zinc-900 tracking-tight">HomeGuide</span>
-        <span className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">Top Pro Award</span>
+        <span className="text-base font-black text-white tracking-tight">HomeGuide</span>
+        <span className="text-[10px] text-white/60 font-semibold uppercase tracking-wider">Top Pro Award</span>
       </div>
     </div>
   );
@@ -88,8 +86,8 @@ function EpaLogo() {
         EPA
       </div>
       <div className="flex flex-col leading-tight">
-        <span className="text-base font-black text-zinc-900 tracking-tight">EPA Certified</span>
-        <span className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">608 Universal</span>
+        <span className="text-base font-black text-white tracking-tight">EPA Certified</span>
+        <span className="text-[10px] text-white/60 font-semibold uppercase tracking-wider">608 Universal</span>
       </div>
     </div>
   );
@@ -106,25 +104,35 @@ export function Accreditations() {
   ];
 
   return (
-    <section className="py-12 bg-zinc-50 border-y border-zinc-200 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex flex-col items-center gap-6">
-          <span className="text-xs uppercase tracking-[0.2em] font-bold text-zinc-500">
-            Trusted, Certified & Accredited
-          </span>
-          <div className="flex flex-wrap justify-center items-center gap-x-10 sm:gap-x-14 gap-y-6 w-full">
-            {badges.map((badge, index) => (
-              <motion.div
-                key={badge.id}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.07, ease: "easeOut" }}
-                className="transition-all duration-300 hover:scale-105"
-              >
-                {badge.node}
-              </motion.div>
-            ))}
+    <section className="relative py-12 bg-gradient-to-b from-primary to-[#020c4a] text-white overflow-hidden border-y border-white/5">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-secondary/10 blur-[100px] rounded-full" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4">
+        <div className="flex flex-col items-center gap-8">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-10 bg-secondary/40" />
+            <span className="text-xs uppercase tracking-[0.3em] font-bold text-white/70">
+              Trusted · Certified · Accredited
+            </span>
+            <span className="h-px w-10 bg-secondary/40" />
+          </div>
+
+          <div className="relative w-full overflow-hidden">
+            <div className="marquee items-center" style={{ ["--marquee-duration" as string]: "45s" }}>
+              {[...badges, ...badges, ...badges].map((badge, index) => (
+                <div
+                  key={`${badge.id}-${index}`}
+                  className="px-7 sm:px-10 shrink-0 transition-transform duration-500 hover:scale-105"
+                >
+                  {badge.node}
+                </div>
+              ))}
+            </div>
+            {/* edge fades */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-40 bg-gradient-to-r from-[#020c4a] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-40 bg-gradient-to-l from-[#020c4a] to-transparent" />
           </div>
         </div>
       </div>
