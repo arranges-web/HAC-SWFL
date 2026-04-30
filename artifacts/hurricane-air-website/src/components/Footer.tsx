@@ -151,6 +151,8 @@ export function Footer() {
                   ["Heating Repair", "/services/heating-repair"],
                   ["Heat Pump Install", "/services/heat-pump-installation"],
                   ["Heating Maintenance", "/services/heating-maintenance"],
+                  ["Furnace Repair", "/services/furnace-repair"],
+                  ["Thermostat Install", "/services/thermostat-install"],
                 ].map(([label, href]) => (
                   <li key={label}>
                     <Link href={href} className="text-white/70 hover:text-accent transition-colors press inline-block">
@@ -159,11 +161,19 @@ export function Footer() {
                   </li>
                 ))}
                 <li className="text-[10px] uppercase tracking-widest text-blue-400/70 font-bold pt-2">Air Quality</li>
-                <li>
-                  <Link href="/services/indoor-air-quality" className="text-white/70 hover:text-blue-400 transition-colors press inline-block">
-                    Indoor Air Quality
-                  </Link>
-                </li>
+                {[
+                  ["Indoor Air Quality", "/services/indoor-air-quality"],
+                  ["Air Duct Repair", "/services/air-duct-repair"],
+                  ["Air Duct Cleaning", "/services/air-duct-cleaning"],
+                  ["Dehumidifier", "/services/dehumidifier"],
+                  ["Humidifier", "/services/humidifier"],
+                ].map(([label, href]) => (
+                  <li key={label}>
+                    <Link href={href} className="text-white/70 hover:text-blue-400 transition-colors press inline-block">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -171,16 +181,21 @@ export function Footer() {
               <h4 className="font-extrabold text-sm uppercase tracking-[0.2em] text-secondary mb-5">Company</h4>
               <ul className="space-y-3 text-sm">
                 {[
-                  ["About Us", "#about"],
-                  ["Membership", "#membership"],
-                  ["Financing", "#financing"],
-                  ["Reviews", "#testimonials"],
-                  ["Contact", "#contact"],
+                  ["About Us", "/about"],
+                  ["Offers", "/offers"],
+                  ["A/C Membership", "/membership"],
+                  ["Financing", "/financing"],
+                  ["Labor Warranty", "/labor-warranty"],
+                  ["Service Area", "/service-area"],
+                  ["Careers", "/careers"],
+                  ["Reviews", "/reviews"],
+                  ["Customer Service", "/customer-service"],
+                  ["Contact", "/contact"],
                 ].map(([label, href]) => (
                   <li key={label}>
-                    <a href={href} className="text-white/70 hover:text-secondary transition-colors press inline-block">
+                    <Link href={href} className="text-white/70 hover:text-secondary transition-colors press inline-block">
                       {label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

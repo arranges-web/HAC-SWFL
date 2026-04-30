@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
-import { Menu, Phone, MapPin, Wrench, Wind, Fan, Shield, Zap, ChevronDown, X } from "lucide-react";
+import { Menu, Phone, MapPin, Wrench, Wind, Fan, Shield, Zap, ChevronDown, X, Flame, Thermometer, Droplets } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -16,15 +16,35 @@ const heatingServices = [
   { icon: Wrench, label: "Heating Repair", desc: "Heat pump & air handler repairs", href: "/services/heating-repair" },
   { icon: Wind, label: "Heat Pump Install", desc: "Inverter systems & replacement", href: "/services/heat-pump-installation" },
   { icon: Fan, label: "Heating Maintenance", desc: "Pre-season safety tune-up", href: "/services/heating-maintenance" },
+  { icon: Flame, label: "Furnace Repair", desc: "Diagnosis & same-day repair", href: "/services/furnace-repair" },
+  { icon: Thermometer, label: "Thermostat Install", desc: "Smart thermostat upgrade", href: "/services/thermostat-install" },
 ];
 
 const airQualityServices = [
   { icon: Shield, label: "Indoor Air Quality", desc: "Filtration, UV & humidity control", href: "/services/indoor-air-quality" },
+  { icon: Wind, label: "Air Duct Repair", desc: "Sealing & duct restoration", href: "/services/air-duct-repair" },
+  { icon: Fan, label: "Air Duct Cleaning", desc: "Remove dust & allergens", href: "/services/air-duct-cleaning" },
+  { icon: Droplets, label: "Dehumidifier Services", desc: "Whole-home humidity control", href: "/services/dehumidifier" },
+  { icon: Droplets, label: "Humidifier Services", desc: "Dry air relief & protection", href: "/services/humidifier" },
+];
+
+const companyLinks = [
+  { label: "About Us", href: "/about" },
+  { label: "Offers", href: "/offers" },
+  { label: "A/C Membership", href: "/membership" },
+  { label: "Financing", href: "/financing" },
+  { label: "Labor Warranty", href: "/labor-warranty" },
+  { label: "Service Area", href: "/service-area" },
+  { label: "Careers", href: "/careers" },
+  { label: "Reviews", href: "/reviews" },
+  { label: "Customer Service", href: "/customer-service" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileCompanyOpen, setMobileCompanyOpen] = useState(false);
   const progressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -59,12 +79,10 @@ export function Header() {
   }, []);
 
   const navLinks = [
-    { name: "Services", href: "/#services", hasMenu: true },
-    { name: "Why Us", href: "/#about" },
-    { name: "Membership", href: "/#membership" },
-    { name: "Financing", href: "/#financing" },
-    { name: "Reviews", href: "/#testimonials" },
-    { name: "Contact", href: "/#contact" },
+    { name: "Services", href: "#", hasMenu: "services" },
+    { name: "Company", href: "#", hasMenu: "company" },
+    { name: "Reviews", href: "/reviews" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -111,19 +129,26 @@ export function Header() {
           <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <div key={link.name} className="relative group">
-                <a
-                  href={link.href}
-                  className="relative px-3 py-2 text-sm font-semibold text-foreground/80 hover:text-foreground transition-colors flex items-center gap-1"
-                >
-                  {link.name}
-                  {link.hasMenu && <ChevronDown className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-180" />}
-                  <span className="absolute left-3 right-3 -bottom-0.5 h-[2px] bg-secondary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
-                </a>
+                {link.href === "#" ? (
+                  <button className="relative px-3 py-2 text-sm font-semibold text-foreground/80 hover:text-foreground transition-colors flex items-center gap-1">
+                    {link.name}
+                    <ChevronDown className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-180" />
+                    <span className="absolute left-3 right-3 -bottom-0.5 h-[2px] bg-secondary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
+                  </button>
+                ) : (
+                  <Link
+                    href={link.href}
+                    className="relative px-3 py-2 text-sm font-semibold text-foreground/80 hover:text-foreground transition-colors flex items-center gap-1"
+                  >
+                    {link.name}
+                    <span className="absolute left-3 right-3 -bottom-0.5 h-[2px] bg-secondary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
+                  </Link>
+                )}
 
-                {/* 3-column Mega menu for Services */}
-                {link.hasMenu && (
+                {/* Services Mega Menu */}
+                {link.hasMenu === "services" && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out z-50">
-                    <div className="w-[640px] bg-background/98 backdrop-blur-2xl border border-border/60 rounded-2xl shadow-2xl p-5">
+                    <div className="w-[680px] bg-background/98 backdrop-blur-2xl border border-border/60 rounded-2xl shadow-2xl p-5">
                       <div className="grid grid-cols-3 gap-4">
                         {/* Cooling column */}
                         <div>
@@ -203,6 +228,23 @@ export function Header() {
                     </div>
                   </div>
                 )}
+
+                {/* Company Dropdown */}
+                {link.hasMenu === "company" && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out z-50">
+                    <div className="w-52 bg-background/98 backdrop-blur-2xl border border-border/60 rounded-2xl shadow-2xl p-2">
+                      {companyLinks.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          className="flex items-center px-3 py-2 rounded-xl hover:bg-muted/60 transition-colors text-sm font-semibold text-foreground/80 hover:text-foreground"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </nav>
@@ -255,17 +297,7 @@ export function Header() {
               <SheetContent side="right" className="bg-background border-l-border/10 w-[300px] sm:w-[400px] overflow-y-auto">
                 <div className="flex flex-col gap-6 mt-12">
                   <nav className="flex flex-col gap-1">
-                    {navLinks.filter(l => !l.hasMenu).map((link) => (
-                      <a
-                        key={link.name}
-                        href={link.href}
-                        className="text-lg font-bold text-foreground hover:text-secondary transition-colors p-3 rounded-xl hover:bg-muted/60"
-                      >
-                        {link.name}
-                      </a>
-                    ))}
-
-                    {/* Expandable Services in mobile */}
+                    {/* Services expandable */}
                     <div>
                       <button
                         onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
@@ -297,6 +329,33 @@ export function Header() {
                         </div>
                       )}
                     </div>
+
+                    {/* Company expandable */}
+                    <div>
+                      <button
+                        onClick={() => setMobileCompanyOpen(!mobileCompanyOpen)}
+                        className="w-full flex items-center justify-between text-lg font-bold text-foreground hover:text-secondary transition-colors p-3 rounded-xl hover:bg-muted/60"
+                      >
+                        Company
+                        {mobileCompanyOpen ? <X className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                      </button>
+                      {mobileCompanyOpen && (
+                        <div className="ml-3 mt-1 space-y-1 border-l-2 border-secondary/20 pl-3">
+                          {companyLinks.map((item) => (
+                            <Link key={item.href} href={item.href} className="block text-sm font-semibold text-foreground/80 hover:text-secondary transition-colors py-1.5 px-2 rounded-lg hover:bg-muted/60">
+                              {item.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    <Link href="/reviews" className="text-lg font-bold text-foreground hover:text-secondary transition-colors p-3 rounded-xl hover:bg-muted/60 block">
+                      Reviews
+                    </Link>
+                    <Link href="/contact" className="text-lg font-bold text-foreground hover:text-secondary transition-colors p-3 rounded-xl hover:bg-muted/60 block">
+                      Contact
+                    </Link>
                   </nav>
 
                   <div className="flex flex-col gap-4 pt-6 border-t border-border">
