@@ -11,7 +11,6 @@ export default function HeatPumpInstallation() {
   return (
     <ServicePageLayout
       category="Heating"
-      categoryHref="/services/heat-pump-installation"
       title="Heat Pump Installation"
       subtitle="Inverter-driven heat pump systems that keep you warm in winter and cool in summer — with industry-leading efficiency and a 5-year parts warranty."
       icon={<Wind className="w-16 h-16 text-accent" />}

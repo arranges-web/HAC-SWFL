@@ -11,7 +11,6 @@ export default function HeatingRepair() {
   return (
     <ServicePageLayout
       category="Heating"
-      categoryHref="/services/heating-repair"
       title="Heating Repair"
       subtitle="Fast, accurate heat pump and furnace repairs for Southwest Florida homes — same-day service and written upfront pricing."
       icon={<Wrench className="w-16 h-16 text-accent" />}

@@ -11,7 +11,6 @@ export default function ACMaintenance() {
   return (
     <ServicePageLayout
       category="Cooling"
-      categoryHref="/services/ac-maintenance"
       title="A/C Maintenance & Tune-Up"
       subtitle="Annual tune-ups that extend your system's life, lower your energy bills, and prevent the peak-summer breakdowns you can't afford."
       icon={<Fan className="w-16 h-16 text-secondary" />}

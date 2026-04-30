@@ -11,7 +11,6 @@ export default function ACInstallation() {
   return (
     <ServicePageLayout
       category="Cooling"
-      categoryHref="/services/ac-installation"
       title="A/C Installation & Replacement"
       subtitle="High-efficiency system sizing, installation, and replacement backed by a 5-year parts warranty and our Comfortmaker Elite Dealer guarantee."
       icon={<Wind className="w-16 h-16 text-secondary" />}

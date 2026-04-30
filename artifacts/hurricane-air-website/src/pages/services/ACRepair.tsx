@@ -11,7 +11,6 @@ export default function ACRepair() {
   return (
     <ServicePageLayout
       category="Cooling"
-      categoryHref="/services/ac-repair"
       title="A/C Repair & Diagnostics"
       subtitle="Fast, accurate diagnosis and same-day repairs for every brand of air conditioning system in Southwest Florida."
       icon={<Wrench className="w-16 h-16 text-secondary" />}

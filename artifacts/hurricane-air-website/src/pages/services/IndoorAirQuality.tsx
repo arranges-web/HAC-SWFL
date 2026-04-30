@@ -11,7 +11,6 @@ export default function IndoorAirQuality() {
   return (
     <ServicePageLayout
       category="Air Quality"
-      categoryHref="/services/indoor-air-quality"
       title="Indoor Air Quality"
       subtitle="Breathe cleaner, healthier air inside your Southwest Florida home with whole-home filtration, UV purification, and humidity control solutions."
       icon={<Shield className="w-16 h-16 text-blue-400" />}

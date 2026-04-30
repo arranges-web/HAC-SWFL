@@ -10,7 +10,6 @@ export default function EmergencyAC() {
   return (
     <ServicePageLayout
       category="Cooling"
-      categoryHref="/services/emergency-ac"
       title="24/7 Emergency A/C Service"
       subtitle="When your AC fails in the Florida heat, every minute matters. We're available around the clock with no overtime fees for members — ever."
       icon={<Zap className="w-16 h-16 text-accent" />}

@@ -11,7 +11,6 @@ export default function DuctlessMiniSplit() {
   return (
     <ServicePageLayout
       category="Cooling"
-      categoryHref="/services/ductless-mini-split"
       title="Ductless Mini Split Systems"
       subtitle="Zone-by-zone comfort without ductwork — install, repair, and maintain ductless mini split systems across Southwest Florida."
       icon={<Wind className="w-16 h-16 text-blue-400" />}

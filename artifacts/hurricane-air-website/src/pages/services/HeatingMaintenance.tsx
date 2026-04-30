@@ -11,7 +11,6 @@ export default function HeatingMaintenance() {
   return (
     <ServicePageLayout
       category="Heating"
-      categoryHref="/services/heating-maintenance"
       title="Heating Maintenance"
       subtitle="Pre-season heating tune-ups to ensure your heat pump is ready before Florida's brief but real cold snaps arrive."
       icon={<Fan className="w-16 h-16 text-accent" />}

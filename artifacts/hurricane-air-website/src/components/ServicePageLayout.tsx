@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 
 interface ServicePageLayoutProps {
   category: string;
-  categoryHref: string;
   title: string;
   subtitle: string;
   icon: React.ReactNode;
@@ -44,7 +43,6 @@ const accentClasses = {
 
 export function ServicePageLayout({
   category,
-  categoryHref,
   title,
   subtitle,
   icon,
@@ -88,7 +86,7 @@ export function ServicePageLayout({
             <nav className="flex items-center gap-1.5 text-white/50 text-sm mb-6" aria-label="Breadcrumb">
               <Link href="/" className="hover:text-white/80 transition-colors">Home</Link>
               <ChevronRight className="h-3.5 w-3.5" />
-              <Link href={categoryHref} className="hover:text-white/80 transition-colors">{category}</Link>
+              <span className="text-white/60">{category}</span>
               <ChevronRight className="h-3.5 w-3.5" />
               <span className="text-white/80">{title}</span>
             </nav>
