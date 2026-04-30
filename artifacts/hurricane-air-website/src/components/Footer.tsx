@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { Facebook, Instagram, Mail, Phone, MapPin, Send, Zap, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -130,19 +131,39 @@ export function Footer() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-14">
             <div>
               <h4 className="font-extrabold text-sm uppercase tracking-[0.2em] text-secondary mb-5">Services</h4>
-              <ul className="space-y-3 text-sm">
+              <ul className="space-y-2.5 text-sm">
+                <li className="text-[10px] uppercase tracking-widest text-secondary/70 font-bold pt-1">Cooling</li>
                 {[
-                  ["A/C Repair", "#services"],
-                  ["A/C Installation", "#services"],
-                  ["Routine Maintenance", "#services"],
-                  ["Indoor Air Quality", "#services"],
+                  ["A/C Repair", "/services/ac-repair"],
+                  ["A/C Installation", "/services/ac-installation"],
+                  ["A/C Maintenance", "/services/ac-maintenance"],
+                  ["Emergency A/C", "/services/emergency-ac"],
+                  ["Ductless Mini Split", "/services/ductless-mini-split"],
                 ].map(([label, href]) => (
                   <li key={label}>
-                    <a href={href} className="text-white/70 hover:text-secondary transition-colors press inline-block">
+                    <Link href={href} className="text-white/70 hover:text-secondary transition-colors press inline-block">
                       {label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
+                <li className="text-[10px] uppercase tracking-widest text-accent/70 font-bold pt-2">Heating</li>
+                {[
+                  ["Heating Repair", "/services/heating-repair"],
+                  ["Heat Pump Install", "/services/heat-pump-installation"],
+                  ["Heating Maintenance", "/services/heating-maintenance"],
+                ].map(([label, href]) => (
+                  <li key={label}>
+                    <Link href={href} className="text-white/70 hover:text-accent transition-colors press inline-block">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+                <li className="text-[10px] uppercase tracking-widest text-blue-400/70 font-bold pt-2">Air Quality</li>
+                <li>
+                  <Link href="/services/indoor-air-quality" className="text-white/70 hover:text-blue-400 transition-colors press inline-block">
+                    Indoor Air Quality
+                  </Link>
+                </li>
               </ul>
             </div>
 

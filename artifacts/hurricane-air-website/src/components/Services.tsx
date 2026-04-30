@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "wouter";
 import { motion, useReducedMotion } from "framer-motion";
 import { Wrench, Wind, Fan, ArrowUpRight, Shield, Zap } from "lucide-react";
 
@@ -10,6 +11,7 @@ const services = [
     accent: "text-accent",
     accentBg: "from-accent/15 to-accent/0",
     chipBg: "bg-accent/10",
+    href: "/services/ac-repair",
   },
   {
     title: "Installation & Replacement",
@@ -18,6 +20,7 @@ const services = [
     accent: "text-secondary",
     accentBg: "from-secondary/15 to-secondary/0",
     chipBg: "bg-secondary/10",
+    href: "/services/ac-installation",
   },
   {
     title: "Routine Maintenance",
@@ -26,6 +29,7 @@ const services = [
     accent: "text-blue-500",
     accentBg: "from-blue-500/15 to-blue-500/0",
     chipBg: "bg-blue-500/10",
+    href: "/services/ac-maintenance",
   },
 ];
 
@@ -179,13 +183,13 @@ export function Services() {
                     {service.description}
                   </p>
 
-                  <a
-                    href="#contact"
+                  <Link
+                    href={service.href}
                     className={`inline-flex items-center gap-1.5 text-sm font-bold ${service.accent} group/link self-start`}
                   >
-                    Get a quote
+                    Learn more
                     <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                  </a>
+                  </Link>
                 </div>
 
                 {/* Bottom accent line */}

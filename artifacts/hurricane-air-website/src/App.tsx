@@ -19,6 +19,16 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { BrandRibbon } from "@/components/BrandRibbon";
 
+import ACRepair from "@/pages/services/ACRepair";
+import ACInstallation from "@/pages/services/ACInstallation";
+import ACMaintenance from "@/pages/services/ACMaintenance";
+import EmergencyAC from "@/pages/services/EmergencyAC";
+import DuctlessMiniSplit from "@/pages/services/DuctlessMiniSplit";
+import HeatingRepair from "@/pages/services/HeatingRepair";
+import HeatPumpInstallation from "@/pages/services/HeatPumpInstallation";
+import HeatingMaintenance from "@/pages/services/HeatingMaintenance";
+import IndoorAirQuality from "@/pages/services/IndoorAirQuality";
+
 const queryClient = new QueryClient();
 
 function Home() {
@@ -49,6 +59,15 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/services/ac-repair" component={ACRepair} />
+      <Route path="/services/ac-installation" component={ACInstallation} />
+      <Route path="/services/ac-maintenance" component={ACMaintenance} />
+      <Route path="/services/emergency-ac" component={EmergencyAC} />
+      <Route path="/services/ductless-mini-split" component={DuctlessMiniSplit} />
+      <Route path="/services/heating-repair" component={HeatingRepair} />
+      <Route path="/services/heat-pump-installation" component={HeatPumpInstallation} />
+      <Route path="/services/heating-maintenance" component={HeatingMaintenance} />
+      <Route path="/services/indoor-air-quality" component={IndoorAirQuality} />
       <Route component={NotFound} />
     </Switch>
   );

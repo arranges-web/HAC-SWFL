@@ -1,11 +1,30 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
-import { Menu, Phone, MapPin, Wrench, Wind, Fan, Shield } from "lucide-react";
+import { Menu, Phone, MapPin, Wrench, Wind, Fan, Shield, Zap, ChevronDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
+const coolingServices = [
+  { icon: Wrench, label: "A/C Repair", desc: "Same-day diagnostics & fix", href: "/services/ac-repair" },
+  { icon: Wind, label: "A/C Installation", desc: "High-efficiency new systems", href: "/services/ac-installation" },
+  { icon: Fan, label: "A/C Maintenance", desc: "Annual tune-ups & plans", href: "/services/ac-maintenance" },
+  { icon: Zap, label: "Emergency A/C", desc: "24/7 priority dispatch", href: "/services/emergency-ac" },
+  { icon: Wind, label: "Ductless Mini Split", desc: "Zone cooling without ducts", href: "/services/ductless-mini-split" },
+];
+
+const heatingServices = [
+  { icon: Wrench, label: "Heating Repair", desc: "Heat pump & air handler repairs", href: "/services/heating-repair" },
+  { icon: Wind, label: "Heat Pump Install", desc: "Inverter systems & replacement", href: "/services/heat-pump-installation" },
+  { icon: Fan, label: "Heating Maintenance", desc: "Pre-season safety tune-up", href: "/services/heating-maintenance" },
+];
+
+const airQualityServices = [
+  { icon: Shield, label: "Indoor Air Quality", desc: "Filtration, UV & humidity control", href: "/services/indoor-air-quality" },
+];
+
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const progressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -40,19 +59,12 @@ export function Header() {
   }, []);
 
   const navLinks = [
-    { name: "Services", href: "#services", hasMenu: true },
-    { name: "Why Us", href: "#about" },
-    { name: "Membership", href: "#membership" },
-    { name: "Financing", href: "#financing" },
-    { name: "Reviews", href: "#testimonials" },
-    { name: "Contact", href: "#contact" },
-  ];
-
-  const serviceMenu = [
-    { icon: Wrench, label: "A/C Repair", desc: "Same-day diagnostics & fix" },
-    { icon: Wind, label: "Installation", desc: "High-efficiency systems" },
-    { icon: Fan, label: "Maintenance", desc: "Tune-ups & service plans" },
-    { icon: Shield, label: "Indoor Air", desc: "Filtration & purification" },
+    { name: "Services", href: "/#services", hasMenu: true },
+    { name: "Why Us", href: "/#about" },
+    { name: "Membership", href: "/#membership" },
+    { name: "Financing", href: "/#financing" },
+    { name: "Reviews", href: "/#testimonials" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -101,32 +113,92 @@ export function Header() {
               <div key={link.name} className="relative group">
                 <a
                   href={link.href}
-                  className="relative px-3 py-2 text-sm font-semibold text-foreground/80 hover:text-foreground transition-colors block"
+                  className="relative px-3 py-2 text-sm font-semibold text-foreground/80 hover:text-foreground transition-colors flex items-center gap-1"
                 >
                   {link.name}
+                  {link.hasMenu && <ChevronDown className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-180" />}
                   <span className="absolute left-3 right-3 -bottom-0.5 h-[2px] bg-secondary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
                 </a>
 
-                {/* Mega menu for Services */}
+                {/* 3-column Mega menu for Services */}
                 {link.hasMenu && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out">
-                    <div className="w-[420px] bg-background/95 backdrop-blur-2xl border border-border/60 rounded-2xl shadow-xl p-3">
-                      <div className="grid grid-cols-2 gap-1">
-                        {serviceMenu.map((item) => (
-                          <a
-                            key={item.label}
-                            href="#services"
-                            className="flex items-start gap-3 p-3 rounded-xl hover:bg-muted/60 transition-colors group/item"
-                          >
-                            <div className="w-9 h-9 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0 group-hover/item:bg-secondary/20 transition-colors">
-                              <item.icon className="w-4 h-4 text-secondary" />
-                            </div>
-                            <div className="min-w-0">
-                              <div className="text-sm font-bold text-foreground">{item.label}</div>
-                              <div className="text-xs text-muted-foreground leading-snug">{item.desc}</div>
-                            </div>
-                          </a>
-                        ))}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out z-50">
+                    <div className="w-[640px] bg-background/98 backdrop-blur-2xl border border-border/60 rounded-2xl shadow-2xl p-5">
+                      <div className="grid grid-cols-3 gap-4">
+                        {/* Cooling column */}
+                        <div>
+                          <div className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-secondary mb-3 px-1">Cooling</div>
+                          <div className="space-y-0.5">
+                            {coolingServices.map((item) => (
+                              <Link
+                                key={item.label}
+                                href={item.href}
+                                className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-muted/60 transition-colors group/item"
+                              >
+                                <div className="w-7 h-7 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0 group-hover/item:bg-secondary/20 transition-colors mt-0.5">
+                                  <item.icon className="w-3.5 h-3.5 text-secondary" />
+                                </div>
+                                <div className="min-w-0">
+                                  <div className="text-sm font-bold text-foreground leading-snug">{item.label}</div>
+                                  <div className="text-[11px] text-muted-foreground leading-snug">{item.desc}</div>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Heating column */}
+                        <div>
+                          <div className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-accent mb-3 px-1">Heating</div>
+                          <div className="space-y-0.5">
+                            {heatingServices.map((item) => (
+                              <Link
+                                key={item.label}
+                                href={item.href}
+                                className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-muted/60 transition-colors group/item"
+                              >
+                                <div className="w-7 h-7 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover/item:bg-accent/20 transition-colors mt-0.5">
+                                  <item.icon className="w-3.5 h-3.5 text-accent" />
+                                </div>
+                                <div className="min-w-0">
+                                  <div className="text-sm font-bold text-foreground leading-snug">{item.label}</div>
+                                  <div className="text-[11px] text-muted-foreground leading-snug">{item.desc}</div>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Air Quality column */}
+                        <div>
+                          <div className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-blue-400 mb-3 px-1">Air Quality</div>
+                          <div className="space-y-0.5">
+                            {airQualityServices.map((item) => (
+                              <Link
+                                key={item.label}
+                                href={item.href}
+                                className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-muted/60 transition-colors group/item"
+                              >
+                                <div className="w-7 h-7 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0 group-hover/item:bg-blue-500/20 transition-colors mt-0.5">
+                                  <item.icon className="w-3.5 h-3.5 text-blue-400" />
+                                </div>
+                                <div className="min-w-0">
+                                  <div className="text-sm font-bold text-foreground leading-snug">{item.label}</div>
+                                  <div className="text-[11px] text-muted-foreground leading-snug">{item.desc}</div>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+
+                          {/* Emergency CTA */}
+                          <div className="mt-4 p-3 rounded-xl bg-secondary/10 border border-secondary/20">
+                            <div className="text-[10px] font-extrabold uppercase tracking-widest text-secondary mb-1">Emergency?</div>
+                            <a href="tel:2397481815" className="text-sm font-extrabold text-foreground hover:text-secondary transition-colors">
+                              (239) 748-1815
+                            </a>
+                            <div className="text-[10px] text-muted-foreground mt-0.5">Available 24/7</div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -153,7 +225,7 @@ export function Header() {
               size="lg"
               className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold px-6 glow-green hover:translate-y-[-1px]"
             >
-              <a href="#contact">Schedule Now</a>
+              <a href="/#contact">Schedule Now</a>
             </Button>
           </div>
 
@@ -171,7 +243,7 @@ export function Header() {
               size="sm"
               className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-10 px-4 text-sm glow-green"
             >
-              <a href="#contact">Schedule</a>
+              <a href="/#contact">Schedule</a>
             </Button>
             <Sheet>
               <SheetTrigger asChild>
@@ -180,10 +252,10 @@ export function Header() {
                   <span className="sr-only">Toggle menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="bg-background border-l-border/10 w-[300px] sm:w-[400px]">
-                <div className="flex flex-col gap-8 mt-12">
+              <SheetContent side="right" className="bg-background border-l-border/10 w-[300px] sm:w-[400px] overflow-y-auto">
+                <div className="flex flex-col gap-6 mt-12">
                   <nav className="flex flex-col gap-1">
-                    {navLinks.map((link) => (
+                    {navLinks.filter(l => !l.hasMenu).map((link) => (
                       <a
                         key={link.name}
                         href={link.href}
@@ -192,8 +264,42 @@ export function Header() {
                         {link.name}
                       </a>
                     ))}
+
+                    {/* Expandable Services in mobile */}
+                    <div>
+                      <button
+                        onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                        className="w-full flex items-center justify-between text-lg font-bold text-foreground hover:text-secondary transition-colors p-3 rounded-xl hover:bg-muted/60"
+                      >
+                        Services
+                        {mobileServicesOpen ? <X className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                      </button>
+                      {mobileServicesOpen && (
+                        <div className="ml-3 mt-1 space-y-1 border-l-2 border-secondary/20 pl-3">
+                          <div className="text-[10px] font-extrabold uppercase tracking-widest text-secondary pt-2 pb-1 px-2">Cooling</div>
+                          {coolingServices.map((s) => (
+                            <Link key={s.href} href={s.href} className="block text-sm font-semibold text-foreground/80 hover:text-secondary transition-colors py-1.5 px-2 rounded-lg hover:bg-muted/60">
+                              {s.label}
+                            </Link>
+                          ))}
+                          <div className="text-[10px] font-extrabold uppercase tracking-widest text-accent pt-3 pb-1 px-2">Heating</div>
+                          {heatingServices.map((s) => (
+                            <Link key={s.href} href={s.href} className="block text-sm font-semibold text-foreground/80 hover:text-accent transition-colors py-1.5 px-2 rounded-lg hover:bg-muted/60">
+                              {s.label}
+                            </Link>
+                          ))}
+                          <div className="text-[10px] font-extrabold uppercase tracking-widest text-blue-400 pt-3 pb-1 px-2">Air Quality</div>
+                          {airQualityServices.map((s) => (
+                            <Link key={s.href} href={s.href} className="block text-sm font-semibold text-foreground/80 hover:text-blue-400 transition-colors py-1.5 px-2 rounded-lg hover:bg-muted/60">
+                              {s.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </nav>
-                  <div className="flex flex-col gap-4 mt-4 pt-8 border-t border-border">
+
+                  <div className="flex flex-col gap-4 pt-6 border-t border-border">
                     <a href="tel:2397481815" className="flex items-center gap-3">
                       <Phone className="h-5 w-5 text-secondary" />
                       <span className="text-lg font-bold">(239) 748-1815</span>
@@ -202,7 +308,7 @@ export function Header() {
                       asChild
                       className="bg-secondary text-secondary-foreground font-bold w-full h-12 text-lg glow-green"
                     >
-                      <a href="#contact">Schedule Now</a>
+                      <a href="/#contact">Schedule Now</a>
                     </Button>
                   </div>
                 </div>
