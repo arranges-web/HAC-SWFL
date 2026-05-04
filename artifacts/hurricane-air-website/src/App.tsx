@@ -18,6 +18,7 @@ import { Accreditations } from "@/components/Accreditations";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { BrandRibbon } from "@/components/BrandRibbon";
+import { PromoPopup } from "@/components/PromoPopup";
 
 // Cooling service pages
 import ACRepair from "@/pages/services/ACRepair";
@@ -71,6 +72,7 @@ const queryClient = new QueryClient();
 function Home() {
   return (
     <div className="min-h-screen w-full flex flex-col bg-background font-sans selection:bg-secondary selection:text-secondary-foreground">
+      <PromoPopup />
       <Header />
       <main className="flex-1">
         <Hero />
