@@ -92,7 +92,7 @@ export function Header() {
         <div className="flex justify-between items-center max-w-7xl mx-auto w-full">
           <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
             <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-secondary shrink-0" />
-            <span className="hidden sm:inline">Serving Lee, Collier, Charlotte & Sarasota Counties</span>
+            <span className="hidden sm:inline">Serving Lee, Collier & Charlotte Counties</span>
             <span className="sm:hidden truncate">SWFL Service Area</span>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">

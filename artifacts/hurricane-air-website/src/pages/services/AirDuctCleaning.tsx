@@ -84,7 +84,7 @@ export default function AirDuctCleaning() {
         <IncludedList
           items={[
             { icon: "💰", title: "Upfront Flat-Rate Pricing", desc: "No hidden fees, no upselling. We quote the job before we start and stick to it." },
-            { icon: "🏆", title: "20+ Years in SWFL", desc: "Trusted by thousands of homeowners across Lee, Collier, Charlotte, and Sarasota Counties." },
+            { icon: "🏆", title: "20+ Years in SWFL", desc: "Trusted by thousands of homeowners across Lee, Collier, and Charlotte Counties." },
             { icon: "📋", title: "Licensed & Insured", desc: "CAC1813319. Every technician is background-checked, licensed, and insured." },
             { icon: "🤝", title: "Honest Assessment", desc: "We'll tell you if your ducts genuinely need cleaning — or if your money is better spent elsewhere." },
           ]}

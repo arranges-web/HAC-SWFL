@@ -205,7 +205,7 @@ export function ServicePageLayout({
               </Button>
             </div>
             <p className="mt-6 text-white/40 text-xs">
-              License #CAC1813319 · Serving Lee, Collier, Charlotte & Sarasota Counties
+              License #CAC1813319 · Serving Lee, Collier & Charlotte Counties
             </p>
           </div>
         </section>

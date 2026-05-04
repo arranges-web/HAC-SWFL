@@ -11,7 +11,7 @@ const values = [
 const stats = [
   { value: "2000", label: "Founded" },
   { value: "20+", label: "Years in Business" },
-  { value: "4", label: "Counties Served" },
+  { value: "3", label: "Counties Served" },
   { value: "5★", label: "Google Rated" },
 ];
 
@@ -72,7 +72,7 @@ export default function AboutPage() {
             We've grown into one of the region's most respected HVAC companies — not through aggressive advertising or high-pressure sales tactics, but through consistent, exceptional work. Our technicians are trained to educate customers, not sell to them. We believe an informed customer makes better decisions — and that those decisions lead to long, trusting relationships.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Today we serve Lee, Collier, Charlotte, and Sarasota Counties, handling everything from emergency AC repairs in the dead of summer to full system replacements, duct work, and indoor air quality solutions. We're proud to be a local, family-owned business — and we act like it on every single job.
+            Today we serve Lee, Collier, and Charlotte Counties, handling everything from emergency AC repairs in the dead of summer to full system replacements, duct work, and indoor air quality solutions. We're proud to be a local, family-owned business — and we act like it on every single job.
           </p>
         </div>
         <div className="rounded-3xl bg-gradient-to-br from-primary via-[#021a8a] to-primary text-white p-8 noise">
@@ -118,7 +118,7 @@ export default function AboutPage() {
       <div className="mt-12 p-6 rounded-2xl bg-card border border-card-border flex flex-wrap items-center gap-6">
         <div className="flex items-center gap-3">
           <Clock className="w-5 h-5 text-secondary" />
-          <span className="text-sm font-semibold text-foreground">Hours: Mon–Fri 8am–10pm · Sat–Sun 8am–5pm</span>
+          <span className="text-sm font-semibold text-foreground">Hours: Mon–Sat 8am–5pm</span>
         </div>
         <div className="flex items-center gap-3">
           <Shield className="w-5 h-5 text-secondary" />

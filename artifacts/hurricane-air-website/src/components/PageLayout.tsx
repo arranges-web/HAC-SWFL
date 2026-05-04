@@ -93,7 +93,7 @@ export function PageLayout({
                   </a>
                 </Button>
               </div>
-              <p className="mt-6 text-white/40 text-xs">License #CAC1813319 · Serving Lee, Collier, Charlotte & Sarasota Counties</p>
+              <p className="mt-6 text-white/40 text-xs">License #CAC1813319 · Serving Lee, Collier & Charlotte Counties</p>
             </div>
           </section>
         )}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { MapPin, Clock, Truck } from "lucide-react";
 
-type CountyKey = "sarasota" | "charlotte" | "lee" | "collier";
+type CountyKey = "charlotte" | "lee" | "collier";
 
 interface County {
   key: CountyKey;
@@ -16,26 +16,17 @@ interface County {
   path: string;
 }
 
-const HQ = { x: 235, y: 365 }; // Fort Myers HQ in Lee County
+const HQ = { x: 235, y: 310 }; // Fort Myers HQ in Lee County
 
 const counties: County[] = [
-  {
-    key: "sarasota",
-    name: "Sarasota County",
-    cities: ["Sarasota", "Venice", "North Port"],
-    responseTime: "~75 min",
-    cx: 195,
-    cy: 90,
-    path: "M70 30 L350 25 L355 165 L75 175 Z",
-  },
   {
     key: "charlotte",
     name: "Charlotte County",
     cities: ["Punta Gorda", "Port Charlotte", "Englewood"],
     responseTime: "~55 min",
     cx: 195,
-    cy: 220,
-    path: "M75 175 L355 165 L360 270 L80 280 Z",
+    cy: 125,
+    path: "M70 30 L350 25 L360 215 L80 225 Z",
   },
   {
     key: "lee",
@@ -43,8 +34,8 @@ const counties: County[] = [
     cities: ["Fort Myers", "Cape Coral", "Bonita Springs", "Estero", "Lehigh Acres"],
     responseTime: "30–60 min",
     cx: 200,
-    cy: 340,
-    path: "M80 280 L360 270 L365 405 L85 415 Z",
+    cy: 310,
+    path: "M80 225 L360 215 L365 400 L85 410 Z",
   },
   {
     key: "collier",
@@ -52,8 +43,8 @@ const counties: County[] = [
     cities: ["Naples", "Marco Island", "Golden Gate"],
     responseTime: "~70 min",
     cx: 205,
-    cy: 500,
-    path: "M85 415 L365 405 L380 580 L100 590 Z",
+    cy: 495,
+    path: "M85 410 L365 400 L380 585 L100 590 Z",
   },
 ];
 
@@ -65,7 +56,7 @@ function CountyMap({ active, setActive }: { active: CountyKey | null; setActive:
       preserveAspectRatio="xMidYMid meet"
       className="w-full h-auto max-h-[280px] sm:max-h-[420px] lg:max-h-none"
       role="img"
-      aria-label="Map of Southwest Florida service area showing four counties"
+      aria-label="Map of Southwest Florida service area showing three counties"
     >
       <defs>
         <linearGradient id="countyDefault" x1="0" y1="0" x2="0" y2="1">
@@ -215,7 +206,7 @@ export function ServiceArea() {
               Proudly serving all of <span className="text-secondary">Southwest Florida.</span>
             </h3>
             <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
-              Based in Fort Myers, our fully-stocked service vans dispatch across four counties to restore your comfort fast — usually within an hour.
+              Based in Fort Myers, our fully-stocked service vans dispatch across three counties to restore your comfort fast — usually within an hour.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4">

@@ -35,11 +35,11 @@ const featured = [
 const shortQuotes = [
   { who: "David K.", where: "Fort Myers", text: "Best AC company in SWFL — period." },
   { who: "Amelia R.", where: "Estero", text: "Quoted exactly what they charged. No surprises." },
-  { who: "Carlos V.", where: "Sarasota", text: "Saved my Airbnb during peak season." },
+  { who: "Carlos V.", where: "Fort Myers", text: "Saved my Airbnb during peak season." },
   { who: "Linda H.", where: "Bonita Springs", text: "Finally an HVAC company that calls back." },
   { who: "Tom B.", where: "Marco Island", text: "Five stars wasn't enough — make it ten." },
-  { who: "Priya N.", where: "Venice", text: "Polite, fast, fair. Exactly what you want." },
-  { who: "Greg D.", where: "North Port", text: "From quote to install in 48 hours flat." },
+  { who: "Priya N.", where: "Cape Coral", text: "Polite, fast, fair. Exactly what you want." },
+  { who: "Greg D.", where: "Port Charlotte", text: "From quote to install in 48 hours flat." },
   { who: "Sarah L.", where: "Lehigh Acres", text: "They're the only ones I'll call now." },
 ];
 

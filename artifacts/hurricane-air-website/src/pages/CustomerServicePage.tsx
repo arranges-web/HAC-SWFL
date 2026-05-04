@@ -165,9 +165,9 @@ export default function CustomerServicePage() {
               <Clock className="w-4 h-4 text-secondary" /> Hours of Operation
             </h3>
             <div className="space-y-3 text-sm">
-              <div className="flex justify-between"><span className="font-medium text-foreground">Monday – Friday</span><span className="text-muted-foreground">8:00am – 10:00pm</span></div>
+              <div className="flex justify-between"><span className="font-medium text-foreground">Monday – Saturday</span><span className="text-muted-foreground">8:00am – 5:00pm</span></div>
               <div className="h-px bg-border" />
-              <div className="flex justify-between"><span className="font-medium text-foreground">Saturday & Sunday</span><span className="text-muted-foreground">8:00am – 5:00pm</span></div>
+              <div className="flex justify-between"><span className="font-medium text-foreground">Sunday</span><span className="text-muted-foreground">Closed</span></div>
               <div className="h-px bg-border" />
               <div className="flex justify-between"><span className="font-medium text-secondary">Emergencies</span><span className="text-secondary font-bold">24/7</span></div>
             </div>

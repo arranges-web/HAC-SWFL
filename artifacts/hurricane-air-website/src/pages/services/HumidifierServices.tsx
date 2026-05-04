@@ -96,7 +96,7 @@ export default function HumidifierServices() {
         <IncludedList
           items={[
             { icon: "💰", title: "Flat-Rate Pricing", desc: "Know the full cost before we start. No hidden charges or surprise fees." },
-            { icon: "🏆", title: "20+ Years in SWFL", desc: "Trusted by thousands of homeowners across Lee, Collier, Charlotte, and Sarasota Counties since 2003." },
+            { icon: "🏆", title: "20+ Years in SWFL", desc: "Trusted by thousands of homeowners across Lee, Collier, and Charlotte Counties since 2003." },
             { icon: "📋", title: "Licensed & Insured", desc: "CAC1813319. Every technician is background-checked, licensed, and insured." },
             { icon: "🤝", title: "Honest Recommendations", desc: "We recommend what your home genuinely needs — not the most expensive option on the shelf." },
           ]}

@@ -35,8 +35,8 @@ function Counter({ target, suffix = "", prefix = "" }: { target: number; suffix?
 
 const stats = [
   { value: 20, suffix: "+", label: "Years in SWFL", dot: "bg-secondary", note: "Family owned since 2003" },
-  { value: 4, suffix: "", label: "Counties served", dot: "bg-accent", note: "Lee · Collier · Charlotte · Sarasota" },
-  { value: 10, suffix: "k+", label: "Homes serviced", dot: "bg-blue-400", note: "Across all four counties" },
+  { value: 3, suffix: "", label: "Counties served", dot: "bg-accent", note: "Lee · Collier · Charlotte" },
+  { value: 10, suffix: "k+", label: "Homes serviced", dot: "bg-blue-400", note: "Across all three counties" },
   { value: 5, suffix: ".0★", label: "Average rating", dot: "bg-secondary", note: "1,200+ verified reviews" },
 ];
 

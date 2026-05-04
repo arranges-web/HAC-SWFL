@@ -62,7 +62,7 @@ export default function FurnaceRepair() {
         <IncludedList
           items={[
             { icon: "💰", title: "Flat-Rate Upfront Pricing", desc: "Know the full cost before we start. No hourly rates, no surprise charges after the fact." },
-            { icon: "🏆", title: "20+ Years of Experience", desc: "We've serviced thousands of furnaces across Lee, Collier, Charlotte, and Sarasota Counties since 2003." },
+            { icon: "🏆", title: "20+ Years of Experience", desc: "We've serviced thousands of furnaces across Lee, Collier, and Charlotte Counties since 2003." },
             { icon: "📋", title: "Fully Licensed & Insured", desc: "CAC1813319. Every technician is background-checked, licensed, and insured." },
             { icon: "🔄", title: "Repair vs. Replace Guidance", desc: "We give honest advice. If a replacement makes more financial sense, we'll tell you — and back it up with data." },
           ]}

@@ -11,10 +11,9 @@ const SWFL_CITIES = [
   "Marco Island",
   "Punta Gorda",
   "Port Charlotte",
-  "Sarasota",
-  "Venice",
-  "North Port",
   "Lehigh Acres",
+  "Fort Myers Beach",
+  "Golden Gate",
 ];
 
 function HurricaneSwirl({ className = "", strokeWidth = 1.2, opacity = 1 }: { className?: string; strokeWidth?: number; opacity?: number }) {
@@ -182,7 +181,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.9 }}
             className="text-lg sm:text-xl text-white/75 max-w-xl font-medium leading-relaxed"
           >
-            Trust. Transparency. Teamwork. Same-day air conditioning repair, replacement, and 24/7 emergency service across Lee, Collier, Charlotte and Sarasota counties.
+            Trust. Transparency. Teamwork. Same-day air conditioning repair, replacement, and 24/7 emergency service across Lee, Collier, and Charlotte counties.
           </motion.p>
 
           {/* CTAs */}

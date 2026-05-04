@@ -21,14 +21,14 @@ const contactInfo = [
   {
     icon: Clock,
     label: "Hours",
-    value: "Mon–Fri: 8am–10pm",
-    sub: "Sat–Sun: 8am–5pm",
+    value: "Mon–Sat: 8am–5pm",
+    sub: "Emergencies: 24/7",
     href: null,
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "12960 Commerce Lakes Dr A-20",
+    value: "12940 Express Ct, Ste 8",
     sub: "Fort Myers, FL 33913",
     href: null,
   },
@@ -217,13 +217,13 @@ export default function ContactPage() {
             <h3 className="font-extrabold text-foreground mb-4">Hours of Operation</h3>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-sm font-semibold text-foreground">Monday – Friday</span>
-                <span className="text-sm text-muted-foreground">8:00am – 10:00pm</span>
+                <span className="text-sm font-semibold text-foreground">Monday – Saturday</span>
+                <span className="text-sm text-muted-foreground">8:00am – 5:00pm</span>
               </div>
               <div className="h-px bg-border" />
               <div className="flex justify-between items-center">
-                <span className="text-sm font-semibold text-foreground">Saturday & Sunday</span>
-                <span className="text-sm text-muted-foreground">8:00am – 5:00pm</span>
+                <span className="text-sm font-semibold text-foreground">Sunday</span>
+                <span className="text-sm text-muted-foreground">Closed</span>
               </div>
               <div className="h-px bg-border" />
               <div className="flex justify-between items-center">

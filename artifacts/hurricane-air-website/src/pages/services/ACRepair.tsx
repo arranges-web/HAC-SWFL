@@ -104,7 +104,7 @@ export default function ACRepair() {
             {
               icon: "🏆",
               title: "20+ Years in Business",
-              desc: "Trusted by Southwest Florida homeowners since 2003. We've serviced thousands of systems across Lee, Collier, Charlotte, and Sarasota counties.",
+              desc: "Trusted by Southwest Florida homeowners since 2003. We've serviced thousands of systems across Lee, Collier, and Charlotte counties.",
             },
             {
               icon: "📋",

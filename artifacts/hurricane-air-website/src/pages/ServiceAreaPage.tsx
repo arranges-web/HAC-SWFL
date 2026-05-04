@@ -17,11 +17,6 @@ const counties = [
     color: "blue",
     cities: ["Port Charlotte", "Punta Gorda", "Englewood", "Rotonda West", "Boca Grande"],
   },
-  {
-    name: "Sarasota County",
-    color: "secondary",
-    cities: ["Sarasota", "Venice", "North Port", "Englewood (shared)"],
-  },
 ];
 
 const colorMap: Record<string, string> = {
@@ -40,13 +35,13 @@ export default function ServiceAreaPage() {
   return (
     <PageLayout
       title="Service Area"
-      subtitle="Dispatching from Southwest Florida — we serve Lee, Collier, Charlotte, and Sarasota Counties with same-day availability."
+      subtitle="Dispatching from Southwest Florida — we serve Lee, Collier, and Charlotte Counties with same-day availability."
       breadcrumb="Service Area"
     >
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14">
         {[
-          { value: "4", label: "Counties Served" },
+          { value: "3", label: "Counties Served" },
           { value: "20+", label: "Cities & Towns" },
           { value: "20+", label: "Years in SWFL" },
           { value: "Same-Day", label: "Availability" },

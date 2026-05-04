@@ -92,7 +92,7 @@ export default function MembershipPage() {
       <div className="rounded-2xl bg-card border border-card-border p-7 sm:p-9">
         <h2 className="text-xl font-extrabold text-foreground mb-4">Important Membership Terms</h2>
         <div className="grid sm:grid-cols-2 gap-x-10 gap-y-3 text-sm text-muted-foreground">
-          <div className="flex gap-2"><Check className="w-4 h-4 text-secondary shrink-0 mt-0.5" /><span>Valid during business hours (Mon–Fri, 8am–5pm)</span></div>
+          <div className="flex gap-2"><Check className="w-4 h-4 text-secondary shrink-0 mt-0.5" /><span>Valid during business hours (Mon–Sat, 8am–5pm)</span></div>
           <div className="flex gap-2"><Check className="w-4 h-4 text-secondary shrink-0 mt-0.5" /><span>Includes limited 30-day drain line warranty</span></div>
           <div className="flex gap-2"><Check className="w-4 h-4 text-secondary shrink-0 mt-0.5" /><span>Emergency services cover no cooling, heating issues, or flooding</span></div>
           <div className="flex gap-2"><Check className="w-4 h-4 text-secondary shrink-0 mt-0.5" /><span>Membership transfers if you relocate to a new home</span></div>

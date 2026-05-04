@@ -207,7 +207,6 @@ export function Footer() {
                 <li>Lee County</li>
                 <li>Collier County</li>
                 <li>Charlotte County</li>
-                <li>Sarasota County</li>
               </ul>
             </div>
 
@@ -238,7 +237,7 @@ export function Footer() {
                   <div>
                     <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold">HQ</div>
                     <div className="text-xs text-white/80 leading-snug">
-                      12960 Commerce Lakes Dr A-20<br />
+                      12940 Express Ct, Ste 8<br />
                       Fort Myers, FL 33913
                     </div>
                   </div>

@@ -63,7 +63,7 @@ export default function ThermostatInstall() {
         <IncludedList
           items={[
             { icon: "💰", title: "Flat-Rate Pricing", desc: "The price we quote is the price you pay. No hidden charges, no overtime fees." },
-            { icon: "🏆", title: "20+ Years in SWFL", desc: "We've installed thermostats in thousands of homes across Lee, Collier, Charlotte, and Sarasota Counties." },
+            { icon: "🏆", title: "20+ Years in SWFL", desc: "We've installed thermostats in thousands of homes across Lee, Collier, and Charlotte Counties." },
             { icon: "📋", title: "Licensed & Insured", desc: "CAC1813319. Every installation is performed by a background-checked, licensed technician." },
             { icon: "🤝", title: "Brand-Neutral Advice", desc: "We recommend what's best for your home, not what has the highest profit margin." },
           ]}
