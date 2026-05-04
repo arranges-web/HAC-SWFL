@@ -90,7 +90,7 @@ export function Contact() {
                   </div>
                   <div>
                     <h4 className="font-extrabold text-sm text-foreground mb-1 tracking-tight">Headquarters</h4>
-                    <p className="text-xs text-muted-foreground leading-snug">12960 Commerce Lakes Dr A-20<br />Fort Myers, FL 33913</p>
+                    <p className="text-xs text-muted-foreground leading-snug">12940 Express Ct, Ste 8<br />Fort Myers, FL 33913</p>
                   </div>
                 </div>
 
@@ -100,7 +100,7 @@ export function Contact() {
                   </div>
                   <div>
                     <h4 className="font-extrabold text-sm text-foreground mb-1 tracking-tight">Hours</h4>
-                    <p className="text-xs text-muted-foreground leading-snug">Mon–Fri 8am–5pm<br />Emergency 24/7/365</p>
+                    <p className="text-xs text-muted-foreground leading-snug">Mon–Sat 8am–5pm<br />Emergency 24/7/365</p>
                   </div>
                 </div>
               </div>
