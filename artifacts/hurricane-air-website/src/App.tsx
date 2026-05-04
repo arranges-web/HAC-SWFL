@@ -40,6 +40,20 @@ import AirDuctCleaning from "@/pages/services/AirDuctCleaning";
 import DehumidifierServices from "@/pages/services/DehumidifierServices";
 import HumidifierServices from "@/pages/services/HumidifierServices";
 
+// Blog
+import BlogIndexPage from "@/pages/BlogIndexPage";
+import AcInspection from "@/pages/blog/AcInspection";
+import AcMaintenanceHowOften from "@/pages/blog/AcMaintenanceHowOften";
+import AcTuneUpScopeSchedulePricing from "@/pages/blog/AcTuneUpScopeSchedulePricing";
+import EnergyEfficientCoolingSettings from "@/pages/blog/EnergyEfficientCoolingSettings";
+import EnergyEfficientCoolingSWFL from "@/pages/blog/EnergyEfficientCoolingSWFL";
+import HvacEmergencyCriteria from "@/pages/blog/HvacEmergencyCriteria";
+import ReplaceAc5000Rule from "@/pages/blog/ReplaceAc5000Rule";
+import RepairOrReplace5000Rule from "@/pages/blog/RepairOrReplace5000Rule";
+import AcRepairCostsSWFL from "@/pages/blog/AcRepairCostsSWFL";
+import DuctworkLifespanCost from "@/pages/blog/DuctworkLifespanCost";
+import DuctRepairOrReplace from "@/pages/blog/DuctRepairOrReplace";
+
 // Standalone pages
 import AboutPage from "@/pages/AboutPage";
 import ContactPage from "@/pages/ContactPage";
@@ -103,6 +117,20 @@ function Router() {
       <Route path="/services/air-duct-cleaning" component={AirDuctCleaning} />
       <Route path="/services/dehumidifier" component={DehumidifierServices} />
       <Route path="/services/humidifier" component={HumidifierServices} />
+
+      {/* Blog */}
+      <Route path="/blog" component={BlogIndexPage} />
+      <Route path="/blog/what-happens-during-ac-inspection" component={AcInspection} />
+      <Route path="/blog/ac-maintenance-how-often" component={AcMaintenanceHowOften} />
+      <Route path="/blog/ac-tune-up-scope-schedule-pricing" component={AcTuneUpScopeSchedulePricing} />
+      <Route path="/blog/energy-efficient-cooling-ac-settings" component={EnergyEfficientCoolingSettings} />
+      <Route path="/blog/energy-efficient-cooling-southwest-florida" component={EnergyEfficientCoolingSWFL} />
+      <Route path="/blog/hvac-emergency-criteria-southwest-florida" component={HvacEmergencyCriteria} />
+      <Route path="/blog/replace-ac-5000-rule" component={ReplaceAc5000Rule} />
+      <Route path="/blog/repair-or-replace-5000-hvac-rule" component={RepairOrReplace5000Rule} />
+      <Route path="/blog/ac-repair-costs-swfl" component={AcRepairCostsSWFL} />
+      <Route path="/blog/ductwork-lifespan-cost-upgrades-swfl-homes" component={DuctworkLifespanCost} />
+      <Route path="/blog/duct-repair-or-replace-guide" component={DuctRepairOrReplace} />
 
       {/* Standalone pages */}
       <Route path="/about" component={AboutPage} />

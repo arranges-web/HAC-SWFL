@@ -81,6 +81,7 @@ export function Header() {
   const navLinks = [
     { name: "Services", href: "#", hasMenu: "services" },
     { name: "Company", href: "#", hasMenu: "company" },
+    { name: "Blog", href: "/blog" },
     { name: "Reviews", href: "/reviews" },
     { name: "Contact", href: "/contact" },
   ];
@@ -350,6 +351,9 @@ export function Header() {
                       )}
                     </div>
 
+                    <Link href="/blog" className="text-lg font-bold text-foreground hover:text-secondary transition-colors p-3 rounded-xl hover:bg-muted/60 block">
+                      Blog
+                    </Link>
                     <Link href="/reviews" className="text-lg font-bold text-foreground hover:text-secondary transition-colors p-3 rounded-xl hover:bg-muted/60 block">
                       Reviews
                     </Link>

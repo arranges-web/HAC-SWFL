@@ -1,4 +1,5 @@
-import { Sparkles } from "lucide-react";
+import { Sparkles, BookOpen } from "lucide-react";
+import { Link } from "wouter";
 import {
   ServicePageLayout,
   ServiceSection,
@@ -89,6 +90,26 @@ export default function AirDuctCleaning() {
             { icon: "🤝", title: "Honest Assessment", desc: "We'll tell you if your ducts genuinely need cleaning — or if your money is better spent elsewhere." },
           ]}
         />
+      </ServiceSection>
+
+      <ServiceSection title="Further Reading">
+        <div className="grid sm:grid-cols-2 gap-4">
+          {[
+            { title: "Is It Time to Repair or Replace Your Air Ducts?", href: "/blog/duct-repair-or-replace-guide" },
+            { title: "Ductwork: Lifespan, Upgrades & Cost in SWFL Homes", href: "/blog/ductwork-lifespan-cost-upgrades-swfl-homes" },
+          ].map((article) => (
+            <Link
+              key={article.href}
+              href={article.href}
+              className="flex items-start gap-3 p-4 rounded-2xl border border-blue-500/20 bg-blue-500/5 hover:bg-blue-500/10 hover:border-blue-500/40 transition-all duration-200 group"
+            >
+              <BookOpen className="h-4 w-4 text-blue-400 shrink-0 mt-0.5" />
+              <span className="text-sm font-semibold text-foreground/80 group-hover:text-blue-400 transition-colors leading-snug">
+                {article.title}
+              </span>
+            </Link>
+          ))}
+        </div>
       </ServiceSection>
     </ServicePageLayout>
   );

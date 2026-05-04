@@ -1,4 +1,5 @@
-import { Zap } from "lucide-react";
+import { Zap, BookOpen } from "lucide-react";
+import { Link } from "wouter";
 import {
   ServicePageLayout,
   ServiceSection,
@@ -111,6 +112,26 @@ export default function EmergencyAC() {
               </li>
             ))}
           </ul>
+        </div>
+      </ServiceSection>
+
+      <ServiceSection title="Further Reading">
+        <div className="grid sm:grid-cols-2 gap-4">
+          {[
+            { title: "HVAC Emergency Criteria in Southwest Florida", href: "/blog/hvac-emergency-criteria-southwest-florida" },
+            { title: "The Truth About AC Repair Costs in SWFL", href: "/blog/ac-repair-costs-swfl" },
+          ].map((article) => (
+            <Link
+              key={article.href}
+              href={article.href}
+              className="flex items-start gap-3 p-4 rounded-2xl border border-accent/20 bg-accent/5 hover:bg-accent/10 hover:border-accent/40 transition-all duration-200 group"
+            >
+              <BookOpen className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+              <span className="text-sm font-semibold text-foreground/80 group-hover:text-accent transition-colors leading-snug">
+                {article.title}
+              </span>
+            </Link>
+          ))}
         </div>
       </ServiceSection>
     </ServicePageLayout>

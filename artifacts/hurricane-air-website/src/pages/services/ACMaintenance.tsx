@@ -1,4 +1,5 @@
-import { Fan } from "lucide-react";
+import { Fan, BookOpen } from "lucide-react";
+import { Link } from "wouter";
 import {
   ServicePageLayout,
   ServiceSection,
@@ -102,6 +103,27 @@ export default function ACMaintenance() {
               </li>
             ))}
           </ul>
+        </div>
+      </ServiceSection>
+
+      <ServiceSection title="Further Reading">
+        <div className="grid sm:grid-cols-3 gap-4">
+          {[
+            { title: "How Often Should You Really Service Your AC?", href: "/blog/ac-maintenance-how-often" },
+            { title: "AC Tune-Up Scope, Schedule & Pricing", href: "/blog/ac-tune-up-scope-schedule-pricing" },
+            { title: "What Really Happens During an AC Inspection?", href: "/blog/what-happens-during-ac-inspection" },
+          ].map((article) => (
+            <Link
+              key={article.href}
+              href={article.href}
+              className="flex items-start gap-3 p-4 rounded-2xl border border-secondary/20 bg-secondary/5 hover:bg-secondary/10 hover:border-secondary/40 transition-all duration-200 group"
+            >
+              <BookOpen className="h-4 w-4 text-secondary shrink-0 mt-0.5" />
+              <span className="text-sm font-semibold text-foreground/80 group-hover:text-secondary transition-colors leading-snug">
+                {article.title}
+              </span>
+            </Link>
+          ))}
         </div>
       </ServiceSection>
     </ServicePageLayout>

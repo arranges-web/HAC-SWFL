@@ -1,4 +1,5 @@
-import { Shield } from "lucide-react";
+import { Shield, BookOpen } from "lucide-react";
+import { Link } from "wouter";
 import {
   ServicePageLayout,
   ServiceSection,
@@ -98,6 +99,26 @@ export default function IndoorAirQuality() {
           <p className="text-foreground text-lg leading-relaxed mb-4">
             Every annual tune-up for Comfort Club members includes an <strong className="text-foreground">Indoor Air Quality inspection</strong> — we check filter condition, coil cleanliness, drain pan for mold, and visible duct condition. Members receive recommendations and exclusive pricing on any IAQ upgrades.
           </p>
+        </div>
+      </ServiceSection>
+
+      <ServiceSection title="Further Reading">
+        <div className="grid sm:grid-cols-2 gap-4">
+          {[
+            { title: "Ductwork: Lifespan, Upgrades & Cost in SWFL Homes", href: "/blog/ductwork-lifespan-cost-upgrades-swfl-homes" },
+            { title: "Energy-Efficient Cooling Options for Southwest Florida", href: "/blog/energy-efficient-cooling-southwest-florida" },
+          ].map((article) => (
+            <Link
+              key={article.href}
+              href={article.href}
+              className="flex items-start gap-3 p-4 rounded-2xl border border-blue-500/20 bg-blue-500/5 hover:bg-blue-500/10 hover:border-blue-500/40 transition-all duration-200 group"
+            >
+              <BookOpen className="h-4 w-4 text-blue-400 shrink-0 mt-0.5" />
+              <span className="text-sm font-semibold text-foreground/80 group-hover:text-blue-400 transition-colors leading-snug">
+                {article.title}
+              </span>
+            </Link>
+          ))}
         </div>
       </ServiceSection>
     </ServicePageLayout>
