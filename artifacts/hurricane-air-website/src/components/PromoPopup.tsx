@@ -71,7 +71,7 @@ export function PromoPopup() {
                 <div className="flex items-start justify-center gap-1 mb-2">
                   <span className="text-white/70 text-xl font-bold mt-2">$</span>
                   <span className="text-secondary text-7xl font-black leading-none tracking-tight" style={{ textShadow: "0 0 40px hsl(126 80% 55% / 0.4)" }}>
-                    100
+                    125
                   </span>
                 </div>
 

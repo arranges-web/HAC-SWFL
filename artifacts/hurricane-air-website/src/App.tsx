@@ -19,6 +19,7 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { BrandRibbon } from "@/components/BrandRibbon";
 import { PromoPopup } from "@/components/PromoPopup";
+import { BookingPopup } from "@/components/BookingPopup";
 
 // Cooling service pages
 import ACRepair from "@/pages/services/ACRepair";
@@ -158,6 +159,7 @@ function App() {
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <Router />
         </WouterRouter>
+        <BookingPopup />
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>
