@@ -23,28 +23,28 @@ interface ServicePageLayoutProps {
 
 const DEFAULT_FAQS: ServiceFAQItem[] = [
   {
-    q: "How quickly can a technician arrive?",
-    a: "Call before noon Monday through Saturday and we guarantee a same-day arrival before sunset — in writing. After-hours and weekend dispatch is available 24/7 for emergencies.",
+    q: "Do I really need a professional, or can I troubleshoot this myself?",
+    a: "Some basics — replacing a clogged air filter, clearing debris off the outdoor condenser, checking thermostat batteries — are safe DIY tasks. Anything involving refrigerant, electrical components, or sealed system parts requires an EPA-certified technician by law. If your system is short-cycling, blowing warm air, leaking, or making unusual noises, call us before the issue escalates into a full system failure.",
   },
   {
-    q: "Do you charge for diagnostics?",
-    a: "Our flat $125 diagnostic fee is waived when you proceed with the repair. You'll see the full price before any work starts — no hourly billing, no surprise charges.",
+    q: "How much does an A/C repair cost in Southwest Florida?",
+    a: "Most repairs in our service area range from $150 to $1,200 depending on the part — capacitors and contactors at the low end, compressors and evaporator coils at the higher end. We charge a flat $125 diagnostic that's waived when you proceed with repairs, and you'll get a written, all-in quote before any work starts. No hourly billing, no surprise add-ons.",
   },
   {
-    q: "Are your technicians licensed and insured?",
-    a: "Yes. Hurricane Air operates under Florida HVAC license #CAC1813319, and every technician is background-checked, fully insured, and trained on every major brand.",
+    q: "When is it smarter to replace my system instead of repairing it?",
+    a: "We use the industry-standard \"$5,000 rule\" — multiply the repair cost by your system's age. If the result is over $5,000, replacement usually makes more financial sense. Systems older than 10–12 years that need a major component (compressor, coil) are often candidates for replacement, especially given the efficiency gains in newer SEER2-rated units. We'll always give you the math and let you decide.",
   },
   {
-    q: "What brands do you service?",
-    a: "All major residential and commercial brands — Trane, Carrier, Lennox, Goodman, Rheem, Comfortmaker, York, American Standard, Bryant, and more.",
+    q: "How often should I service my A/C?",
+    a: "In Southwest Florida's heat and humidity, we recommend professional maintenance twice a year — once before the cooling season (spring) and once mid-summer. Annual maintenance catches small failures before they become $2,000 emergency calls and keeps your manufacturer warranty intact. Our $189/yr Membership Plan covers both visits plus member-only repair pricing.",
   },
   {
-    q: "Do you offer financing?",
-    a: "Yes. We partner with several Florida-licensed lenders to offer 0% APR options on qualifying systems. Pre-approval takes about 60 seconds and won't affect your credit.",
+    q: "How long will the service appointment take?",
+    a: "A standard diagnostic takes 30–60 minutes. Most common repairs (capacitors, contactors, drain line flushes, refrigerant top-offs) are completed on the first visit in 1–2 hours total — our trucks are stocked with the parts that fail most often in Florida. Larger jobs like coil replacements or full system installs are typically scheduled for a follow-up day.",
   },
   {
-    q: "What's your warranty?",
-    a: "5-year parts warranty on qualifying repairs and a 10-year limited warranty on new installations, plus our written same-day arrival guarantee.",
+    q: "What if my system is out of warranty?",
+    a: "Out-of-warranty doesn't mean out of options. We back qualifying repairs with our own 5-year parts warranty, and on new installations you get a 10-year limited manufacturer warranty plus our 1-year labor guarantee. We'll always check what coverage you have before quoting — sometimes we find warranty coverage homeowners didn't know was active.",
   },
 ];
 
@@ -151,9 +151,9 @@ export function ServicePageLayout({
                     size="lg"
                     className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-12 px-6 glow-green"
                   >
-                    <a href="/#contact">
+                    <a href="#book">
                       <Calendar className="mr-2 h-4 w-4" />
-                      Schedule Service
+                      Schedule Online
                     </a>
                   </Button>
                   <Button
@@ -167,6 +167,26 @@ export function ServicePageLayout({
                       (239) 748-1815
                     </a>
                   </Button>
+                </div>
+
+                {/* Hero trust strip */}
+                <div className="mt-7 flex items-center gap-4 sm:gap-6 text-white/70 text-xs sm:text-sm">
+                  <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-3.5 w-3.5 fill-secondary text-secondary" />
+                      ))}
+                    </div>
+                    <span className="font-semibold">
+                      <span className="text-white font-extrabold tabular-nums">4.9</span>
+                      <span className="text-white/50"> · 749 Google reviews</span>
+                    </span>
+                  </div>
+                  <span className="hidden sm:inline-block h-3 w-px bg-white/20" />
+                  <div className="hidden sm:flex items-center gap-1.5 font-semibold">
+                    <ShieldCheck className="h-3.5 w-3.5 text-secondary" />
+                    <span>Licensed · CAC1813319</span>
+                  </div>
                 </div>
               </motion.div>
 
@@ -201,9 +221,10 @@ export function ServicePageLayout({
         <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16 lg:py-20">
           {children}
 
+          <ServiceProcess />
           <ServiceFAQ items={faqs ?? DEFAULT_FAQS} />
           <MembershipPromo />
-          <ServiceLeadForm serviceTitle={title} />
+          <ServiceBookingScheduler serviceTitle={title} />
         </div>
 
         {/* Bottom CTA strip */}
@@ -229,7 +250,7 @@ export function ServicePageLayout({
                 size="lg"
                 className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-13 px-8 text-base glow-green"
               >
-                <a href="/#contact">Book Online</a>
+                <a href="#book">Book Online</a>
               </Button>
               <Button
                 asChild
@@ -475,53 +496,44 @@ export function MembershipPromo() {
   );
 }
 
-export function ServiceLeadForm({ serviceTitle }: { serviceTitle: string }) {
-  const [submitted, setSubmitted] = useState(false);
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [zip, setZip] = useState("");
-  const [details, setDetails] = useState("");
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    // eslint-disable-next-line no-console
-    console.info("[ServiceLeadForm]", { service: serviceTitle, name, phone, email, zip, details });
-    setSubmitted(true);
-  }
-
+export function ServiceBookingScheduler({ serviceTitle }: { serviceTitle: string }) {
   return (
     <motion.div
+      id="book"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="rounded-3xl bg-card border border-card-border p-7 sm:p-10 mb-2"
+      className="relative overflow-hidden rounded-3xl bg-card border border-card-border p-5 sm:p-7 lg:p-9 mb-2 shadow-xl"
     >
-      <div className="grid lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 items-start">
-        <div>
+      <div className="absolute -top-32 -right-20 w-[400px] h-[400px] bg-secondary/[0.06] rounded-full blur-[120px] pointer-events-none" />
+      <div className="relative grid lg:grid-cols-[0.85fr_1.15fr] gap-8 lg:gap-12 items-start">
+        <div className="lg:pt-4">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="h-px w-8 bg-secondary" />
             <span className="text-[11px] font-bold tracking-[0.25em] text-secondary uppercase">
-              Request Service
+              Book Online
             </span>
           </div>
-          <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground mb-3">
-            Get on the schedule today.
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-foreground mb-3 leading-tight">
+            Schedule your{" "}
+            <span className="text-secondary">{serviceTitle.toLowerCase()}</span>{" "}
+            in 60 seconds.
           </h3>
           <p className="text-muted-foreground leading-relaxed mb-6">
-            Tell us a bit about what's going on and we'll call you back within 15 minutes during business hours.
-            Or call{" "}
+            Pick a time that works for you — our dispatcher will confirm by phone before arrival.
+            Need help right now?{" "}
             <a href="tel:2397481815" className="text-secondary font-bold hover:underline">
-              (239) 748-1815
-            </a>{" "}
-            for an immediate response.
+              Call (239) 748-1815
+            </a>
+            .
           </p>
-          <ul className="space-y-2.5 text-sm text-muted-foreground">
+          <ul className="space-y-3 text-sm text-foreground/80">
             {[
               "Same-day arrival before sunset (Mon–Sat)",
-              "Upfront flat-rate pricing — no surprises",
+              "Flat-rate pricing — confirmed before any work",
               "Licensed & insured · CAC1813319",
+              "4.9★ across 749 Google reviews",
             ].map((line) => (
               <li key={line} className="flex items-start gap-2.5">
                 <span className="mt-[3px] h-4 w-4 rounded-full bg-secondary/15 border border-secondary/30 flex items-center justify-center shrink-0">
@@ -533,106 +545,75 @@ export function ServiceLeadForm({ serviceTitle }: { serviceTitle: string }) {
           </ul>
         </div>
 
-        {submitted ? (
-          <div className="rounded-2xl bg-secondary/10 border border-secondary/30 p-6 sm:p-8 text-center">
-            <div className="w-12 h-12 rounded-full bg-secondary/20 border border-secondary/40 flex items-center justify-center mx-auto mb-3">
-              <Send className="h-5 w-5 text-secondary" />
-            </div>
-            <h4 className="text-xl font-extrabold text-foreground mb-2">Request received</h4>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              Thanks {name.split(" ")[0] || "—"} — a Hurricane Air dispatcher will call {phone || "you"} within 15 minutes during business hours.
-            </p>
-            <p className="text-xs text-muted-foreground">
-              Need help right now?{" "}
-              <a href="tel:2397481815" className="font-bold text-secondary hover:underline">
-                Call (239) 748-1815
-              </a>
-            </p>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-3">
-            <div className="grid sm:grid-cols-2 gap-3">
-              <FormField label="Full name">
-                <input
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-background border border-card-border focus:bg-card focus:border-secondary/60 focus:outline-none focus:ring-2 focus:ring-secondary/20 text-sm text-foreground placeholder:text-muted-foreground transition-colors"
-                  placeholder="Jane Smith"
-                  autoComplete="name"
-                />
-              </FormField>
-              <FormField label="Phone">
-                <input
-                  required
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-background border border-card-border focus:bg-card focus:border-secondary/60 focus:outline-none focus:ring-2 focus:ring-secondary/20 text-sm text-foreground placeholder:text-muted-foreground transition-colors"
-                  placeholder="(239) 555-0100"
-                  autoComplete="tel"
-                />
-              </FormField>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-3">
-              <FormField label="Email">
-                <input
-                  required
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-background border border-card-border focus:bg-card focus:border-secondary/60 focus:outline-none focus:ring-2 focus:ring-secondary/20 text-sm text-foreground placeholder:text-muted-foreground transition-colors"
-                  placeholder="you@example.com"
-                  autoComplete="email"
-                />
-              </FormField>
-              <FormField label="ZIP code">
-                <input
-                  required
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  value={zip}
-                  onChange={(e) => setZip(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-background border border-card-border focus:bg-card focus:border-secondary/60 focus:outline-none focus:ring-2 focus:ring-secondary/20 text-sm text-foreground placeholder:text-muted-foreground transition-colors"
-                  placeholder="33901"
-                  autoComplete="postal-code"
-                />
-              </FormField>
-            </div>
-            <FormField label="What's going on?">
-              <textarea
-                value={details}
-                onChange={(e) => setDetails(e.target.value)}
-                className="form-input min-h-[88px] resize-y"
-                placeholder={`Tell us briefly about your ${serviceTitle.toLowerCase()} needs...`}
-                rows={3}
-              />
-            </FormField>
-            <Button
-              type="submit"
-              size="lg"
-              className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-12 glow-green"
-            >
-              <Send className="mr-2 h-4 w-4" />
-              Request Service
-            </Button>
-            <p className="text-[11px] text-muted-foreground text-center leading-relaxed">
-              By submitting, you agree to be contacted by Hurricane Air about your request. We never sell or share your info.
-            </p>
-          </form>
-        )}
+        <div className="rounded-2xl overflow-hidden border border-card-border bg-white shadow-inner">
+          <iframe
+            src="https://go.servicetitan.com/webscheduler?tenantid=993943591&campaignid=1636"
+            title={`Schedule ${serviceTitle}`}
+            loading="lazy"
+            className="w-full h-[700px] block border-0"
+          />
+        </div>
       </div>
     </motion.div>
   );
 }
 
-function FormField({ label, children }: { label: string; children: React.ReactNode }) {
+const PROCESS_STEPS = [
+  {
+    icon: Phone,
+    title: "Call or Book Online",
+    desc: "Tell us what's going on. We'll have a licensed tech dispatched the same day in most cases.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Diagnose, Not Guess",
+    desc: "Your tech runs a full system diagnostic and shows you exactly what's wrong — no shortcuts, no scare tactics.",
+  },
+  {
+    icon: Send,
+    title: "Approve a Flat Quote",
+    desc: "You get an upfront, written, all-in price. Approve it and we get to work — usually same-visit.",
+  },
+  {
+    icon: Star,
+    title: "Cool, Comfortable, Done",
+    desc: "Your system runs like new before we leave. Backed by our 5-year parts warranty and arrival guarantee.",
+  },
+];
+
+export function ServiceProcess() {
   return (
-    <label className="block">
-      <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-1.5 block">
-        {label}
-      </span>
-      {children}
-    </label>
+    <ServiceSection title="How it works">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        {PROCESS_STEPS.map((step, idx) => {
+          const Icon = step.icon;
+          return (
+            <motion.div
+              key={step.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="relative p-6 rounded-2xl bg-card border border-card-border hover:border-secondary/40 hover:-translate-y-1 transition-all duration-300 group overflow-hidden"
+            >
+              <div className="absolute -top-12 -right-12 w-32 h-32 bg-secondary/[0.06] rounded-full blur-2xl group-hover:bg-secondary/[0.12] transition-colors" />
+              <div className="relative">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="h-12 w-12 rounded-2xl bg-secondary/10 border border-secondary/30 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+                    <Icon className="h-5 w-5 text-secondary" />
+                  </div>
+                  <span className="text-4xl font-black text-foreground/[0.06] tabular-nums leading-none">
+                    0{idx + 1}
+                  </span>
+                </div>
+                <div className="font-extrabold text-foreground mb-1.5 tracking-tight">{step.title}</div>
+                <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </ServiceSection>
   );
 }
+
