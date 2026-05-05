@@ -139,7 +139,7 @@ export default function SchedulePage() {
                   src="https://go.servicetitan.com/webscheduler?tenantid=993943591&campaignid=1636"
                   title="Schedule Hurricane Air Service"
                   loading="eager"
-                  className="w-full h-[760px] block border-0"
+                  className="w-full block border-0 h-[640px] sm:h-[720px] lg:h-[780px]"
                 />
               </div>
             </motion.div>

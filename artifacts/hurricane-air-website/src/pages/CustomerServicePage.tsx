@@ -140,9 +140,9 @@ export default function CustomerServicePage() {
       {/* Commitments */}
       <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight mb-8">Our Service Commitments</h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-14">
-        {commitments.map((c) => (
+        {commitments.map((c, idx) => (
           <div key={c.title} className="flex gap-4 p-5 rounded-2xl bg-card border border-card-border">
-            <div className="text-2xl shrink-0 mt-0.5">{c.icon}</div>
+            <div className="h-9 w-9 rounded-xl bg-secondary/10 border border-secondary/30 flex items-center justify-center shrink-0 mt-0.5 text-[11px] font-extrabold tabular-nums text-secondary">{String(idx + 1).padStart(2, "0")}</div>
             <div>
               <div className="font-bold text-foreground mb-1">{c.title}</div>
               <div className="text-sm text-muted-foreground leading-relaxed">{c.desc}</div>

@@ -126,14 +126,11 @@ export function Hero() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-7 text-white space-y-5 sm:space-y-7"
         >
-          {/* Live status pill */}
+          {/* Trust pill */}
           <div className="inline-flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-full glass-tile text-white/95">
-            <span className="relative flex h-2 w-2 ml-1">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary" />
-            </span>
+            <ShieldCheck className="h-3.5 w-3.5 text-secondary" />
             <span className="text-xs font-semibold tracking-wider uppercase text-white/90">
-              Live in SWFL · Dispatching now
+              Licensed in Florida · CAC1813319
             </span>
           </div>
 
@@ -228,38 +225,34 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Mobile-only compact stat strip (replaces the desktop floating cards) */}
+          {/* Mobile-only trust strip */}
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.1 }}
-            className="grid grid-cols-3 gap-2 lg:hidden"
-            role="list"
-            aria-label="Live service status: 86 degrees in Fort Myers, 47 minute average dispatch time, 5.0 star rated"
+            className="grid grid-cols-2 gap-2 lg:hidden"
           >
-            <div role="listitem" className="glass-tile rounded-2xl p-3 text-white">
-              <div className="flex items-center gap-1.5 mb-1">
-                <Sun className="h-3 w-3 text-accent" aria-hidden />
-                <span className="text-[9px] uppercase tracking-widest text-white/60 font-bold">Now</span>
+            <a
+              href="https://www.google.com/search?q=Hurricane+Air+Conditioning+SWFL+reviews"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="glass-tile rounded-2xl p-3 text-white"
+            >
+              <div className="flex items-center gap-0.5 mb-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-3 w-3 fill-secondary text-secondary" aria-hidden />
+                ))}
               </div>
-              <div className="text-2xl font-extrabold tabular-nums leading-none">86°</div>
-              <div className="text-[10px] text-white/60 mt-1">Fort Myers</div>
-            </div>
-            <div role="listitem" className="glass-tile rounded-2xl p-3 text-white">
+              <div className="text-2xl font-extrabold tabular-nums leading-none">4.9</div>
+              <div className="text-[10px] text-white/60 mt-1 uppercase tracking-widest">749 Google reviews</div>
+            </a>
+            <div className="glass-tile rounded-2xl p-3 text-white">
               <div className="flex items-center gap-1.5 mb-1">
-                <Clock className="h-3 w-3 text-secondary" aria-hidden />
-                <span className="text-[9px] uppercase tracking-widest text-white/60 font-bold">Dispatch</span>
+                <ShieldCheck className="h-3 w-3 text-secondary" aria-hidden />
+                <span className="text-[9px] uppercase tracking-widest text-white/60 font-bold">Licensed</span>
               </div>
-              <div className="text-2xl font-extrabold tabular-nums leading-none">47<span className="text-xs text-white/60 font-medium">min</span></div>
-              <div className="text-[10px] text-white/60 mt-1">Avg arrival</div>
-            </div>
-            <div role="listitem" className="glass-tile rounded-2xl p-3 text-white">
-              <div className="flex items-center gap-1.5 mb-1">
-                <Star className="h-3 w-3 fill-secondary text-secondary" aria-hidden />
-                <span className="text-[9px] uppercase tracking-widest text-white/60 font-bold">Rated</span>
-              </div>
-              <div className="text-2xl font-extrabold tabular-nums leading-none">5.0★</div>
-              <div className="text-[10px] text-white/60 mt-1">1,200+ revs</div>
+              <div className="text-2xl font-extrabold leading-none">20+ yrs</div>
+              <div className="text-[10px] text-white/60 mt-1 uppercase tracking-widest">CAC1813319</div>
             </div>
           </motion.div>
 
@@ -313,8 +306,11 @@ export function Hero() {
             <div className="text-[10px] text-white/50 mt-1.5 uppercase tracking-wider">Indoor demand · High</div>
           </motion.div>
 
-          {/* Card 2: Dispatch */}
-          <motion.div
+          {/* Card 2: Google reviews */}
+          <motion.a
+            href="https://www.google.com/search?q=Hurricane+Air+Conditioning+SWFL+reviews"
+            target="_blank"
+            rel="noreferrer noopener"
             initial={reduceMotion ? false : { opacity: 0, y: 20, x: 20 }}
             animate={{ opacity: 1, y: 0, x: 0 }}
             transition={{ duration: 0.9, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -322,23 +318,29 @@ export function Hero() {
             style={{ animationDelay: "1.5s" }}
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-secondary/20 flex items-center justify-center">
-                <Clock className="h-5 w-5 text-secondary" />
+              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shrink-0 shadow-sm">
+                <svg viewBox="0 0 48 48" className="h-5 w-5" aria-hidden>
+                  <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z" />
+                  <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z" />
+                  <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z" />
+                  <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z" />
+                </svg>
               </div>
               <div>
-                <div className="text-3xl font-extrabold leading-none tabular-nums">47<span className="text-base font-medium text-white/60"> min</span></div>
-                <div className="text-[11px] uppercase tracking-widest text-white/60 font-semibold mt-1">Avg dispatch</div>
+                <div className="flex items-center gap-1">
+                  <span className="text-2xl font-extrabold leading-none tabular-nums">4.9</span>
+                  <div className="flex items-center">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-3 w-3 fill-secondary text-secondary" />
+                    ))}
+                  </div>
+                </div>
+                <div className="text-[11px] uppercase tracking-widest text-white/60 font-semibold mt-1">
+                  749 Google reviews
+                </div>
               </div>
             </div>
-            <div className="mt-4 flex items-center gap-1.5">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <div
-                  key={i}
-                  className={`h-1.5 flex-1 rounded-full ${i < 4 ? "bg-secondary" : "bg-white/15"}`}
-                />
-              ))}
-            </div>
-          </motion.div>
+          </motion.a>
 
           {/* Card 3: Reviews */}
           <motion.div

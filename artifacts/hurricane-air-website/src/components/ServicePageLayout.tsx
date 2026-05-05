@@ -378,20 +378,20 @@ export function PricingCallout({
 export function IncludedList({ items }: { items: { icon?: string; title: string; desc: string }[] }) {
   return (
     <div className="grid sm:grid-cols-2 gap-4 mb-14">
-      {items.map((item) => (
+      {items.map((item, idx) => (
         <motion.div
           key={item.title}
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="flex gap-4 p-5 rounded-2xl bg-card border border-card-border"
+          transition={{ duration: 0.5, delay: idx * 0.04, ease: [0.16, 1, 0.3, 1] }}
+          className="flex gap-4 p-5 rounded-2xl bg-card border border-card-border hover:border-secondary/30 transition-colors"
         >
-          {item.icon && (
-            <div className="text-2xl shrink-0 mt-0.5">{item.icon}</div>
-          )}
-          <div>
-            <div className="font-bold text-foreground mb-1">{item.title}</div>
+          <div className="h-9 w-9 rounded-xl bg-secondary/10 border border-secondary/30 flex items-center justify-center shrink-0 mt-0.5 text-[11px] font-extrabold tabular-nums text-secondary">
+            {String(idx + 1).padStart(2, "0")}
+          </div>
+          <div className="min-w-0">
+            <div className="font-extrabold text-foreground mb-1 tracking-tight">{item.title}</div>
             <div className="text-sm text-muted-foreground leading-relaxed">{item.desc}</div>
           </div>
         </motion.div>
@@ -593,7 +593,7 @@ export function ServiceBookingScheduler({ serviceTitle }: { serviceTitle: string
             src="https://go.servicetitan.com/webscheduler?tenantid=993943591&campaignid=1636"
             title={`Schedule ${serviceTitle}`}
             loading="lazy"
-            className="w-full h-[700px] block border-0"
+            className="w-full block border-0 h-[600px] sm:h-[680px] lg:h-[720px]"
           />
         </div>
       </div>

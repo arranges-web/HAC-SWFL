@@ -86,7 +86,7 @@ export default function LaborWarrantyPage() {
             transition={{ duration: 0.5, delay: i * 0.07 }}
             className="flex gap-4 p-5 rounded-2xl bg-card border border-card-border"
           >
-            <div className="text-2xl shrink-0 mt-0.5">{f.icon}</div>
+            <div className="h-9 w-9 rounded-xl bg-secondary/10 border border-secondary/30 flex items-center justify-center shrink-0 mt-0.5 text-[11px] font-extrabold tabular-nums text-secondary">{String(i + 1).padStart(2, "0")}</div>
             <div>
               <div className="font-bold text-foreground mb-1">{f.title}</div>
               <div className="text-sm text-muted-foreground leading-relaxed">{f.desc}</div>

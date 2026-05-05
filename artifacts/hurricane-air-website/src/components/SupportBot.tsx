@@ -52,27 +52,27 @@ function pickEmpathy(issue: string, firstName: string): string {
   const name = firstName || "friend";
 
   if (i.includes("not cool") || i.includes("warm") || i.includes("hot") || i.includes("blowing")) {
-    return `Ugh, no AC in Florida heat is the worst, ${name}. The good news — it's almost always a small fix (capacitor, refrigerant, drain line). Our techs carry the most common parts on the truck so most repairs are done same-visit.`;
+    return `Understood, ${name}. A system blowing warm in Florida heat is almost always a small repair — typically a capacitor, low refrigerant, or a clogged drain line. Our trucks are stocked for these, so most jobs are completed on the first visit.`;
   }
   if (i.includes("noise") || i.includes("loud") || i.includes("rattle") || i.includes("buzz") || i.includes("squeal")) {
-    return `Strange noises usually mean something's loose or wearing out — catching it early is way cheaper than waiting. Our techs can pinpoint exactly which part is the source within the diagnostic.`;
+    return `Noted. Unusual noises typically signal a worn component — addressing it early prevents a much larger repair down the road. Our diagnostic isolates the exact source quickly.`;
   }
   if (i.includes("bill") || i.includes("expensive") || i.includes("electric") || i.includes("efficien")) {
-    return `Spiking bills almost always trace back to dirty coils, low refrigerant, or duct leakage — all fixable. We'll show you exactly what's costing you and what the payback looks like.`;
+    return `Higher utility bills usually trace back to dirty coils, low refrigerant, or duct leakage — all of which we can identify and resolve. You'll receive a clear breakdown of what's affecting efficiency and the expected payback.`;
   }
   if (i.includes("tune") || i.includes("maintenan") || i.includes("check")) {
-    return `Smart move, ${name}. In SWFL heat, twice-a-year maintenance keeps your warranty valid and prevents the $2,000 emergency calls we see every summer.`;
+    return `A wise decision, ${name}. In Southwest Florida's climate, semi-annual maintenance protects your warranty and helps avoid the larger emergency repairs we routinely see during peak season.`;
   }
   if (i.includes("new") || i.includes("replac") || i.includes("install") || i.includes("quote")) {
-    return `Got it. We do free in-home estimates with proper sizing — none of the "guess by square footage" stuff. You'll get a written quote with options across efficiency tiers.`;
+    return `Of course. Our estimates are complimentary and include a proper Manual J load calculation — no guesswork by square footage. You'll receive a written quote outlining options across multiple efficiency tiers.`;
   }
   if (i.includes("leak") || i.includes("water") || i.includes("drip")) {
-    return `Water around an indoor unit is almost always a clogged drain line — easy fix, but if left alone it can shut down the system or damage your ceiling. Let's get a tech out before it spreads.`;
+    return `Water around an indoor unit usually indicates a clogged condensate drain line — straightforward to clear, but worth addressing promptly to avoid system shutdown or ceiling damage.`;
   }
   if (i.includes("emergency") || i.includes("urgent") || i.includes("asap") || i.includes("now")) {
-    return `Hang in there, ${name}. We dispatch 24/7 — let me get you into our priority queue right now.`;
+    return `I understand, ${name}. We dispatch 24 hours a day. Let me move you into our priority queue right now.`;
   }
-  return `Thanks for sharing that, ${name}. I want to make sure a real technician takes a proper look — no guessing, no upselling. Let's get you on the schedule.`;
+  return `Thank you for the details, ${name}. I'd like to ensure a licensed technician takes a proper look — straightforward diagnosis, no upselling. Let's get you scheduled.`;
 }
 
 export function SupportBot() {
@@ -116,8 +116,8 @@ export function SupportBot() {
 
   async function startConversation() {
     if (messages.length > 0) return;
-    await pushBot("Hi there 👋 I'm your AI Comfort Specialist at Hurricane Air.");
-    await pushBot("I'll get you in touch with a real technician fast — what's your first name?");
+    await pushBot("Hello — I'm your AI Comfort Specialist at Hurricane Air.");
+    await pushBot("I'll connect you with a licensed technician quickly. May I have your first name?");
     setStep("name");
   }
 
@@ -134,7 +134,7 @@ export function SupportBot() {
     setDraft((d) => ({ ...d, name: value }));
     setInput("");
     const first = value.split(" ")[0] || value;
-    await pushBot(`Nice to meet you, ${first}! What's the best phone number to reach you?`);
+    await pushBot(`Pleasure to meet you, ${first}. What's the best phone number to reach you?`);
     setStep("phone");
   }
 
@@ -148,7 +148,7 @@ export function SupportBot() {
     pushUser(value);
     setDraft((d) => ({ ...d, phone: value }));
     setInput("");
-    await pushBot("Got it, thank you! 🙏 So tell me — what's going on with your A/C? You can pick one of these or describe it in your own words:", QUICK_ISSUES);
+    await pushBot("Thank you. Now, what's happening with your system? Select an option below or describe it in your own words.", QUICK_ISSUES);
     setStep("issue");
   }
 
@@ -159,7 +159,7 @@ export function SupportBot() {
     setStep("empathy");
     const first = (draft.name || "").split(" ")[0] || "friend";
     await pushBot(pickEmpathy(value, first));
-    await pushBot("Want me to grab a slot on the schedule right now? Same-day usually available.", [
+    await pushBot("Would you like to reserve a time on our schedule now? Same-day appointments are typically available.", [
       "Yes — schedule me",
       "Have someone call me",
     ]);
@@ -176,11 +176,11 @@ export function SupportBot() {
 
     if (value.toLowerCase().includes("schedule")) {
       await pushBot(
-        `You got it, ${first}. Tap the button below to pick your time — takes 60 seconds. We'll confirm by phone right after.`,
+        `Excellent, ${first}. Use the button below to select your time — it takes about 60 seconds. We'll confirm by phone immediately after.`,
       );
     } else {
       await pushBot(
-        `Perfect, ${first}. A Hurricane Air dispatcher will call ${draft.phone} within 15 minutes during business hours. For immediate help, just dial (239) 748-1815.`,
+        `Thank you, ${first}. A Hurricane Air dispatcher will call ${draft.phone} within 15 minutes during business hours. For immediate assistance, please dial (239) 748-1815.`,
       );
     }
   }
