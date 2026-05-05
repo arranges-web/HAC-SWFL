@@ -20,6 +20,7 @@ import { Footer } from "@/components/Footer";
 import { BrandRibbon } from "@/components/BrandRibbon";
 import { PromoPopup } from "@/components/PromoPopup";
 import { BookingPopup } from "@/components/BookingPopup";
+import { SupportBot } from "@/components/SupportBot";
 
 // Cooling service pages
 import ACRepair from "@/pages/services/ACRepair";
@@ -160,6 +161,7 @@ function App() {
           <Router />
         </WouterRouter>
         <BookingPopup />
+        <SupportBot />
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>

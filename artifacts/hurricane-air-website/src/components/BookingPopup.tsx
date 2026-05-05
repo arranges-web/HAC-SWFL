@@ -56,8 +56,8 @@ function generateBooking(id: number): Booking {
 }
 
 const INITIAL_DELAY_MS = 6000;
-const VISIBLE_MS = 6500;
-const GAP_MS = 9000;
+const VISIBLE_MS = 7000;
+const GAP_MS = 113000;
 
 export function BookingPopup() {
   const [booking, setBooking] = useState<Booking | null>(null);

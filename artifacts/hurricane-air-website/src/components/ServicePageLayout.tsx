@@ -1,9 +1,15 @@
+import { useState } from "react";
 import { Link } from "wouter";
-import { Phone, ChevronRight, Calendar } from "lucide-react";
+import { Phone, ChevronRight, Calendar, ChevronDown, Star, Send, ShieldCheck } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+
+export interface ServiceFAQItem {
+  q: string;
+  a: string;
+}
 
 interface ServicePageLayoutProps {
   category: string;
@@ -11,8 +17,36 @@ interface ServicePageLayoutProps {
   subtitle: string;
   icon: React.ReactNode;
   accentColor?: "green" | "orange" | "blue";
+  faqs?: ServiceFAQItem[];
   children: React.ReactNode;
 }
+
+const DEFAULT_FAQS: ServiceFAQItem[] = [
+  {
+    q: "How quickly can a technician arrive?",
+    a: "Call before noon Monday through Saturday and we guarantee a same-day arrival before sunset — in writing. After-hours and weekend dispatch is available 24/7 for emergencies.",
+  },
+  {
+    q: "Do you charge for diagnostics?",
+    a: "Our flat $125 diagnostic fee is waived when you proceed with the repair. You'll see the full price before any work starts — no hourly billing, no surprise charges.",
+  },
+  {
+    q: "Are your technicians licensed and insured?",
+    a: "Yes. Hurricane Air operates under Florida HVAC license #CAC1813319, and every technician is background-checked, fully insured, and trained on every major brand.",
+  },
+  {
+    q: "What brands do you service?",
+    a: "All major residential and commercial brands — Trane, Carrier, Lennox, Goodman, Rheem, Comfortmaker, York, American Standard, Bryant, and more.",
+  },
+  {
+    q: "Do you offer financing?",
+    a: "Yes. We partner with several Florida-licensed lenders to offer 0% APR options on qualifying systems. Pre-approval takes about 60 seconds and won't affect your credit.",
+  },
+  {
+    q: "What's your warranty?",
+    a: "5-year parts warranty on qualifying repairs and a 10-year limited warranty on new installations, plus our written same-day arrival guarantee.",
+  },
+];
 
 const accentClasses = {
   green: {
@@ -47,6 +81,7 @@ export function ServicePageLayout({
   subtitle,
   icon,
   accentColor = "green",
+  faqs,
   children,
 }: ServicePageLayoutProps) {
   const ac = accentClasses[accentColor];
@@ -165,6 +200,10 @@ export function ServicePageLayout({
         {/* Page body */}
         <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16 lg:py-20">
           {children}
+
+          <ServiceFAQ items={faqs ?? DEFAULT_FAQS} />
+          <MembershipPromo />
+          <ServiceLeadForm serviceTitle={title} />
         </div>
 
         {/* Bottom CTA strip */}
@@ -301,7 +340,7 @@ export function TrustBar() {
   const items = [
     { stat: "20+", label: "Years in business" },
     { stat: "24/7", label: "Emergency available" },
-    { stat: "5★", label: "Google rated" },
+    { stat: "4.9★", label: "749 Google reviews" },
     { stat: "5-yr", label: "Parts warranty" },
   ];
   return (
@@ -313,5 +352,287 @@ export function TrustBar() {
         </div>
       ))}
     </div>
+  );
+}
+
+export function ServiceFAQ({ items }: { items: ServiceFAQItem[] }) {
+  const [open, setOpen] = useState<number | null>(0);
+  return (
+    <ServiceSection title="Frequently Asked Questions">
+      <div className="space-y-3">
+        {items.map((item, idx) => {
+          const isOpen = open === idx;
+          return (
+            <div
+              key={item.q}
+              className={`rounded-2xl border bg-card transition-colors ${
+                isOpen ? "border-secondary/40" : "border-card-border"
+              }`}
+            >
+              <button
+                type="button"
+                onClick={() => setOpen(isOpen ? null : idx)}
+                className="w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left"
+                aria-expanded={isOpen}
+              >
+                <span className="font-bold text-foreground text-base sm:text-lg leading-snug">
+                  {item.q}
+                </span>
+                <ChevronDown
+                  className={`h-5 w-5 shrink-0 text-secondary transition-transform duration-300 ${
+                    isOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    key="content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-muted-foreground leading-relaxed">
+                      {item.a}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
+      </div>
+    </ServiceSection>
+  );
+}
+
+export function MembershipPromo() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-[#021a8a] to-primary text-white p-7 sm:p-10 mb-14 sm:mb-18 noise"
+    >
+      <div className="absolute -right-24 -top-24 w-80 h-80 bg-secondary/[0.08] rounded-full blur-[120px] pointer-events-none" />
+      <div className="relative grid lg:grid-cols-[1fr_auto] gap-8 items-center">
+        <div className="max-w-xl">
+          <div className="inline-flex items-center gap-2 mb-3">
+            <ShieldCheck className="h-4 w-4 text-secondary" />
+            <span className="text-[11px] font-bold tracking-[0.25em] text-secondary uppercase">
+              Membership Plan
+            </span>
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-3">
+            Skip the diagnostic fee — join for{" "}
+            <span className="text-secondary tabular-nums">$189/yr</span>.
+          </h3>
+          <p className="text-white/70 leading-relaxed mb-5">
+            Two annual tune-ups, priority scheduling, member-only repair discounts, and a discounted{" "}
+            <span className="font-bold text-white">$89</span> service-call fee — saves the average homeowner about{" "}
+            <span className="font-bold text-white">$230 a year</span>.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Button
+              asChild
+              size="lg"
+              className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-12 px-6 glow-green"
+            >
+              <Link href="/membership">Learn More</Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-white/20 text-white hover:bg-white/10 hover:text-white font-bold h-12 px-6"
+            >
+              <a href="tel:2397481815">
+                <Phone className="mr-2 h-4 w-4" />
+                (239) 748-1815
+              </a>
+            </Button>
+          </div>
+        </div>
+        <div className="hidden lg:flex flex-col items-center gap-1 text-center">
+          <div className="text-7xl font-extrabold text-secondary tabular-nums leading-none">$189</div>
+          <div className="text-xs uppercase tracking-[0.2em] font-semibold text-white/60 mt-2">
+            per year
+          </div>
+          <div className="flex items-center gap-1 mt-3">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="h-3.5 w-3.5 fill-secondary text-secondary" />
+            ))}
+          </div>
+          <div className="text-[10px] uppercase tracking-widest text-white/50 mt-1">
+            Loved by 1,800+ homes
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+export function ServiceLeadForm({ serviceTitle }: { serviceTitle: string }) {
+  const [submitted, setSubmitted] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [zip, setZip] = useState("");
+  const [details, setDetails] = useState("");
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    // eslint-disable-next-line no-console
+    console.info("[ServiceLeadForm]", { service: serviceTitle, name, phone, email, zip, details });
+    setSubmitted(true);
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="rounded-3xl bg-card border border-card-border p-7 sm:p-10 mb-2"
+    >
+      <div className="grid lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 items-start">
+        <div>
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="h-px w-8 bg-secondary" />
+            <span className="text-[11px] font-bold tracking-[0.25em] text-secondary uppercase">
+              Request Service
+            </span>
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground mb-3">
+            Get on the schedule today.
+          </h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Tell us a bit about what's going on and we'll call you back within 15 minutes during business hours.
+            Or call{" "}
+            <a href="tel:2397481815" className="text-secondary font-bold hover:underline">
+              (239) 748-1815
+            </a>{" "}
+            for an immediate response.
+          </p>
+          <ul className="space-y-2.5 text-sm text-muted-foreground">
+            {[
+              "Same-day arrival before sunset (Mon–Sat)",
+              "Upfront flat-rate pricing — no surprises",
+              "Licensed & insured · CAC1813319",
+            ].map((line) => (
+              <li key={line} className="flex items-start gap-2.5">
+                <span className="mt-[3px] h-4 w-4 rounded-full bg-secondary/15 border border-secondary/30 flex items-center justify-center shrink-0">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary" />
+                </span>
+                {line}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {submitted ? (
+          <div className="rounded-2xl bg-secondary/10 border border-secondary/30 p-6 sm:p-8 text-center">
+            <div className="w-12 h-12 rounded-full bg-secondary/20 border border-secondary/40 flex items-center justify-center mx-auto mb-3">
+              <Send className="h-5 w-5 text-secondary" />
+            </div>
+            <h4 className="text-xl font-extrabold text-foreground mb-2">Request received</h4>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              Thanks {name.split(" ")[0] || "—"} — a Hurricane Air dispatcher will call {phone || "you"} within 15 minutes during business hours.
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Need help right now?{" "}
+              <a href="tel:2397481815" className="font-bold text-secondary hover:underline">
+                Call (239) 748-1815
+              </a>
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-3">
+            <div className="grid sm:grid-cols-2 gap-3">
+              <FormField label="Full name">
+                <input
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl bg-background border border-card-border focus:bg-card focus:border-secondary/60 focus:outline-none focus:ring-2 focus:ring-secondary/20 text-sm text-foreground placeholder:text-muted-foreground transition-colors"
+                  placeholder="Jane Smith"
+                  autoComplete="name"
+                />
+              </FormField>
+              <FormField label="Phone">
+                <input
+                  required
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl bg-background border border-card-border focus:bg-card focus:border-secondary/60 focus:outline-none focus:ring-2 focus:ring-secondary/20 text-sm text-foreground placeholder:text-muted-foreground transition-colors"
+                  placeholder="(239) 555-0100"
+                  autoComplete="tel"
+                />
+              </FormField>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-3">
+              <FormField label="Email">
+                <input
+                  required
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl bg-background border border-card-border focus:bg-card focus:border-secondary/60 focus:outline-none focus:ring-2 focus:ring-secondary/20 text-sm text-foreground placeholder:text-muted-foreground transition-colors"
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                />
+              </FormField>
+              <FormField label="ZIP code">
+                <input
+                  required
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  value={zip}
+                  onChange={(e) => setZip(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl bg-background border border-card-border focus:bg-card focus:border-secondary/60 focus:outline-none focus:ring-2 focus:ring-secondary/20 text-sm text-foreground placeholder:text-muted-foreground transition-colors"
+                  placeholder="33901"
+                  autoComplete="postal-code"
+                />
+              </FormField>
+            </div>
+            <FormField label="What's going on?">
+              <textarea
+                value={details}
+                onChange={(e) => setDetails(e.target.value)}
+                className="form-input min-h-[88px] resize-y"
+                placeholder={`Tell us briefly about your ${serviceTitle.toLowerCase()} needs...`}
+                rows={3}
+              />
+            </FormField>
+            <Button
+              type="submit"
+              size="lg"
+              className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-12 glow-green"
+            >
+              <Send className="mr-2 h-4 w-4" />
+              Request Service
+            </Button>
+            <p className="text-[11px] text-muted-foreground text-center leading-relaxed">
+              By submitting, you agree to be contacted by Hurricane Air about your request. We never sell or share your info.
+            </p>
+          </form>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
+function FormField({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label className="block">
+      <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-1.5 block">
+        {label}
+      </span>
+      {children}
+    </label>
   );
 }

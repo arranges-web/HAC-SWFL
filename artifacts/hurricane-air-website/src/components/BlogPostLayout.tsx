@@ -163,12 +163,12 @@ export function BlogPostLayout({
                 </div>
               </div>
 
-              {/* $69 Tune-Up callout */}
+              {/* Tune-Up callout */}
               <div className="rounded-2xl border border-secondary/20 bg-secondary/5 p-5">
-                <div className="text-3xl font-extrabold text-secondary tabular-nums mb-0.5">$69</div>
-                <div className="text-sm font-bold text-foreground mb-1">A/C Tune-Up Special</div>
+                <div className="text-3xl font-extrabold text-secondary tabular-nums mb-0.5">$189</div>
+                <div className="text-sm font-bold text-foreground mb-1">A/C Tune-Up & Maintenance</div>
                 <p className="text-xs text-muted-foreground leading-relaxed mb-4">
-                  Full inspection, cleaning, and documented report. Diagnostic fee waived with approved repair.
+                  Full inspection, cleaning, and documented report — included in our annual membership plan.
                 </p>
                 <Button asChild size="sm" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold w-full">
                   <a href="/#contact">Claim Offer</a>
