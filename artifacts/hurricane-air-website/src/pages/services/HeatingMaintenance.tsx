@@ -15,6 +15,8 @@ export default function HeatingMaintenance() {
       subtitle="Pre-season heating tune-ups to ensure your heat pump is ready before Florida's brief but real cold snaps arrive."
       icon={<Fan className="w-16 h-16 text-accent" />}
       accentColor="orange"
+      price="$189"
+      priceLabel="Annual membership — two tune-ups + perks"
     >
       <TrustBar />
 

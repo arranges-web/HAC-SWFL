@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -20,8 +21,10 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { BrandRibbon } from "@/components/BrandRibbon";
 import { PromoPopup } from "@/components/PromoPopup";
-import { BookingPopup } from "@/components/BookingPopup";
-import { SupportBot } from "@/components/SupportBot";
+
+// Lazy-load below-the-fold floating widgets so they don't block first paint.
+const BookingPopup = lazy(() => import("@/components/BookingPopup").then((m) => ({ default: m.BookingPopup })));
+const SupportBot = lazy(() => import("@/components/SupportBot").then((m) => ({ default: m.SupportBot })));
 
 // Cooling service pages
 import ACRepair from "@/pages/services/ACRepair";
@@ -164,8 +167,10 @@ function App() {
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <Router />
         </WouterRouter>
-        <BookingPopup />
-        <SupportBot />
+        <Suspense fallback={null}>
+          <BookingPopup />
+          <SupportBot />
+        </Suspense>
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>

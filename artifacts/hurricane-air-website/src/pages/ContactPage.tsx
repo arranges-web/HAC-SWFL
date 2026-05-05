@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Phone, Mail, Clock, MapPin, Send, Check } from "lucide-react";
+import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import { PageLayout } from "@/components/PageLayout";
 import { Button } from "@/components/ui/button";
+import { ContactWizard } from "@/components/ContactWizard";
 
 const contactInfo = [
   {
@@ -35,26 +35,6 @@ const contactInfo = [
 ];
 
 export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    preferredContact: "phone",
-    reason: "",
-    timeline: "asap",
-  });
-
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  }
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
-
   return (
     <PageLayout
       title="Contact Us"
@@ -80,121 +60,20 @@ export default function ContactPage() {
         ))}
       </div>
 
-      {/* Contact form */}
-      <div className="grid lg:grid-cols-2 gap-12 items-start">
+      {/* Interactive Contact Wizard */}
+      <div className="grid lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-12 items-start">
         <div>
-          <h2 className="text-2xl font-extrabold tracking-tight text-foreground mb-2">Send Us a Message</h2>
-          <p className="text-muted-foreground mb-8">Fill out the form and a member of our team will reach out within one business day.</p>
-
-          {submitted ? (
-            <div className="flex flex-col items-center justify-center py-16 text-center rounded-3xl bg-card border border-card-border">
-              <div className="w-16 h-16 rounded-full bg-secondary/20 border border-secondary/40 flex items-center justify-center mb-4">
-                <Check className="w-8 h-8 text-secondary" />
-              </div>
-              <h3 className="text-xl font-extrabold text-foreground mb-2">Message Received!</h3>
-              <p className="text-muted-foreground text-sm max-w-xs">We'll be in touch within one business day. For urgent issues, please call us directly.</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-semibold text-foreground mb-1.5 block">First Name *</label>
-                  <input
-                    name="firstName"
-                    required
-                    value={form.firstName}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-secondary transition-colors"
-                    placeholder="Jane"
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-foreground mb-1.5 block">Last Name *</label>
-                  <input
-                    name="lastName"
-                    required
-                    value={form.lastName}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-secondary transition-colors"
-                    placeholder="Smith"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="text-sm font-semibold text-foreground mb-1.5 block">Email *</label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  value={form.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-secondary transition-colors"
-                  placeholder="jane@example.com"
-                />
-              </div>
-              <div>
-                <label className="text-sm font-semibold text-foreground mb-1.5 block">Phone Number *</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  required
-                  value={form.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-secondary transition-colors"
-                  placeholder="(239) 555-0123"
-                />
-              </div>
-              <div>
-                <label className="text-sm font-semibold text-foreground mb-1.5 block">Preferred Contact</label>
-                <select
-                  name="preferredContact"
-                  value={form.preferredContact}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground focus:outline-none focus:border-secondary transition-colors"
-                >
-                  <option value="phone">Phone</option>
-                  <option value="email">Email</option>
-                </select>
-              </div>
-              <div>
-                <label className="text-sm font-semibold text-foreground mb-1.5 block">Reason for Reaching Out *</label>
-                <textarea
-                  name="reason"
-                  required
-                  value={form.reason}
-                  onChange={handleChange}
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-secondary transition-colors resize-none"
-                  placeholder="Describe your HVAC issue or question..."
-                />
-              </div>
-              <div>
-                <label className="text-sm font-semibold text-foreground mb-1.5 block">Timeline for Work Needed</label>
-                <select
-                  name="timeline"
-                  value={form.timeline}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-card border border-card-border text-foreground focus:outline-none focus:border-secondary transition-colors"
-                >
-                  <option value="asap">ASAP</option>
-                  <option value="days">Next few days</option>
-                  <option value="weeks">Within weeks</option>
-                  <option value="months">Within months</option>
-                </select>
-              </div>
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-13 text-base glow-green"
-              >
-                <Send className="mr-2 h-4 w-4" />
-                Send Message
-              </Button>
-              <p className="text-xs text-muted-foreground text-center">
-                By submitting you agree to receive communications about your appointment. We never share your information.
-              </p>
-            </form>
-          )}
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="h-px w-8 bg-secondary" />
+            <h2 className="text-xs font-bold tracking-[0.3em] text-secondary uppercase">Get In Touch</h2>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground mb-3">
+            Tell us what you need — we'll handle the rest.
+          </h2>
+          <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
+            Four quick steps. Most are answered within 15 minutes during business hours.
+          </p>
+          <ContactWizard variant="card" />
         </div>
 
         {/* Right: emergency callout + hours */}

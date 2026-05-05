@@ -88,6 +88,9 @@ export function Hero() {
           src="/hero-bg.png"
           alt=""
           aria-hidden
+          loading="eager"
+          decoding="async"
+          fetchPriority="low"
           className="w-full h-full object-cover object-center opacity-[0.12]"
         />
         {/* Soft top vignette so the LIVE pill / headline always read clean */}

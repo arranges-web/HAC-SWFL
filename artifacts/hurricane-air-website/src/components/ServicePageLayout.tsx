@@ -18,7 +18,20 @@ interface ServicePageLayoutProps {
   icon: React.ReactNode;
   accentColor?: "green" | "orange" | "blue";
   faqs?: ServiceFAQItem[];
+  price?: string;
+  priceLabel?: string;
   children: React.ReactNode;
+}
+
+function GoogleGlyph({ className = "" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" aria-hidden="true">
+      <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z" />
+      <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z" />
+      <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z" />
+      <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z" />
+    </svg>
+  );
 }
 
 const DEFAULT_FAQS: ServiceFAQItem[] = [
@@ -82,6 +95,8 @@ export function ServicePageLayout({
   icon,
   accentColor = "green",
   faqs,
+  price = "$125",
+  priceLabel = "Diagnostic — waived with completed repair",
   children,
 }: ServicePageLayoutProps) {
   const ac = accentClasses[accentColor];
@@ -132,10 +147,16 @@ export function ServicePageLayout({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               >
-                {/* Category pill */}
-                <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border ${ac.pill} mb-5`}>
-                  <span className={`h-1.5 w-1.5 rounded-full ${ac.dot}`} />
-                  <span className="text-xs font-bold tracking-widest uppercase">{category}</span>
+                {/* Category + Price pills */}
+                <div className="flex flex-wrap items-center gap-2 mb-5">
+                  <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border ${ac.pill}`}>
+                    <span className={`h-1.5 w-1.5 rounded-full ${ac.dot}`} />
+                    <span className="text-xs font-bold tracking-widest uppercase">{category}</span>
+                  </div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground shadow-md shadow-secondary/30">
+                    <span className="text-xs font-extrabold tracking-widest uppercase">From</span>
+                    <span className="text-base font-black tabular-nums leading-none">{price}</span>
+                  </div>
                 </div>
 
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.04] tracking-[-0.015em] mb-5">
@@ -169,21 +190,43 @@ export function ServicePageLayout({
                   </Button>
                 </div>
 
-                {/* Hero trust strip */}
-                <div className="mt-7 flex items-center gap-4 sm:gap-6 text-white/70 text-xs sm:text-sm">
-                  <div className="flex items-center gap-1.5">
-                    <div className="flex items-center gap-0.5">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-3.5 w-3.5 fill-secondary text-secondary" />
-                      ))}
+                {/* Price + Google badges */}
+                <div className="mt-7 flex flex-wrap items-center gap-3">
+                  <div className="inline-flex items-center gap-2.5 px-3 py-2 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <div className="text-xs">
+                      <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold">Starting at</div>
+                      <div className="text-lg font-black text-secondary tabular-nums leading-none">{price}</div>
                     </div>
-                    <span className="font-semibold">
-                      <span className="text-white font-extrabold tabular-nums">4.9</span>
-                      <span className="text-white/50"> · 749 Google reviews</span>
-                    </span>
+                    <div className="h-7 w-px bg-white/10" />
+                    <div className="text-[10px] text-white/60 leading-tight max-w-[160px]">
+                      {priceLabel}
+                    </div>
                   </div>
-                  <span className="hidden sm:inline-block h-3 w-px bg-white/20" />
-                  <div className="hidden sm:flex items-center gap-1.5 font-semibold">
+
+                  <a
+                    href="https://www.google.com/search?q=Hurricane+Air+Conditioning+SWFL+reviews"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="inline-flex items-center gap-2.5 px-3 py-2 rounded-2xl bg-white text-foreground shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5"
+                    aria-label="View Google reviews"
+                  >
+                    <GoogleGlyph className="h-6 w-6 shrink-0" />
+                    <div className="text-xs leading-tight">
+                      <div className="flex items-center gap-1">
+                        <span className="text-base font-black tabular-nums">4.9</span>
+                        <div className="flex items-center">
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} className="h-3 w-3 fill-amber-400 text-amber-400" />
+                          ))}
+                        </div>
+                      </div>
+                      <div className="text-[10px] text-muted-foreground font-semibold">
+                        <span className="font-extrabold text-foreground tabular-nums">749</span> Google reviews
+                      </div>
+                    </div>
+                  </a>
+
+                  <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white/5 border border-white/10 text-xs font-semibold text-white/80">
                     <ShieldCheck className="h-3.5 w-3.5 text-secondary" />
                     <span>Licensed · CAC1813319</span>
                   </div>

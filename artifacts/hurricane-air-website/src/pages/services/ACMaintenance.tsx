@@ -16,6 +16,8 @@ export default function ACMaintenance() {
       subtitle="Annual tune-ups that extend your system's life, lower your energy bills, and prevent the peak-summer breakdowns you can't afford."
       icon={<Fan className="w-16 h-16 text-secondary" />}
       accentColor="green"
+      price="$189"
+      priceLabel="Annual membership — two tune-ups + perks"
     >
       <TrustBar />
 

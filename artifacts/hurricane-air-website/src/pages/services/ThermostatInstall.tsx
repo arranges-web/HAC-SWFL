@@ -15,6 +15,8 @@ export default function ThermostatInstall() {
       subtitle="Professional smart thermostat installation in Southwest Florida — save energy, gain control, and upgrade your comfort."
       icon={<Thermometer className="w-16 h-16 text-accent" />}
       accentColor="orange"
+      price="$280"
+      priceLabel="Smart thermostat install — all-in"
     >
       <TrustBar />
 

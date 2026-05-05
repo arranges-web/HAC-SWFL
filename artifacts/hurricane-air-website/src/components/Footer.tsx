@@ -54,7 +54,7 @@ export function Footer() {
           {/* Top: brand + newsletter */}
           <div className="grid lg:grid-cols-12 gap-8 sm:gap-10 mb-10 sm:mb-14 pb-8 sm:pb-10 border-b border-white/10">
             <div className="lg:col-span-6 space-y-5">
-              <img src="/logo.webp" alt="Hurricane Air Logo" className="h-12 w-auto brightness-0 invert" />
+              <img src="/logo.webp" alt="Hurricane Air Logo" className="h-14 w-auto" loading="lazy" decoding="async" />
               <p className="text-white/70 max-w-md text-base leading-relaxed">
                 Southwest Florida's most trusted air conditioning and heating experts since 2003. Trust. Transparency. Teamwork.
               </p>

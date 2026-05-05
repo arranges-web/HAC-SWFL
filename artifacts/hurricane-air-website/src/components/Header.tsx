@@ -117,6 +117,10 @@ export function Header() {
             <img
               src="/logo.webp"
               alt="Hurricane Air Logo"
+              width={144}
+              height={48}
+              fetchPriority="high"
+              decoding="async"
               className="h-9 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_hsl(126_80%_55%/0.5)]"
             />
           </Link>
