@@ -49,7 +49,7 @@ export default function LaborWarrantyPage() {
               When your manufacturer warranty runs out, parts are still covered — but labor isn't. A single repair call can cost $300–$800 in labor alone. coolCARE protects you from that expense for up to a decade.
             </p>
             <Button asChild size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold glow-green">
-              <a href="/#contact">
+              <a href="/schedule">
                 Ask About coolCARE <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </Button>

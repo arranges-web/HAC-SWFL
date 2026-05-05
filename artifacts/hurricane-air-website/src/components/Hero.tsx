@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, CreditCard, ShieldCheck, ThermometerSnowflake, Zap, Star, Clock, Sun } from "lucide-react";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 
 const SWFL_CITIES = [
@@ -196,10 +197,10 @@ export function Hero() {
               size="lg"
               className="w-full sm:w-auto bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-12 sm:h-14 px-6 sm:px-7 text-base sm:text-lg glow-green hover:translate-y-[-2px] group"
             >
-              <a href="#contact">
-                Instant A/C Quote
+              <Link href="/schedule">
+                Schedule Service
                 <ArrowRight className="ml-1 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
+              </Link>
             </Button>
             <div className="grid grid-cols-2 sm:contents gap-3">
               <Button
@@ -208,7 +209,7 @@ export function Hero() {
                 variant="outline"
                 className="bg-white/5 border-white/25 text-white hover:bg-white/15 hover:text-white h-12 sm:h-14 px-4 sm:px-7 font-bold text-sm sm:text-lg backdrop-blur-md"
               >
-                <a href="#contact">Free Second Opinion</a>
+                <Link href="/schedule">Free Second Opinion</Link>
               </Button>
               <Button
                 asChild

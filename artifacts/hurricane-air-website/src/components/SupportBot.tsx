@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Phone, CheckCircle2, Bot } from "lucide-react";
+import { Link } from "wouter";
+import { Sparkles, X, Send, Phone, CheckCircle2, Calendar } from "lucide-react";
 
 type Sender = "bot" | "user";
 
@@ -13,36 +14,29 @@ interface ChatMessage {
 
 type Step =
   | "intro"
-  | "service"
   | "name"
   | "phone"
-  | "email"
-  | "address"
-  | "preferred"
-  | "submitting"
+  | "issue"
+  | "empathy"
+  | "schedule"
   | "done";
 
 interface LeadDraft {
-  service?: string;
   name?: string;
   phone?: string;
-  email?: string;
-  address?: string;
-  preferred?: string;
+  issue?: string;
 }
 
-const SERVICE_OPTIONS = [
-  "AC not cooling",
-  "AC making noise",
-  "Schedule a tune-up",
-  "Need a new system",
-  "Air quality / ducts",
+const QUICK_ISSUES = [
+  "Not cooling",
+  "Strange noise",
+  "High bills",
+  "Tune-up / Maintenance",
+  "New system quote",
   "Something else",
 ];
 
-const PREFERRED_OPTIONS = ["Today / ASAP", "Tomorrow", "This week", "Next week"];
-
-const TYPING_DELAY_MS = 600;
+const TYPING_DELAY_MS = 650;
 
 function uid() {
   return Math.random().toString(36).slice(2, 9);
@@ -53,8 +47,32 @@ function isValidPhone(s: string) {
   return digits.length >= 10;
 }
 
-function isValidEmail(s: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim());
+function pickEmpathy(issue: string, firstName: string): string {
+  const i = issue.toLowerCase();
+  const name = firstName || "friend";
+
+  if (i.includes("not cool") || i.includes("warm") || i.includes("hot") || i.includes("blowing")) {
+    return `Ugh, no AC in Florida heat is the worst, ${name}. The good news — it's almost always a small fix (capacitor, refrigerant, drain line). Our techs carry the most common parts on the truck so most repairs are done same-visit.`;
+  }
+  if (i.includes("noise") || i.includes("loud") || i.includes("rattle") || i.includes("buzz") || i.includes("squeal")) {
+    return `Strange noises usually mean something's loose or wearing out — catching it early is way cheaper than waiting. Our techs can pinpoint exactly which part is the source within the diagnostic.`;
+  }
+  if (i.includes("bill") || i.includes("expensive") || i.includes("electric") || i.includes("efficien")) {
+    return `Spiking bills almost always trace back to dirty coils, low refrigerant, or duct leakage — all fixable. We'll show you exactly what's costing you and what the payback looks like.`;
+  }
+  if (i.includes("tune") || i.includes("maintenan") || i.includes("check")) {
+    return `Smart move, ${name}. In SWFL heat, twice-a-year maintenance keeps your warranty valid and prevents the $2,000 emergency calls we see every summer.`;
+  }
+  if (i.includes("new") || i.includes("replac") || i.includes("install") || i.includes("quote")) {
+    return `Got it. We do free in-home estimates with proper sizing — none of the "guess by square footage" stuff. You'll get a written quote with options across efficiency tiers.`;
+  }
+  if (i.includes("leak") || i.includes("water") || i.includes("drip")) {
+    return `Water around an indoor unit is almost always a clogged drain line — easy fix, but if left alone it can shut down the system or damage your ceiling. Let's get a tech out before it spreads.`;
+  }
+  if (i.includes("emergency") || i.includes("urgent") || i.includes("asap") || i.includes("now")) {
+    return `Hang in there, ${name}. We dispatch 24/7 — let me get you into our priority queue right now.`;
+  }
+  return `Thanks for sharing that, ${name}. I want to make sure a real technician takes a proper look — no guessing, no upselling. Let's get you on the schedule.`;
 }
 
 export function SupportBot() {
@@ -76,7 +94,7 @@ export function SupportBot() {
   }, [messages, botTyping]);
 
   useEffect(() => {
-    if (open && inputRef.current && step !== "intro" && step !== "service" && step !== "preferred" && step !== "submitting" && step !== "done") {
+    if (open && inputRef.current && (step === "name" || step === "phone" || step === "issue")) {
       inputRef.current.focus();
     }
   }, [open, step]);
@@ -98,9 +116,9 @@ export function SupportBot() {
 
   async function startConversation() {
     if (messages.length > 0) return;
-    await pushBot("Hi there! 👋 I'm Hurricane Air's Support Bot.");
-    await pushBot("I can get you scheduled with a licensed technician in under a minute. What's going on?", SERVICE_OPTIONS);
-    setStep("service");
+    await pushBot("Hi there 👋 I'm your AI Comfort Specialist at Hurricane Air.");
+    await pushBot("I'll get you in touch with a real technician fast — what's your first name?");
+    setStep("name");
   }
 
   function openWidget() {
@@ -111,74 +129,72 @@ export function SupportBot() {
     }
   }
 
-  async function handleServiceSelect(value: string) {
+  async function handleNameSubmit(value: string) {
     pushUser(value);
-    setDraft((d) => ({ ...d, service: value }));
-    await pushBot(`Got it — ${value.toLowerCase()}. What's your full name?`);
-    setStep("name");
+    setDraft((d) => ({ ...d, name: value }));
+    setInput("");
+    const first = value.split(" ")[0] || value;
+    await pushBot(`Nice to meet you, ${first}! What's the best phone number to reach you?`);
+    setStep("phone");
   }
 
-  async function handleSubmitText() {
+  async function handlePhoneSubmit(value: string) {
+    if (!isValidPhone(value)) {
+      pushUser(value);
+      setInput("");
+      await pushBot("Hmm, that doesn't look like a complete phone number — could you double-check it for me?");
+      return;
+    }
+    pushUser(value);
+    setDraft((d) => ({ ...d, phone: value }));
+    setInput("");
+    await pushBot("Got it, thank you! 🙏 So tell me — what's going on with your A/C? You can pick one of these or describe it in your own words:", QUICK_ISSUES);
+    setStep("issue");
+  }
+
+  async function handleIssueSubmit(value: string) {
+    pushUser(value);
+    setDraft((d) => ({ ...d, issue: value }));
+    setInput("");
+    setStep("empathy");
+    const first = (draft.name || "").split(" ")[0] || "friend";
+    await pushBot(pickEmpathy(value, first));
+    await pushBot("Want me to grab a slot on the schedule right now? Same-day usually available.", [
+      "Yes — schedule me",
+      "Have someone call me",
+    ]);
+    setStep("schedule");
+  }
+
+  async function handleScheduleChoice(value: string) {
+    pushUser(value);
+    setStep("done");
+    const first = (draft.name || "").split(" ")[0] || "friend";
+
+    // eslint-disable-next-line no-console
+    console.info("[AI Comfort Specialist lead]", { ...draft, choice: value });
+
+    if (value.toLowerCase().includes("schedule")) {
+      await pushBot(
+        `You got it, ${first}. Tap the button below to pick your time — takes 60 seconds. We'll confirm by phone right after.`,
+      );
+    } else {
+      await pushBot(
+        `Perfect, ${first}. A Hurricane Air dispatcher will call ${draft.phone} within 15 minutes during business hours. For immediate help, just dial (239) 748-1815.`,
+      );
+    }
+  }
+
+  function handleSubmitText() {
     const value = input.trim();
     if (!value) return;
     if (step === "name") {
-      pushUser(value);
-      setDraft((d) => ({ ...d, name: value }));
-      setInput("");
-      await pushBot(`Thanks ${value.split(" ")[0]}! What's the best phone number to reach you?`);
-      setStep("phone");
-      return;
+      void handleNameSubmit(value);
+    } else if (step === "phone") {
+      void handlePhoneSubmit(value);
+    } else if (step === "issue") {
+      void handleIssueSubmit(value);
     }
-    if (step === "phone") {
-      if (!isValidPhone(value)) {
-        await pushBot("Hmm, that doesn't look like a valid phone number. Could you double-check it?");
-        return;
-      }
-      pushUser(value);
-      setDraft((d) => ({ ...d, phone: value }));
-      setInput("");
-      await pushBot("Perfect. What's your email address? (We'll send a confirmation.)");
-      setStep("email");
-      return;
-    }
-    if (step === "email") {
-      if (!isValidEmail(value)) {
-        await pushBot("That email doesn't look right — mind trying again?");
-        return;
-      }
-      pushUser(value);
-      setDraft((d) => ({ ...d, email: value }));
-      setInput("");
-      await pushBot("Almost done. What's the service address (street + city)?");
-      setStep("address");
-      return;
-    }
-    if (step === "address") {
-      pushUser(value);
-      setDraft((d) => ({ ...d, address: value }));
-      setInput("");
-      await pushBot("Last thing — when would you like service?", PREFERRED_OPTIONS);
-      setStep("preferred");
-      return;
-    }
-  }
-
-  async function handlePreferredSelect(value: string) {
-    pushUser(value);
-    const finalDraft = { ...draft, preferred: value };
-    setDraft(finalDraft);
-    setStep("submitting");
-    await pushBot("Booking your request now...");
-    setTimeout(async () => {
-      // In production this would POST to /api/leads or similar.
-      // For now we capture the draft to console so it's available for inspection.
-      // eslint-disable-next-line no-console
-      console.info("[SupportBot lead]", finalDraft);
-      await pushBot(
-        `You're all set, ${finalDraft.name?.split(" ")[0] || "there"}! ✅ A Hurricane Air dispatcher will reach out at ${finalDraft.phone} within 15 minutes during business hours. For immediate help, call (239) 748-1815.`,
-      );
-      setStep("done");
-    }, 900);
   }
 
   function handleKey(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -189,31 +205,23 @@ export function SupportBot() {
   }
 
   const showOptions = (() => {
-    if (step === "service" || step === "preferred") {
+    if (step === "issue" || step === "schedule") {
       const last = messages[messages.length - 1];
       if (last && last.sender === "bot" && last.options) return last.options;
     }
     return null;
   })();
 
-  const inputDisabled =
-    step === "intro" ||
-    step === "service" ||
-    step === "preferred" ||
-    step === "submitting" ||
-    step === "done" ||
-    botTyping;
+  const inputDisabled = step === "intro" || step === "schedule" || step === "empathy" || step === "done" || botTyping;
 
   const placeholder = (() => {
     switch (step) {
       case "name":
-        return "Your full name";
+        return "Your first name";
       case "phone":
         return "(239) 555-0100";
-      case "email":
-        return "you@example.com";
-      case "address":
-        return "Street, city";
+      case "issue":
+        return "Describe what's going on...";
       default:
         return "Type your message...";
     }
@@ -231,19 +239,21 @@ export function SupportBot() {
             exit={{ opacity: 0, scale: 0.8, y: 16 }}
             transition={{ type: "spring", stiffness: 320, damping: 24 }}
             onClick={openWidget}
-            className="fixed bottom-4 right-4 z-[180] flex items-center gap-2.5 pl-4 pr-5 py-3 rounded-full bg-primary text-white shadow-2xl hover:shadow-secondary/30 transition-all hover:-translate-y-0.5 group"
-            aria-label="Open Hurricane Air Support Bot"
+            className="fixed bottom-4 right-4 z-[180] flex items-center gap-2.5 pl-3 pr-5 py-2.5 rounded-full bg-primary text-white shadow-2xl hover:shadow-secondary/30 transition-all hover:-translate-y-0.5 group"
+            aria-label="Open AI Comfort Specialist"
           >
             <div className="relative">
-              <div className="h-9 w-9 rounded-full bg-secondary flex items-center justify-center">
-                <Bot className="h-5 w-5 text-primary" />
+              <div className="h-9 w-9 rounded-full bg-gradient-to-br from-secondary to-emerald-400 flex items-center justify-center shadow-inner">
+                <Sparkles className="h-4 w-4 text-primary" />
               </div>
               {unread && (
                 <span className="absolute -top-0.5 -right-0.5 h-3 w-3 rounded-full bg-red-500 border-2 border-primary animate-pulse" />
               )}
             </div>
             <div className="text-left leading-tight">
-              <div className="text-[10px] uppercase tracking-widest font-extrabold text-secondary/90">Support Bot</div>
+              <div className="text-[10px] uppercase tracking-widest font-extrabold text-secondary/90">
+                AI Comfort Specialist
+              </div>
               <div className="text-sm font-bold">Chat with us</div>
             </div>
           </motion.button>
@@ -259,28 +269,29 @@ export function SupportBot() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 16 }}
             transition={{ type: "spring", stiffness: 320, damping: 28 }}
-            className="fixed bottom-4 right-4 z-[180] w-[calc(100vw-2rem)] sm:w-[380px] max-h-[min(640px,calc(100vh-2rem))] flex flex-col rounded-3xl bg-card border border-card-border shadow-2xl overflow-hidden"
+            className="fixed bottom-4 right-4 z-[180] w-[calc(100vw-2rem)] sm:w-[400px] max-h-[min(680px,calc(100vh-2rem))] flex flex-col rounded-3xl bg-card border border-card-border shadow-2xl overflow-hidden"
             role="dialog"
-            aria-label="Hurricane Air Support Bot"
+            aria-label="AI Comfort Specialist chat"
           >
             {/* Header */}
-            <div className="relative bg-primary text-white px-5 py-4 flex items-center gap-3">
+            <div className="relative bg-primary text-white px-5 py-4 flex items-center gap-3 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-secondary/[0.12] via-transparent to-transparent pointer-events-none" />
               <div className="relative">
-                <div className="h-10 w-10 rounded-full bg-secondary flex items-center justify-center">
-                  <Bot className="h-5 w-5 text-primary" />
+                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-secondary to-emerald-400 flex items-center justify-center shadow-inner">
+                  <Sparkles className="h-5 w-5 text-primary" />
                 </div>
                 <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-green-400 border-2 border-primary" />
               </div>
-              <div className="flex-1 min-w-0">
-                <div className="font-extrabold tracking-tight leading-tight">Support Bot</div>
-                <div className="text-[11px] text-white/60 flex items-center gap-1.5">
+              <div className="relative flex-1 min-w-0">
+                <div className="font-extrabold tracking-tight leading-tight">AI Comfort Specialist</div>
+                <div className="text-[11px] text-white/65 flex items-center gap-1.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
                   Online · Replies instantly
                 </div>
               </div>
               <a
                 href="tel:2397481815"
-                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-white/80 hover:text-white px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 transition-colors"
+                className="relative hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-white/85 hover:text-white px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 transition-colors"
                 aria-label="Call Hurricane Air"
               >
                 <Phone className="h-3.5 w-3.5" />
@@ -289,7 +300,7 @@ export function SupportBot() {
               <button
                 onClick={() => setOpen(false)}
                 aria-label="Close chat"
-                className="h-8 w-8 rounded-full hover:bg-white/10 flex items-center justify-center transition-colors"
+                className="relative h-8 w-8 rounded-full hover:bg-white/10 flex items-center justify-center transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -300,7 +311,7 @@ export function SupportBot() {
               {messages.map((m) => (
                 <div key={m.id} className={`flex ${m.sender === "user" ? "justify-end" : "justify-start"}`}>
                   <div
-                    className={`max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${
+                    className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${
                       m.sender === "user"
                         ? "bg-primary text-white rounded-br-sm"
                         : "bg-white text-foreground border border-zinc-200 rounded-bl-sm"
@@ -329,9 +340,7 @@ export function SupportBot() {
                   {showOptions.map((opt) => (
                     <button
                       key={opt}
-                      onClick={() =>
-                        step === "service" ? handleServiceSelect(opt) : handlePreferredSelect(opt)
-                      }
+                      onClick={() => (step === "issue" ? handleIssueSubmit(opt) : handleScheduleChoice(opt))}
                       className="px-3 py-1.5 rounded-full bg-white border border-secondary/40 text-secondary text-xs font-bold hover:bg-secondary hover:text-secondary-foreground transition-colors"
                     >
                       {opt}
@@ -341,17 +350,22 @@ export function SupportBot() {
               )}
 
               {step === "done" && (
-                <div className="pt-2">
-                  <div className="rounded-2xl bg-secondary/10 border border-secondary/30 p-3.5 flex items-start gap-2.5">
-                    <CheckCircle2 className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
-                    <div className="text-xs text-foreground/80 leading-relaxed">
-                      Need help right now? Call{" "}
-                      <a href="tel:2397481815" className="font-extrabold text-secondary hover:underline">
-                        (239) 748-1815
-                      </a>
-                      .
-                    </div>
-                  </div>
+                <div className="pt-2 space-y-2">
+                  <Link
+                    href="/schedule"
+                    onClick={() => setOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground font-extrabold rounded-xl py-3 transition-all hover:-translate-y-0.5 shadow-lg"
+                  >
+                    <Calendar className="h-4 w-4" />
+                    Pick my time slot
+                  </Link>
+                  <a
+                    href="tel:2397481815"
+                    className="flex items-center justify-center gap-2 w-full bg-white border border-card-border hover:border-secondary/40 text-foreground font-bold rounded-xl py-2.5 transition-colors text-sm"
+                  >
+                    <Phone className="h-4 w-4 text-secondary" />
+                    Or call (239) 748-1815
+                  </a>
                 </div>
               )}
             </div>
@@ -367,7 +381,7 @@ export function SupportBot() {
               >
                 <input
                   ref={inputRef}
-                  type={step === "email" ? "email" : step === "phone" ? "tel" : "text"}
+                  type={step === "phone" ? "tel" : "text"}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKey}
@@ -385,8 +399,8 @@ export function SupportBot() {
                   <Send className="h-4 w-4" />
                 </button>
               </form>
-              <p className="text-[10px] text-muted-foreground text-center mt-2 leading-tight">
-                <MessageCircle className="inline h-2.5 w-2.5 mr-0.5 -mt-0.5" />
+              <p className="text-[10px] text-muted-foreground text-center mt-2 leading-tight flex items-center justify-center gap-1">
+                <CheckCircle2 className="h-2.5 w-2.5 text-secondary" />
                 Your info stays private — used only to schedule your service.
               </p>
             </div>

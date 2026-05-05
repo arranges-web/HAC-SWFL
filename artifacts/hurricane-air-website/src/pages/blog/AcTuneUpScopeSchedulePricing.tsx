@@ -159,7 +159,7 @@ export default function AcTuneUpScopeSchedulePricing() {
           <p>Priority scheduling, full documentation, diagnostic waived with repair.</p>
         </div>
         <a
-          href="/#contact"
+          href="/schedule"
           className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-secondary/90 transition-colors whitespace-nowrap"
         >
           Claim Offer

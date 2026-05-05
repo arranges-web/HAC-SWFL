@@ -184,7 +184,7 @@ export default function DuctworkLifespanCost() {
           <p>Financing available through formal quotes. Serving SWFL communities including Fort Myers, Gateway, Naples, and more.</p>
         </div>
         <a
-          href="/#contact"
+          href="/schedule"
           className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-secondary/90 transition-colors whitespace-nowrap"
         >
           Get Assessment

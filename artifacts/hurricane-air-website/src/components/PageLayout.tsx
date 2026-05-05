@@ -81,7 +81,7 @@ export function PageLayout({
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button asChild size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-13 px-8 text-base glow-green">
-                  <a href="/#contact">
+                  <a href="/schedule">
                     <Calendar className="mr-2 h-4 w-4" />
                     Book Online
                   </a>

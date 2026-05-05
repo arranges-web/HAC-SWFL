@@ -44,7 +44,7 @@ export default function FinancingPage() {
               Hurricane Air partners with GreenSky, a Goldman Sachs company, to provide consumer loan programs with competitive rates and flexible terms. Apply takes minutes — most customers receive a decision the same day.
             </p>
             <Button asChild size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold glow-green">
-              <a href="/#contact">
+              <a href="/schedule">
                 <Phone className="mr-2 h-4 w-4" />
                 Ask About Financing
               </a>
@@ -85,7 +85,7 @@ export default function FinancingPage() {
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed mb-4">{plan.desc}</p>
             <Button asChild variant="outline" size="sm" className="border-secondary/30 text-secondary hover:bg-secondary/10">
-              <a href="/#contact">
+              <a href="/schedule">
                 Apply Now <ArrowRight className="ml-1 h-3.5 w-3.5" />
               </a>
             </Button>

@@ -49,7 +49,7 @@ export default function MembershipPage() {
               Two annual maintenance visits, priority scheduling, member discounts, and peace of mind — all for less than $16/month.
             </p>
             <Button asChild size="lg" className="mt-6 bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold glow-green">
-              <a href="/#contact">Join the Membership</a>
+              <a href="/schedule">Join the Membership</a>
             </Button>
           </div>
           <ul className="space-y-3">

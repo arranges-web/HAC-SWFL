@@ -8,6 +8,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
+import { TeamCollage } from "@/components/TeamCollage";
 import { Stats } from "@/components/Stats";
 import { About } from "@/components/About";
 import { Membership } from "@/components/Membership";
@@ -66,6 +67,7 @@ import LaborWarrantyPage from "@/pages/LaborWarrantyPage";
 import ServiceAreaPage from "@/pages/ServiceAreaPage";
 import CareersPage from "@/pages/CareersPage";
 import OffersPage from "@/pages/OffersPage";
+import SchedulePage from "@/pages/SchedulePage";
 import ReviewsPage from "@/pages/ReviewsPage";
 import CustomerServicePage from "@/pages/CustomerServicePage";
 
@@ -81,6 +83,7 @@ function Home() {
         <Accreditations />
         <Services />
         <WhyChooseUs />
+        <TeamCollage />
         <Stats />
         <BrandRibbon variant="dark" />
         <About />
@@ -145,6 +148,7 @@ function Router() {
       <Route path="/service-area" component={ServiceAreaPage} />
       <Route path="/careers" component={CareersPage} />
       <Route path="/offers" component={OffersPage} />
+      <Route path="/schedule" component={SchedulePage} />
       <Route path="/reviews" component={ReviewsPage} />
       <Route path="/customer-service" component={CustomerServicePage} />
 

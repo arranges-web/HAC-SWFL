@@ -147,7 +147,7 @@ export function BlogPostLayout({
                       asChild
                       className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold w-full glow-green"
                     >
-                      <a href="/#contact">Schedule Online</a>
+                      <a href="/schedule">Schedule Online</a>
                     </Button>
                     <Button
                       asChild
@@ -171,7 +171,7 @@ export function BlogPostLayout({
                   Full inspection, cleaning, and documented report — included in our annual membership plan.
                 </p>
                 <Button asChild size="sm" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold w-full">
-                  <a href="/#contact">Claim Offer</a>
+                  <a href="/schedule">Claim Offer</a>
                 </Button>
               </div>
 
@@ -223,7 +223,7 @@ export function BlogPostLayout({
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button asChild size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-13 px-8 text-base glow-green">
-                <a href="/#contact">Book Online</a>
+                <a href="/schedule">Book Online</a>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 hover:text-white font-bold h-13 px-8 text-base backdrop-blur-sm">
                 <a href="tel:2397481815">

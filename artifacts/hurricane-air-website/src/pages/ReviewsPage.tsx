@@ -132,7 +132,7 @@ export default function ReviewsPage() {
         <h3 className="font-extrabold text-foreground text-lg mb-2">Ready to experience the difference?</h3>
         <p className="text-muted-foreground text-sm mb-5">Join thousands of satisfied Southwest Florida homeowners — schedule service today.</p>
         <Button asChild size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold glow-green">
-          <a href="/#contact">Schedule Service</a>
+          <a href="/schedule">Schedule Service</a>
         </Button>
       </div>
     </PageLayout>

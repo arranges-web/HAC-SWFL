@@ -30,15 +30,10 @@ const airQualityServices = [
 
 const companyLinks = [
   { label: "About Us", href: "/about" },
-  { label: "Offers", href: "/offers" },
   { label: "A/C Membership", href: "/membership" },
   { label: "Financing", href: "/financing" },
-  { label: "Labor Warranty", href: "/labor-warranty" },
   { label: "Service Area", href: "/service-area" },
   { label: "Careers", href: "/careers" },
-  { label: "Reviews", href: "/reviews" },
-  { label: "Customer Service", href: "/customer-service" },
-  { label: "Contact", href: "/contact" },
 ];
 
 export function Header() {
@@ -80,9 +75,9 @@ export function Header() {
 
   const navLinks = [
     { name: "Services", href: "#", hasMenu: "services" },
-    { name: "Company", href: "#", hasMenu: "company" },
-    { name: "Blog", href: "/blog" },
+    { name: "Offers", href: "/offers" },
     { name: "Reviews", href: "/reviews" },
+    { name: "Company", href: "#", hasMenu: "company" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -268,7 +263,7 @@ export function Header() {
               size="lg"
               className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold px-6 glow-green hover:translate-y-[-1px]"
             >
-              <a href="/#contact">Schedule Now</a>
+              <Link href="/schedule">Schedule Now</Link>
             </Button>
           </div>
 
@@ -286,7 +281,7 @@ export function Header() {
               size="sm"
               className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-10 px-4 text-sm glow-green"
             >
-              <a href="/#contact">Schedule</a>
+              <Link href="/schedule">Schedule</Link>
             </Button>
             <Sheet>
               <SheetTrigger asChild>
@@ -351,11 +346,14 @@ export function Header() {
                       )}
                     </div>
 
-                    <Link href="/blog" className="text-lg font-bold text-foreground hover:text-secondary transition-colors p-3 rounded-xl hover:bg-muted/60 block">
-                      Blog
+                    <Link href="/offers" className="text-lg font-bold text-foreground hover:text-secondary transition-colors p-3 rounded-xl hover:bg-muted/60 block">
+                      Offers
                     </Link>
                     <Link href="/reviews" className="text-lg font-bold text-foreground hover:text-secondary transition-colors p-3 rounded-xl hover:bg-muted/60 block">
                       Reviews
+                    </Link>
+                    <Link href="/blog" className="text-lg font-bold text-foreground hover:text-secondary transition-colors p-3 rounded-xl hover:bg-muted/60 block">
+                      Blog
                     </Link>
                     <Link href="/contact" className="text-lg font-bold text-foreground hover:text-secondary transition-colors p-3 rounded-xl hover:bg-muted/60 block">
                       Contact
@@ -371,7 +369,7 @@ export function Header() {
                       asChild
                       className="bg-secondary text-secondary-foreground font-bold w-full h-12 text-lg glow-green"
                     >
-                      <a href="/#contact">Schedule Now</a>
+                      <Link href="/schedule">Schedule Now</Link>
                     </Button>
                   </div>
                 </div>
