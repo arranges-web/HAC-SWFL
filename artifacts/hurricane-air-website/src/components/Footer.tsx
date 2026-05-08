@@ -207,11 +207,24 @@ export function Footer() {
           {/* Bottom bar */}
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/50">
             <p>© {new Date().getFullYear()} Hurricane Air Conditioning of SWFL, Inc. All rights reserved.</p>
-            <div className="flex gap-6">
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
               <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
               <a href="#" className="hover:text-white transition-colors">License #CAC1817454</a>
             </div>
+          </div>
+
+          {/* Designer credit */}
+          <div className="mt-5 pt-5 border-t border-white/[0.06] text-center text-[11px] text-white/40">
+            Designed by{" "}
+            <a
+              href="https://arrangesmarketing.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-white/60 hover:text-secondary transition-colors"
+            >
+              Arranges Marketing
+            </a>
           </div>
         </div>
       </div>

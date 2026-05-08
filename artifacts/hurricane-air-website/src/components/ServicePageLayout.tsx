@@ -505,7 +505,7 @@ export function MembershipPromo() {
               size="lg"
               className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-12 px-6 glow-green"
             >
-              <Link href="/membership">Learn More</Link>
+              <Link href="/membership#enroll">Become a Member</Link>
             </Button>
             <Button
               asChild

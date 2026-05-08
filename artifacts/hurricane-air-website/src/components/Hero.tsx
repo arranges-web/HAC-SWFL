@@ -135,7 +135,7 @@ export function Hero() {
           </div>
 
           {/* Headline with staggered word reveal */}
-          <h1 className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] xl:text-[6rem] font-extrabold leading-[1.05] tracking-[-0.015em]">
+          <h1 className="text-[2.5rem] sm:text-5xl md:text-[3.75rem] lg:text-[4.25rem] xl:text-[4.75rem] font-extrabold leading-[1.05] tracking-[-0.015em] max-w-[14ch]">
             {["Locally", "owned.", "Family", "run."].map((word, i) => (
               <motion.span
                 key={i}

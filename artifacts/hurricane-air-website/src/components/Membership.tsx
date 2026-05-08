@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Check, Sparkles, Crown } from "lucide-react";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 
 const benefits = [
@@ -147,7 +148,7 @@ export function Membership() {
                     asChild
                     className="w-full mt-7 bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-14 text-lg glow-green hover:translate-y-[-1px]"
                   >
-                    <a href="#contact">Become a Member</a>
+                    <Link href="/membership#enroll">Become a Member</Link>
                   </Button>
 
                   <p className="text-center text-[11px] text-zinc-500 mt-4">
