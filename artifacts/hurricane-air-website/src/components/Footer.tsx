@@ -204,27 +204,27 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Bottom bar */}
-          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/50">
-            <p>© {new Date().getFullYear()} Hurricane Air Conditioning of SWFL, Inc. All rights reserved.</p>
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-white transition-colors">License #CAC1817454</a>
-            </div>
-          </div>
-
-          {/* Designer credit */}
-          <div className="mt-5 pt-5 border-t border-white/[0.06] text-center text-[11px] text-white/40">
+          {/* Designer credit — shown above the legal bar so floating widgets never cover it */}
+          <div className="pt-7 border-t border-white/10 flex justify-center text-[11px] text-white/55">
             Designed by{" "}
             <a
               href="https://arrangesmarketing.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-bold text-white/60 hover:text-secondary transition-colors"
+              className="font-extrabold text-white hover:text-secondary transition-colors ml-1"
             >
               Arranges Marketing
             </a>
+          </div>
+
+          {/* Bottom legal bar */}
+          <div className="mt-5 pt-5 border-t border-white/[0.06] flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/50 pb-24 md:pb-0">
+            <p className="text-center md:text-left">© {new Date().getFullYear()} Hurricane Air Conditioning of SWFL, Inc. All rights reserved.</p>
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+              <a href="#" className="hover:text-white transition-colors">License #CAC1817454</a>
+            </div>
           </div>
         </div>
       </div>

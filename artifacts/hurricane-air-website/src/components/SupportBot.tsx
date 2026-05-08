@@ -269,7 +269,7 @@ export function SupportBot() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 16 }}
             transition={{ type: "spring", stiffness: 320, damping: 28 }}
-            className="fixed bottom-4 right-4 z-[180] w-[calc(100vw-2rem)] sm:w-[400px] max-h-[min(680px,calc(100vh-2rem))] flex flex-col rounded-3xl bg-card border border-card-border shadow-2xl overflow-hidden"
+            className="fixed bottom-2 right-2 sm:bottom-4 sm:right-4 z-[180] w-[calc(100vw-1rem)] sm:w-[400px] max-h-[min(680px,calc(100dvh-1rem))] sm:max-h-[min(680px,calc(100vh-2rem))] flex flex-col rounded-3xl bg-card border border-card-border shadow-2xl overflow-hidden"
             role="dialog"
             aria-label="AI Comfort Specialist chat"
           >
