@@ -39,9 +39,9 @@ export function Footer() {
           {/* Top: brand */}
           <div className="grid lg:grid-cols-12 gap-8 sm:gap-10 mb-10 sm:mb-14 pb-8 sm:pb-10 border-b border-white/10 items-center">
             <div className="lg:col-span-7 space-y-5">
-              <img src="/logo.webp" alt="Hurricane Air Logo" className="h-14 w-auto" loading="lazy" decoding="async" />
+              <img src="/logo.webp" alt="Hurricane Air Logo" className="h-16 sm:h-20 w-auto" loading="lazy" decoding="async" />
               <p className="text-white/70 max-w-xl text-base sm:text-lg leading-relaxed">
-                Southwest Florida's most trusted air conditioning and heating experts since 2003. Trust. Transparency. Teamwork.
+                A privately owned, family-run HVAC company — born and raised in Southwest Florida since 2003. No franchise fees, no out-of-state owners. Just your neighbors fixing your air conditioner.
               </p>
               <div className="flex items-center gap-3 pt-1">
                 <a

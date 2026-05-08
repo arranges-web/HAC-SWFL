@@ -1,8 +1,8 @@
-import { Check, Shield, Calendar, Star, Zap, Clock } from "lucide-react";
+import { Check, Shield, Star, Zap, Clock } from "lucide-react";
 import { Link } from "wouter";
 import { PageLayout } from "@/components/PageLayout";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { PmaSignupWizard } from "@/components/PmaSignupWizard";
 
 const included = [
   "2 in-person maintenance visits per year",
@@ -31,37 +31,45 @@ export default function MembershipPage() {
       subtitle="$189/year for two annual tune-ups, priority scheduling, and member discounts — the smartest investment you can make in your HVAC system."
       breadcrumb="A/C Membership"
     >
-      {/* Pricing hero */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-[#021a8a] to-primary text-white p-8 sm:p-12 mb-14 noise">
-        <div className="absolute -right-20 -bottom-20 w-80 h-80 opacity-[0.07] pointer-events-none">
-          <svg viewBox="0 0 400 400" fill="none" className="animate-spin-slower w-full h-full">
-            {[0, 1, 2, 3].map((i) => (
-              <circle key={i} cx="200" cy="200" r={50 + i * 40} stroke="hsl(126 80% 55%)" strokeWidth="1.5" strokeDasharray={`${6 + i * 2} ${(6 + i * 2) * 2}`} fill="none" />
-            ))}
-          </svg>
-        </div>
-        <div className="relative grid sm:grid-cols-2 gap-10 items-center">
-          <div>
-            <div className="text-xs font-extrabold uppercase tracking-widest text-secondary mb-3">Annual Plan</div>
-            <div className="text-7xl font-extrabold text-secondary tabular-nums">$189</div>
-            <div className="text-white/60 mt-1 text-sm">per year · cancel anytime</div>
-            <p className="text-white/70 mt-4 leading-relaxed">
-              Two annual maintenance visits, priority scheduling, member discounts, and peace of mind — all for less than $16/month.
-            </p>
-            <Button asChild size="lg" className="mt-6 bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold glow-green">
-              <a href="/schedule">Join the Membership</a>
-            </Button>
+      {/* Pricing hero + interactive sign-up */}
+      <div className="grid lg:grid-cols-[1fr_1.05fr] gap-8 lg:gap-10 mb-14 items-start">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-[#021a8a] to-primary text-white p-7 sm:p-9 noise">
+          <div className="absolute -right-20 -bottom-20 w-80 h-80 opacity-[0.07] pointer-events-none">
+            <svg viewBox="0 0 400 400" fill="none" className="animate-spin-slower w-full h-full">
+              {[0, 1, 2, 3].map((i) => (
+                <circle key={i} cx="200" cy="200" r={50 + i * 40} stroke="hsl(126 80% 55%)" strokeWidth="1.5" strokeDasharray={`${6 + i * 2} ${(6 + i * 2) * 2}`} fill="none" />
+              ))}
+            </svg>
           </div>
-          <ul className="space-y-3">
-            {included.map((item) => (
-              <li key={item} className="flex items-start gap-2.5 text-sm text-white/85">
-                <span className="mt-[3px] h-4 w-4 rounded-full bg-secondary/20 border border-secondary/40 flex items-center justify-center shrink-0">
-                  <Check className="h-2.5 w-2.5 text-secondary" />
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
+          <div className="relative">
+            <div className="text-xs font-extrabold uppercase tracking-widest text-secondary mb-3">Comfort Club · Annual PMA</div>
+            <div className="flex items-baseline gap-2">
+              <div className="text-6xl sm:text-7xl font-extrabold text-secondary tabular-nums leading-none">$189</div>
+              <div className="text-white/60 text-sm font-bold">/year</div>
+            </div>
+            <div className="text-white/60 mt-1 text-sm">~$15.75 per month · cancel anytime</div>
+            <p className="text-white/70 mt-4 leading-relaxed">
+              Two annual maintenance visits, priority scheduling, member-only repair pricing, and a discounted $89 service-call fee. Backed by your locally owned, family-run Hurricane Air team.
+            </p>
+            <ul className="mt-6 space-y-2.5">
+              {included.slice(0, 6).map((item) => (
+                <li key={item} className="flex items-start gap-2.5 text-sm text-white/85">
+                  <span className="mt-[3px] h-4 w-4 rounded-full bg-secondary/20 border border-secondary/40 flex items-center justify-center shrink-0">
+                    <Check className="h-2.5 w-2.5 text-secondary" />
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p className="text-xs text-white/50 mt-4">
+              Plus {included.length - 6} more — see the full benefit list below.
+            </p>
+          </div>
+        </div>
+
+        {/* Interactive PMA Signup */}
+        <div id="enroll" className="lg:sticky lg:top-28">
+          <PmaSignupWizard />
         </div>
       </div>
 

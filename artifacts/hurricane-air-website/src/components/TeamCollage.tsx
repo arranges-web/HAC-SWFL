@@ -62,16 +62,16 @@ export function TeamCollage() {
           >
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="h-px w-8 bg-secondary" />
-              <h2 className="text-xs font-bold tracking-[0.3em] text-secondary uppercase">The Team</h2>
+              <h2 className="text-xs font-bold tracking-[0.3em] text-secondary uppercase">Locally Owned · Family Run</h2>
             </div>
             <h3 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-foreground leading-[1.05] tracking-tight mb-5 sm:mb-6">
-              Real techs.{" "}
-              <span className="text-secondary">Real care.</span>{" "}
-              Real results.
+              Your neighbors{" "}
+              <span className="text-secondary">in Fort Myers.</span>{" "}
+              Not a franchise.
             </h3>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
-              Every Hurricane Air technician is licensed, background-checked, and trained in-house — never subcontracted.
-              When we show up at your door, you're getting someone we'd send to our own grandmother's house.
+              Hurricane Air is a privately owned, family-run HVAC company — founded and operated right here in Southwest Florida since 2003.
+              Every technician is licensed, background-checked, and trained in-house — never subcontracted, never out-of-state. When we show up at your door, you're getting someone we'd send to our own grandmother's house.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
@@ -80,9 +80,9 @@ export function TeamCollage() {
                   <ShieldCheck className="h-5 w-5 text-secondary" />
                 </div>
                 <div className="leading-tight">
-                  <div className="text-sm font-extrabold text-foreground">100% W-2 Employees</div>
+                  <div className="text-sm font-extrabold text-foreground">Privately Owned</div>
                   <div className="text-xs text-muted-foreground mt-0.5 leading-snug">
-                    Never subcontracted. Background-checked.
+                    Independent, family-operated since 2003.
                   </div>
                 </div>
               </div>
@@ -91,9 +91,9 @@ export function TeamCollage() {
                   <Users className="h-5 w-5 text-accent" />
                 </div>
                 <div className="leading-tight">
-                  <div className="text-sm font-extrabold text-foreground">In-House Training</div>
+                  <div className="text-sm font-extrabold text-foreground">100% Local Team</div>
                   <div className="text-xs text-muted-foreground mt-0.5 leading-snug">
-                    Continuous certification across every brand.
+                    W-2 employees · trained in-house · never subbed.
                   </div>
                 </div>
               </div>

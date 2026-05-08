@@ -136,7 +136,7 @@ export function Hero() {
 
           {/* Headline with staggered word reveal */}
           <h1 className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] xl:text-[6rem] font-extrabold leading-[1.05] tracking-[-0.015em]">
-            {["When", "the", "storm", "hits,"].map((word, i) => (
+            {["Locally", "owned.", "Family", "run."].map((word, i) => (
               <motion.span
                 key={i}
                 initial={reduceMotion ? false : { opacity: 0, y: 30 }}
@@ -148,19 +148,19 @@ export function Hero() {
               </motion.span>
             ))}
             <span className="block">
-              {["we", "show", "up."].map((word, i) => (
+              {["Always", "on", "call."].map((word, i) => (
                 <motion.span
                   key={i}
                   initial={reduceMotion ? false : { opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.45 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
                   className={`inline-block mr-3 ${
-                    word === "show" || word === "up." ? "text-secondary" : ""
+                    word === "on" || word === "call." ? "text-secondary" : ""
                   }`}
                 >
-                  {word === "up." ? (
+                  {word === "call." ? (
                     <span className="relative">
-                      <span className="relative z-10">up.</span>
+                      <span className="relative z-10">call.</span>
                       <motion.span
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
@@ -182,7 +182,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.9 }}
             className="text-lg sm:text-xl text-white/75 max-w-xl font-medium leading-relaxed"
           >
-            Trust. Transparency. Teamwork. Same-day air conditioning repair, replacement, and 24/7 emergency service across Lee, Collier, and Charlotte counties.
+            Hurricane Air is a privately owned, family-run HVAC company headquartered right here in Fort Myers. Same-day air conditioning repair, replacement, and 24/7 emergency service across Lee, Collier, and Charlotte counties — answered by your neighbors, not a call center.
           </motion.p>
 
           {/* CTAs */}
