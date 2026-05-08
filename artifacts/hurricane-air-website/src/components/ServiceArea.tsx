@@ -348,73 +348,18 @@ export function ServiceArea() {
           </p>
         </motion.div>
 
-        {/* Mobile: map first (compact) → cards below.  Desktop: two-column. */}
-        <div className="grid lg:grid-cols-[1.05fr_1fr] gap-6 sm:gap-10 lg:gap-16 items-start">
-          {/* Map column */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative order-1 lg:order-2"
-          >
-            <div className="relative rounded-3xl overflow-hidden shadow-xl bg-gradient-to-br from-blue-50 to-blue-100 p-3 sm:p-5 lg:p-6 border border-blue-100/80">
-              <div className="max-h-[300px] sm:max-h-[420px] lg:max-h-none overflow-hidden flex items-center justify-center">
-                <CountyMap active={active} onSelect={setActive} />
-              </div>
-
-              {/* Mobile/tablet caption strip — replaces the floating legend */}
-              <div className="lg:hidden mt-3 flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl bg-white/70 backdrop-blur-sm border border-blue-100">
-                <div className="flex items-center gap-2 min-w-0">
-                  <Truck className="h-3.5 w-3.5 text-accent shrink-0" />
-                  <span className="text-[10px] uppercase tracking-widest font-extrabold text-foreground truncate">
-                    {activeCounty?.name ?? "Service Coverage"}
-                  </span>
-                </div>
-                <span className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground shrink-0">
-                  Tap a county to view cities
-                </span>
-              </div>
-            </div>
-
-            {/* Floating glass legend — desktop only */}
-            <div className="hidden lg:block absolute bottom-6 right-6 max-w-[280px] glass rounded-2xl p-4 shadow-xl">
-              <div className="flex items-center gap-2 mb-3">
-                <Truck className="h-4 w-4 text-accent" />
-                <span className="text-[10px] uppercase tracking-[0.22em] font-extrabold text-foreground">
-                  {activeCounty?.name ?? "Service Coverage"}
-                </span>
-              </div>
-              {activeCounty && (
-                <>
-                  <div className="text-xs font-bold text-foreground mb-1.5 uppercase tracking-wider">
-                    Cities we serve
-                  </div>
-                  <div className="text-sm text-muted-foreground leading-relaxed mb-3">
-                    {activeCounty.cities.join(" · ")}
-                  </div>
-                  <Link
-                    href="/schedule"
-                    className="inline-flex items-center gap-1 text-xs font-extrabold text-secondary hover:text-secondary/80 transition-colors uppercase tracking-widest"
-                  >
-                    Schedule Service
-                    <ArrowRight className="h-3 w-3" />
-                  </Link>
-                </>
-              )}
-            </div>
-          </motion.div>
-
+        {/* Mobile: coverage hero + cards. Desktop: cards on left, full map on right. */}
+        <div className="grid lg:grid-cols-[1fr_1.1fr] gap-6 sm:gap-10 lg:gap-16 items-start">
           {/* County cards column */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-3 order-2 lg:order-1"
           >
-            <div className="text-[10px] uppercase tracking-[0.25em] font-extrabold text-secondary lg:mb-1">
-              Tap a county
+            <div className="text-[10px] uppercase tracking-[0.25em] font-extrabold text-secondary mb-1">
+              Tap a county for city list
             </div>
             {counties.map((county) => (
               <CountyCard
@@ -424,6 +369,146 @@ export function ServiceArea() {
                 onSelect={() => setActive(county.key)}
               />
             ))}
+
+            {/* Coverage stat strip */}
+            <div className="mt-4 grid grid-cols-3 gap-3 p-4 rounded-2xl bg-card border border-card-border">
+              <div className="text-center">
+                <div className="text-2xl font-black text-secondary tabular-nums leading-none">3</div>
+                <div className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground mt-1">
+                  Counties
+                </div>
+              </div>
+              <div className="text-center border-x border-card-border">
+                <div className="text-2xl font-black text-secondary tabular-nums leading-none">
+                  {counties.reduce((acc, c) => acc + c.cities.length, 0)}+
+                </div>
+                <div className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground mt-1">
+                  Cities
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-black text-secondary tabular-nums leading-none">24/7</div>
+                <div className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground mt-1">
+                  Dispatch
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Map column */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+            className="relative order-1 lg:order-2"
+          >
+            {/* Mobile coverage hero (replaces the SVG map on phones) */}
+            <div className="lg:hidden relative rounded-3xl overflow-hidden bg-gradient-to-br from-primary via-[#021a8a] to-primary text-white p-6 sm:p-8 shadow-xl noise">
+              <div className="absolute -top-20 -right-20 w-60 h-60 bg-secondary/[0.18] rounded-full blur-[100px] pointer-events-none" />
+              <div className="absolute -bottom-24 -left-16 w-56 h-56 bg-accent/[0.10] rounded-full blur-[100px] pointer-events-none" />
+
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 mb-4">
+                  <Truck className="h-4 w-4 text-secondary" />
+                  <span className="text-[10px] uppercase tracking-[0.25em] font-extrabold text-secondary">
+                    Headquartered in Fort Myers
+                  </span>
+                </div>
+
+                {/* Stylized coverage band — three stacked county strips */}
+                <div className="space-y-2 mb-5">
+                  {counties.map((c) => {
+                    const isActive = active === c.key;
+                    return (
+                      <button
+                        type="button"
+                        key={c.key}
+                        onClick={() => setActive(c.key)}
+                        className={`w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl border text-left transition-all duration-300 ${
+                          isActive
+                            ? "bg-secondary/20 border-secondary/40 shadow-lg shadow-secondary/10"
+                            : "bg-white/5 border-white/10 hover:bg-white/10"
+                        }`}
+                        aria-pressed={isActive}
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <span
+                            className={`h-2 w-2 rounded-full transition-colors ${
+                              isActive ? "bg-secondary" : "bg-white/40"
+                            }`}
+                          />
+                          <span className="text-sm font-extrabold tracking-tight">
+                            {c.name.replace(" County", "")}
+                          </span>
+                        </div>
+                        <span
+                          className={`text-[10px] uppercase tracking-widest font-bold transition-colors ${
+                            isActive ? "text-secondary" : "text-white/45"
+                          }`}
+                        >
+                          {c.cities.length} cities
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className="flex items-center justify-between gap-3 pt-4 border-t border-white/10">
+                  <div className="min-w-0">
+                    <div className="text-[10px] uppercase tracking-widest font-bold text-white/50">
+                      Currently viewing
+                    </div>
+                    <div className="text-sm font-extrabold tracking-tight truncate">
+                      {activeCounty?.name ?? "All Counties"}
+                    </div>
+                  </div>
+                  <Link
+                    href="/schedule"
+                    className="inline-flex items-center gap-1 px-3 py-2 rounded-lg bg-secondary text-secondary-foreground text-[10px] font-extrabold uppercase tracking-widest hover:bg-secondary/90 transition-colors shrink-0"
+                  >
+                    Schedule
+                    <ArrowRight className="h-3 w-3" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop SVG map */}
+            <div className="hidden lg:block">
+              <div className="relative rounded-3xl overflow-hidden shadow-xl bg-gradient-to-br from-blue-50 to-blue-100 p-6 border border-blue-100/80">
+                <div className="flex items-center justify-center">
+                  <CountyMap active={active} onSelect={setActive} />
+                </div>
+              </div>
+
+              {/* Floating glass legend */}
+              <div className="absolute bottom-6 right-6 max-w-[280px] glass rounded-2xl p-4 shadow-xl">
+                <div className="flex items-center gap-2 mb-3">
+                  <Truck className="h-4 w-4 text-accent" />
+                  <span className="text-[10px] uppercase tracking-[0.22em] font-extrabold text-foreground">
+                    {activeCounty?.name ?? "Service Coverage"}
+                  </span>
+                </div>
+                {activeCounty && (
+                  <>
+                    <div className="text-xs font-bold text-foreground mb-1.5 uppercase tracking-wider">
+                      Cities we serve
+                    </div>
+                    <div className="text-sm text-muted-foreground leading-relaxed mb-3">
+                      {activeCounty.cities.join(" · ")}
+                    </div>
+                    <Link
+                      href="/schedule"
+                      className="inline-flex items-center gap-1 text-xs font-extrabold text-secondary hover:text-secondary/80 transition-colors uppercase tracking-widest"
+                    >
+                      Schedule Service
+                      <ArrowRight className="h-3 w-3" />
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
