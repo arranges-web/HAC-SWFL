@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { MapPin, Truck, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { MapPin, Truck, ArrowRight, ChevronDown, Phone } from "lucide-react";
 import { Link } from "wouter";
 
 type CountyKey = "charlotte" | "lee" | "collier";
@@ -43,13 +43,19 @@ const counties: County[] = [
   },
 ];
 
-function CountyMap({ active, setActive }: { active: CountyKey | null; setActive: (k: CountyKey | null) => void }) {
+function CountyMap({
+  active,
+  onSelect,
+}: {
+  active: CountyKey | null;
+  onSelect: (k: CountyKey) => void;
+}) {
   const reduceMotion = useReducedMotion();
   return (
     <svg
       viewBox="0 0 460 640"
       preserveAspectRatio="xMidYMid meet"
-      className="w-full h-auto max-h-[300px] sm:max-h-[460px] lg:max-h-none"
+      className="w-full h-auto"
       role="img"
       aria-label="Map of Hurricane Air Conditioning's Southwest Florida service area"
     >
@@ -78,11 +84,9 @@ function CountyMap({ active, setActive }: { active: CountyKey | null; setActive:
         </filter>
       </defs>
 
-      {/* Ocean background + dot grid */}
       <rect width="460" height="640" fill="url(#oceanGrad)" rx="28" />
       <rect width="460" height="640" fill="url(#dotgrid)" rx="28" />
 
-      {/* Coastline accent */}
       <path
         d="M40 0 Q 55 80 45 160 Q 35 240 50 320 Q 65 400 40 480 Q 30 560 50 640"
         stroke="white"
@@ -95,23 +99,25 @@ function CountyMap({ active, setActive }: { active: CountyKey | null; setActive:
         GULF
       </text>
 
-      {/* Compass */}
       <g transform="translate(412, 32)">
         <circle r="16" fill="white" stroke="hsl(228 30% 78%)" strokeWidth="1.2" />
         <path d="M0 -11 L3.5 0 L0 11 L-3.5 0 Z" fill="hsl(33 90% 54%)" />
         <text y="3" fontSize="7" fontWeight="800" fill="hsl(228 50% 25%)" textAnchor="middle">N</text>
       </g>
 
-      {/* Counties */}
       {counties.map((c) => {
         const isActive = active === c.key;
         return (
           <g
             key={c.key}
-            onMouseEnter={() => setActive(c.key)}
-            onFocus={() => setActive(c.key)}
+            onClick={() => onSelect(c.key)}
+            onMouseEnter={() => onSelect(c.key)}
+            onFocus={() => onSelect(c.key)}
             tabIndex={0}
-            className="cursor-pointer outline-none"
+            role="button"
+            aria-label={`Select ${c.name}`}
+            aria-pressed={isActive}
+            className="cursor-pointer outline-none focus-visible:[&>path]:stroke-secondary"
           >
             <path
               d={c.path}
@@ -148,7 +154,6 @@ function CountyMap({ active, setActive }: { active: CountyKey | null; setActive:
         );
       })}
 
-      {/* Dispatch routes from HQ */}
       {counties.map((c) => {
         if (c.key === "lee") return null;
         return (
@@ -163,7 +168,7 @@ function CountyMap({ active, setActive }: { active: CountyKey | null; setActive:
             strokeDasharray="5 7"
             strokeLinecap="round"
             opacity={active === c.key ? "1" : "0.55"}
-            className="transition-opacity duration-400"
+            className="transition-opacity duration-400 pointer-events-none"
           >
             {!reduceMotion && (
               <animate attributeName="stroke-dashoffset" from="0" to="-36" dur="1.8s" repeatCount="indefinite" />
@@ -172,7 +177,6 @@ function CountyMap({ active, setActive }: { active: CountyKey | null; setActive:
         );
       })}
 
-      {/* City pins */}
       {counties.flatMap((c, ci) =>
         c.cities.slice(0, 3).map((city, i) => {
           const angle = (i / 3) * Math.PI * 2 + ci * 0.6;
@@ -196,8 +200,7 @@ function CountyMap({ active, setActive }: { active: CountyKey | null; setActive:
         }),
       )}
 
-      {/* HQ pin (Fort Myers) */}
-      <g>
+      <g className="pointer-events-none">
         <circle cx={HQ.x} cy={HQ.y} r="34" fill="url(#hqHalo)">
           {!reduceMotion && (
             <animate attributeName="r" values="26;38;26" dur="3s" repeatCount="indefinite" />
@@ -219,8 +222,102 @@ function CountyMap({ active, setActive }: { active: CountyKey | null; setActive:
   );
 }
 
+function CountyCard({
+  county,
+  isActive,
+  onSelect,
+}: {
+  county: County;
+  isActive: boolean;
+  onSelect: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      onMouseEnter={onSelect}
+      onFocus={onSelect}
+      aria-expanded={isActive}
+      className={`w-full text-left rounded-2xl border transition-all duration-300 overflow-hidden ${
+        isActive
+          ? "bg-secondary/10 border-secondary/50 shadow-md"
+          : "bg-card border-card-border hover:border-secondary/30 hover:bg-secondary/5"
+      }`}
+    >
+      <div className="flex items-center gap-3 p-4 sm:p-5">
+        <div
+          className={`h-10 w-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+            isActive ? "bg-secondary/20 border border-secondary/40" : "bg-secondary/5 border border-secondary/15"
+          }`}
+        >
+          <MapPin className={`w-5 h-5 ${isActive ? "text-secondary" : "text-primary"}`} />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h4 className="font-extrabold text-base tracking-tight text-foreground leading-tight">
+            {county.name}
+          </h4>
+          <p className="text-xs text-muted-foreground mt-0.5 truncate">
+            {county.cities.length} cities · tap for details
+          </p>
+        </div>
+        <ChevronDown
+          className={`h-5 w-5 shrink-0 text-secondary transition-transform duration-300 ${
+            isActive ? "rotate-180" : ""
+          }`}
+        />
+      </div>
+      <AnimatePresence initial={false}>
+        {isActive && (
+          <motion.div
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="px-4 sm:px-5 pb-4 sm:pb-5">
+              <div className="text-[10px] uppercase tracking-widest font-extrabold text-secondary mb-2">
+                Cities we serve
+              </div>
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {county.cities.map((city) => (
+                  <span
+                    key={city}
+                    className="inline-flex items-center px-2.5 py-1 rounded-full bg-background border border-card-border text-xs font-bold text-foreground/85"
+                  >
+                    {city}
+                  </span>
+                ))}
+              </div>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Link
+                  href="/schedule"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-secondary text-secondary-foreground hover:bg-secondary/90 text-xs font-extrabold uppercase tracking-widest transition-colors"
+                >
+                  Schedule Service
+                  <ArrowRight className="h-3 w-3" />
+                </Link>
+                <a
+                  href="tel:2397481815"
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-background border border-card-border hover:border-secondary/40 hover:text-secondary text-xs font-extrabold uppercase tracking-widest transition-colors"
+                >
+                  <Phone className="h-3 w-3" />
+                  Call
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </button>
+  );
+}
+
 export function ServiceArea() {
-  const [active, setActive] = useState<CountyKey | null>("lee");
+  const [active, setActive] = useState<CountyKey>("lee");
   const activeCounty = counties.find((c) => c.key === active);
 
   return (
@@ -231,75 +328,64 @@ export function ServiceArea() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Copy + counties list */}
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-3xl mb-10 sm:mb-12 lg:mb-14"
+        >
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="h-px w-8 bg-secondary" />
+            <h2 className="text-xs font-bold tracking-[0.3em] text-secondary uppercase">Service Area</h2>
+          </div>
+          <h3 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-foreground leading-[1.05] tracking-tight mb-4 sm:mb-5">
+            Proudly serving all of <span className="text-secondary">Southwest Florida.</span>
+          </h3>
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl">
+            Headquartered in Fort Myers, our fully-stocked vans dispatch across three counties — covering every neighborhood from the Gulf to Lehigh Acres.
+          </p>
+        </motion.div>
+
+        {/* Mobile: map first (compact) → cards below.  Desktop: two-column. */}
+        <div className="grid lg:grid-cols-[1.05fr_1fr] gap-6 sm:gap-10 lg:gap-16 items-start">
+          {/* Map column */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="relative order-1 lg:order-2"
           >
-            <div className="inline-flex items-center gap-2 mb-3">
-              <span className="h-px w-8 bg-secondary" />
-              <h2 className="text-xs font-bold tracking-[0.3em] text-secondary uppercase">Service Area</h2>
-            </div>
-            <h3 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-foreground leading-[1.05] tracking-tight mb-5 sm:mb-6">
-              Proudly serving all of <span className="text-secondary">Southwest Florida.</span>
-            </h3>
-            <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
-              Headquartered in Fort Myers, our fully-stocked service vans dispatch across three counties — covering every neighborhood from the Gulf to Lehigh Acres.
-            </p>
+            <div className="relative rounded-3xl overflow-hidden shadow-xl bg-gradient-to-br from-blue-50 to-blue-100 p-3 sm:p-5 lg:p-6 border border-blue-100/80">
+              <div className="max-h-[300px] sm:max-h-[420px] lg:max-h-none overflow-hidden flex items-center justify-center">
+                <CountyMap active={active} onSelect={setActive} />
+              </div>
 
-            <div className="grid sm:grid-cols-2 gap-4">
-              {counties.map((county) => {
-                const isActive = active === county.key;
-                return (
-                  <button
-                    key={county.key}
-                    type="button"
-                    onMouseEnter={() => setActive(county.key)}
-                    onFocus={() => setActive(county.key)}
-                    className={`text-left rounded-2xl p-5 border transition-all duration-400 press ${
-                      isActive
-                        ? "bg-secondary/10 border-secondary/40 shadow-md"
-                        : "bg-card border-card-border hover:border-secondary/30 hover:bg-secondary/5"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <MapPin className={`w-4 h-4 ${isActive ? "text-secondary" : "text-primary"}`} />
-                      <h4 className="font-extrabold text-base tracking-tight text-foreground">{county.name}</h4>
-                    </div>
-                    <p className="text-xs text-muted-foreground leading-snug">
-                      {county.cities.slice(0, 3).join(" · ")}
-                      {county.cities.length > 3 && ` · +${county.cities.length - 3}`}
-                    </p>
-                  </button>
-                );
-              })}
-            </div>
-          </motion.div>
-
-          {/* Map */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative"
-          >
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-50 to-blue-100 p-4 sm:p-6 border border-blue-100/80 flex items-center justify-center">
-              <CountyMap active={active} setActive={setActive} />
+              {/* Mobile/tablet caption strip — replaces the floating legend */}
+              <div className="lg:hidden mt-3 flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl bg-white/70 backdrop-blur-sm border border-blue-100">
+                <div className="flex items-center gap-2 min-w-0">
+                  <Truck className="h-3.5 w-3.5 text-accent shrink-0" />
+                  <span className="text-[10px] uppercase tracking-widest font-extrabold text-foreground truncate">
+                    {activeCounty?.name ?? "Service Coverage"}
+                  </span>
+                </div>
+                <span className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground shrink-0">
+                  Tap a county to view cities
+                </span>
+              </div>
             </div>
 
-            {/* Floating glass legend */}
-            <div className="absolute bottom-6 left-6 right-6 sm:left-auto sm:right-6 sm:max-w-[280px] glass rounded-2xl p-4 shadow-xl">
+            {/* Floating glass legend — desktop only */}
+            <div className="hidden lg:block absolute bottom-6 right-6 max-w-[280px] glass rounded-2xl p-4 shadow-xl">
               <div className="flex items-center gap-2 mb-3">
                 <Truck className="h-4 w-4 text-accent" />
                 <span className="text-[10px] uppercase tracking-[0.22em] font-extrabold text-foreground">
-                  {activeCounty ? activeCounty.name : "Service Coverage"}
+                  {activeCounty?.name ?? "Service Coverage"}
                 </span>
               </div>
-              {activeCounty ? (
+              {activeCounty && (
                 <>
                   <div className="text-xs font-bold text-foreground mb-1.5 uppercase tracking-wider">
                     Cities we serve
@@ -315,10 +401,29 @@ export function ServiceArea() {
                     <ArrowRight className="h-3 w-3" />
                   </Link>
                 </>
-              ) : (
-                <p className="text-xs text-muted-foreground">Hover any county to see the cities we cover.</p>
               )}
             </div>
+          </motion.div>
+
+          {/* County cards column */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-3 order-2 lg:order-1"
+          >
+            <div className="text-[10px] uppercase tracking-[0.25em] font-extrabold text-secondary lg:mb-1">
+              Tap a county
+            </div>
+            {counties.map((county) => (
+              <CountyCard
+                key={county.key}
+                county={county}
+                isActive={active === county.key}
+                onSelect={() => setActive(county.key)}
+              />
+            ))}
           </motion.div>
         </div>
       </div>
