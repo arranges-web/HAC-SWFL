@@ -72,6 +72,7 @@ import ServiceAreaPage from "@/pages/ServiceAreaPage";
 import CareersPage from "@/pages/CareersPage";
 import OffersPage from "@/pages/OffersPage";
 import SchedulePage from "@/pages/SchedulePage";
+import AdminPage from "@/pages/AdminPage";
 import ReviewsPage from "@/pages/ReviewsPage";
 import CustomerServicePage from "@/pages/CustomerServicePage";
 
@@ -154,6 +155,7 @@ function Router() {
       <Route path="/careers" component={CareersPage} />
       <Route path="/offers" component={OffersPage} />
       <Route path="/schedule" component={SchedulePage} />
+      <Route path="/admin" component={AdminPage} />
       <Route path="/reviews" component={ReviewsPage} />
       <Route path="/customer-service" component={CustomerServicePage} />
 

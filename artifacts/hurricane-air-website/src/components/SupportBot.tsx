@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { Sparkles, X, Send, Phone, CheckCircle2, Calendar } from "lucide-react";
+import { submitBotInquiry } from "@/lib/leads-api";
 
 type Sender = "bot" | "user";
 
@@ -171,8 +172,15 @@ export function SupportBot() {
     setStep("done");
     const first = (draft.name || "").split(" ")[0] || "friend";
 
-    // eslint-disable-next-line no-console
-    console.info("[AI Comfort Specialist lead]", { ...draft, choice: value });
+    if (draft.name && draft.phone) {
+      void submitBotInquiry({
+        name: draft.name,
+        phone: draft.phone,
+        issue: draft.issue,
+        choice: value,
+        transcript: messages.map((m) => ({ sender: m.sender, text: m.text })),
+      });
+    }
 
     if (value.toLowerCase().includes("schedule")) {
       await pushBot(

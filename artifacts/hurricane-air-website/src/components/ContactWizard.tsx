@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
+import { submitContactLead } from "@/lib/leads-api";
 import {
   ArrowRight,
   ArrowLeft,
@@ -122,8 +123,16 @@ export function ContactWizard({ variant = "card", defaultService }: ContactWizar
     if (step < TOTAL_STEPS - 1) {
       setStep((s) => s + 1);
     } else {
-      // eslint-disable-next-line no-console
-      console.info("[ContactWizard submit]", data);
+      void submitContactLead({
+        service: data.service,
+        urgency: data.urgency,
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        zip: data.zip,
+        contactPref: data.contactPref,
+        details: data.details,
+      });
       setDone(true);
     }
   }

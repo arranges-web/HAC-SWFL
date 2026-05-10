@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
+import { submitPmaEnrollment } from "@/lib/leads-api";
 import {
   ArrowRight,
   ArrowLeft,
@@ -111,8 +112,23 @@ export function PmaSignupWizard() {
     if (step < TOTAL_STEPS - 1) {
       setStep((s) => s + 1);
     } else {
-      // eslint-disable-next-line no-console
-      console.info("[PMA enrollment]", data, priceForData(data));
+      const price = priceForData(data);
+      void submitPmaEnrollment({
+        propertyType: data.propertyType,
+        systems: data.systems,
+        systemAge: data.systemAge,
+        billing: data.billing,
+        startDate: data.startDate,
+        annualPriceCents: Math.round(price.annual * 100),
+        monthlyPriceCents: Math.round(price.monthly * 100),
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        address: data.address,
+        city: data.city,
+        zip: data.zip,
+        notes: data.notes,
+      });
       setDone(true);
     }
   }
