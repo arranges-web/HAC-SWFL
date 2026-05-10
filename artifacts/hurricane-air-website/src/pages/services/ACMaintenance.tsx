@@ -35,6 +35,19 @@ export default function ACMaintenance() {
         ]}
       />
 
+      <ServiceSection title="Our Technicians at Work">
+        <div className="relative w-full aspect-[16/7] rounded-3xl overflow-hidden shadow-xl">
+          <img
+            src="/team/ro-maintenance-1.jpeg"
+            alt="Hurricane Air technician Ro running diagnostics on an AC unit during a maintenance visit"
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
+        </div>
+      </ServiceSection>
+
       <ServiceSection title="What's Included in Every Tune-Up">
         <p className="text-muted-foreground text-lg leading-relaxed mb-8">
           Our 20-point precision tune-up covers every component of your air conditioning system. A well-maintained system lasts 3–5 years longer and uses up to 25% less energy than a neglected one.

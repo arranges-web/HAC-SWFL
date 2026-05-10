@@ -21,11 +21,11 @@ export function About() {
           >
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
               <img
-                src="/ac-install.png"
-                alt="Hurricane Air technician installing a high-efficiency system"
+                src="/team/chris-ro.jpeg"
+                alt="Chris and Ro — Hurricane Air technicians ready for another day serving SWFL homeowners"
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
+                className="w-full h-full object-cover object-center transition-transform duration-1000 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
               <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-3xl pointer-events-none" />

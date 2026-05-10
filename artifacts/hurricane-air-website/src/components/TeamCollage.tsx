@@ -1,7 +1,16 @@
 import { motion } from "framer-motion";
-import { ShieldCheck, Award, Users } from "lucide-react";
+import { ShieldCheck, Users } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+
+const galleryPhotos = [
+  { src: "/team/chris-ro.jpeg", alt: "Chris and Ro — Hurricane Air techs heading out on a job", tall: true },
+  { src: "/team/van-green.jpeg", alt: "Hurricane Air branded green service van on a SWFL job site" },
+  { src: "/team/tech-sunglasses.jpeg", alt: "Hurricane Air technician inspecting an outdoor AC unit" },
+  { src: "/team/ro-maintenance-1.jpeg", alt: "Ro running diagnostics during an AC maintenance visit" },
+  { src: "/team/joey-condenser.jpeg", alt: "Joey diagnosing an AC condenser", tall: true },
+  { src: "/team/austin-truck.png", alt: "Austin with a fully stocked Hurricane Air service van" },
+];
 
 export function TeamCollage() {
   return (
@@ -12,112 +21,110 @@ export function TeamCollage() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Photo */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative order-2 lg:order-1"
-          >
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-card-border bg-primary">
-              <img
-                src="/team-collage.jpg"
-                alt="The Hurricane Air technicians and team in Fort Myers, Florida"
-                className="w-full h-auto block"
-                loading="lazy"
-              />
-              {/* Subtle gradient overlay for premium feel */}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent pointer-events-none" />
-            </div>
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-10 sm:mb-14"
+        >
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="h-px w-8 bg-secondary/60" />
+            <span className="text-xs font-bold tracking-[0.3em] uppercase text-secondary">Real People. Real Work.</span>
+            <span className="h-px w-8 bg-secondary/60" />
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight leading-tight">
+            Your neighbors — out in the field,{" "}
+            <span className="text-secondary">every day.</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+            These aren't stock photos. This is our actual team, on actual jobs, across Lee, Collier, and Charlotte Counties.
+          </p>
+        </motion.div>
 
-            {/* Floating accent badge */}
+        {/* Masonry-style photo grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4" style={{ gridAutoRows: "220px" }}>
+          {galleryPhotos.map((photo, i) => (
             <motion.div
-              initial={{ opacity: 0, scale: 0.85, y: 16 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute -bottom-6 -right-3 sm:-right-6 bg-card border border-card-border rounded-2xl p-4 sm:p-5 shadow-2xl flex items-center gap-3"
+              key={photo.src}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.55, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+              className={`relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-lg group ${
+                photo.tall ? "row-span-2" : ""
+              }`}
             >
-              <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-secondary/15 border border-secondary/30 flex items-center justify-center shrink-0">
-                <Award className="h-5 w-5 sm:h-6 sm:w-6 text-secondary" />
-              </div>
-              <div className="leading-tight">
-                <div className="text-xl sm:text-2xl font-extrabold text-foreground tabular-nums">20+ years</div>
-                <div className="text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground font-bold">
-                  Serving SWFL
-                </div>
-              </div>
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/15 transition-colors duration-500" />
+              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/25 to-transparent pointer-events-none" />
             </motion.div>
-          </motion.div>
-
-          {/* Copy */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="order-1 lg:order-2"
-          >
-            <div className="inline-flex items-center gap-2 mb-3">
-              <span className="h-px w-8 bg-secondary" />
-              <h2 className="text-xs font-bold tracking-[0.3em] text-secondary uppercase">Locally Owned · Family Run</h2>
-            </div>
-            <h3 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-foreground leading-[1.05] tracking-tight mb-5 sm:mb-6">
-              Your neighbors{" "}
-              <span className="text-secondary">in Fort Myers.</span>{" "}
-              Not a franchise.
-            </h3>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
-              Hurricane Air is a privately owned, family-run HVAC company — founded and operated right here in Southwest Florida since 2003.
-              Every technician is licensed, background-checked, and trained in-house — never subcontracted, never out-of-state. When we show up at your door, you're getting someone we'd send to our own grandmother's house.
-            </p>
-
-            <div className="grid sm:grid-cols-2 gap-4 mb-8">
-              <div className="flex items-start gap-3 p-4 rounded-2xl bg-card border border-card-border">
-                <div className="h-10 w-10 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center shrink-0">
-                  <ShieldCheck className="h-5 w-5 text-secondary" />
-                </div>
-                <div className="leading-tight">
-                  <div className="text-sm font-extrabold text-foreground">Privately Owned</div>
-                  <div className="text-xs text-muted-foreground mt-0.5 leading-snug">
-                    Independent, family-operated since 2003.
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 p-4 rounded-2xl bg-card border border-card-border">
-                <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
-                  <Users className="h-5 w-5 text-accent" />
-                </div>
-                <div className="leading-tight">
-                  <div className="text-sm font-extrabold text-foreground">100% Local Team</div>
-                  <div className="text-xs text-muted-foreground mt-0.5 leading-snug">
-                    W-2 employees · trained in-house · never subbed.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <Button
-                asChild
-                size="lg"
-                className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-12 px-6 glow-green"
-              >
-                <Link href="/about">Meet the Team</Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-card-border hover:border-secondary/40 hover:text-secondary font-bold h-12 px-6"
-              >
-                <Link href="/careers">We're Hiring</Link>
-              </Button>
-            </div>
-          </motion.div>
+          ))}
         </div>
+
+        {/* Trust badges row */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10 sm:mt-14 grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto"
+        >
+          <div className="flex items-start gap-3 p-4 rounded-2xl bg-card border border-card-border">
+            <div className="h-10 w-10 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center shrink-0">
+              <ShieldCheck className="h-5 w-5 text-secondary" />
+            </div>
+            <div className="leading-tight">
+              <div className="text-sm font-extrabold text-foreground">Privately Owned Since 2003</div>
+              <div className="text-xs text-muted-foreground mt-0.5 leading-snug">
+                Independent, family-operated — not a franchise.
+              </div>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 p-4 rounded-2xl bg-card border border-card-border">
+            <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
+              <Users className="h-5 w-5 text-accent" />
+            </div>
+            <div className="leading-tight">
+              <div className="text-sm font-extrabold text-foreground">100% Local, W-2 Team</div>
+              <div className="text-xs text-muted-foreground mt-0.5 leading-snug">
+                Trained in-house · never subcontracted · always accountable.
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* CTA buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-wrap justify-center gap-3 mt-6"
+        >
+          <Button
+            asChild
+            size="lg"
+            className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-12 px-6 glow-green"
+          >
+            <Link href="/about">Meet the Team</Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-card-border hover:border-secondary/40 hover:text-secondary font-bold h-12 px-6"
+          >
+            <Link href="/careers">We're Hiring</Link>
+          </Button>
+        </motion.div>
       </div>
     </section>
   );

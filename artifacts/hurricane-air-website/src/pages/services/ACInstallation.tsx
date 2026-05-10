@@ -32,6 +32,19 @@ export default function ACInstallation() {
         ]}
       />
 
+      <ServiceSection title="Our Technicians at Work">
+        <div className="relative w-full aspect-[16/7] rounded-3xl overflow-hidden shadow-xl">
+          <img
+            src="/team/install-condenser.jpeg"
+            alt="Hurricane Air technician installing a new high-efficiency AC condenser at a Southwest Florida home"
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
+        </div>
+      </ServiceSection>
+
       <ServiceSection title="What's Included in Our A/C Installation">
         <p className="text-muted-foreground text-lg leading-relaxed mb-8">
           A new air conditioning system is one of the most important investments you'll make in your home. Hurricane Air ensures the job is done right the first time — from proper sizing to professional commissioning.

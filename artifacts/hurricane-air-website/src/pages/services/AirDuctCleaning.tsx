@@ -33,6 +33,19 @@ export default function AirDuctCleaning() {
         ]}
       />
 
+      <ServiceSection title="Our Technicians at Work">
+        <div className="relative w-full aspect-[16/7] rounded-3xl overflow-hidden shadow-xl">
+          <img
+            src="/team/duct-cleaning.jpeg"
+            alt="Hurricane Air technician cleaning air ducts at a customer's home in Southwest Florida"
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
+        </div>
+      </ServiceSection>
+
       <ServiceSection title="Why Clean Your Air Ducts?">
         <IncludedList
           items={[
