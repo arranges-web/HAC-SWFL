@@ -4,12 +4,18 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 
 const galleryPhotos = [
-  { src: "/team/chris-ro.jpeg", alt: "Chris and Ro — Hurricane Air techs heading out on a job", tall: true },
-  { src: "/team/van-green.jpeg", alt: "Hurricane Air branded green service van on a SWFL job site" },
-  { src: "/team/tech-sunglasses.jpeg", alt: "Hurricane Air technician inspecting an outdoor AC unit" },
-  { src: "/team/ro-maintenance-1.jpeg", alt: "Ro running diagnostics during an AC maintenance visit" },
-  { src: "/team/joey-condenser.jpeg", alt: "Joey diagnosing an AC condenser", tall: true },
-  { src: "/team/austin-truck.png", alt: "Austin with a fully stocked Hurricane Air service van" },
+  { src: "/team/chris-ro.jpeg",        alt: "Chris and Ro — Hurricane Air technicians heading out on a job", tall: true },
+  { src: "/team/van-green.jpeg",        alt: "Hurricane Air branded green service van at a SWFL job site" },
+  { src: "/team/tech-sunglasses.jpeg",  alt: "Hurricane Air technician inspecting an outdoor AC unit" },
+  { src: "/team/ro-maintenance-1.jpeg", alt: "Ro running diagnostics during a scheduled AC maintenance visit" },
+  { src: "/team/brian-truck.jpeg",      alt: "Brian loading a fully stocked Hurricane Air service van" },
+  { src: "/team/joey-condenser.jpeg",   alt: "Joey working on an AC condenser unit", tall: true },
+  { src: "/team/austin-truck.png",      alt: "Austin with a Hurricane Air service van ready for the day" },
+  { src: "/team/van-blue.jpeg",         alt: "Hurricane Air branded blue service van — Just Another Quality Job!" },
+  { src: "/team/tech-gauges.jpeg",      alt: "Hurricane Air technician checking refrigerant pressure with gauges" },
+  { src: "/team/duct-cleaning.jpeg",    alt: "Hurricane Air technician cleaning ceiling ductwork at a customer's home" },
+  { src: "/team/install-condenser.jpeg",alt: "Team installing a new high-efficiency AC condenser at a SWFL property" },
+  { src: "/team/ro-maintenance-2.jpeg", alt: "Ro performing an AC maintenance check at an outdoor unit" },
 ];
 
 export function TeamCollage() {
@@ -43,15 +49,18 @@ export function TeamCollage() {
           </p>
         </motion.div>
 
-        {/* Masonry-style photo grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4" style={{ gridAutoRows: "220px" }}>
+        {/* Masonry photo grid — all 12 real team photos */}
+        <div
+          className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
+          style={{ gridAutoRows: "200px" }}
+        >
           {galleryPhotos.map((photo, i) => (
             <motion.div
               key={photo.src}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.55, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.55, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
               className={`relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-lg group ${
                 photo.tall ? "row-span-2" : ""
               }`}
@@ -69,7 +78,7 @@ export function TeamCollage() {
           ))}
         </div>
 
-        {/* Trust badges row */}
+        {/* Trust badges */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
