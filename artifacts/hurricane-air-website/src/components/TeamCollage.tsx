@@ -139,12 +139,12 @@ export function TeamCollage() {
             </div>
           </motion.div>
 
-          {/* Editorial photo grid */}
+          {/* Editorial photo grid: 1 featured + 3 supporting stacked beside it */}
           <div className="lg:col-span-7 order-1 lg:order-2">
-            <div className="grid grid-cols-12 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-[1.5fr_1fr] gap-3 sm:gap-4 sm:h-[480px] lg:h-[560px]">
               {/* Featured photo */}
-              <div className="col-span-12 sm:col-span-7 sm:row-span-2 aspect-[4/5] sm:aspect-auto sm:h-[500px] lg:h-[560px] relative">
-                <PhotoTile photo={featured} loading="eager" className="absolute inset-0" />
+              <div className="relative aspect-[4/5] sm:aspect-auto sm:h-full">
+                <PhotoTile photo={featured} loading="eager" className="absolute inset-0 h-full" />
 
                 {/* Floating "20+ years" badge */}
                 <motion.div
@@ -152,7 +152,7 @@ export function TeamCollage() {
                   whileInView={{ opacity: 1, scale: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                  className="absolute bottom-3 right-3 sm:bottom-5 sm:right-5 bg-card border border-card-border rounded-2xl p-3 sm:p-4 shadow-2xl flex items-center gap-2.5 sm:gap-3"
+                  className="absolute bottom-3 right-3 sm:bottom-5 sm:right-5 bg-card border border-card-border rounded-2xl p-3 sm:p-4 shadow-2xl flex items-center gap-2.5 sm:gap-3 z-10"
                 >
                   <div className="h-9 w-9 sm:h-11 sm:w-11 rounded-xl bg-secondary/15 border border-secondary/30 flex items-center justify-center shrink-0">
                     <Award className="h-4 w-4 sm:h-5 sm:w-5 text-secondary" />
@@ -168,20 +168,14 @@ export function TeamCollage() {
                 </motion.div>
               </div>
 
-              {/* Supporting photos */}
-              {supporting.map((photo, i) => (
-                <div
-                  key={photo.src}
-                  className={
-                    i === 0
-                      ? "col-span-12 sm:col-span-5 aspect-[5/3] sm:aspect-auto sm:h-[242px] lg:h-[272px]"
-                      : "col-span-6 sm:col-span-5 aspect-[5/4] sm:aspect-auto sm:h-[242px] lg:h-[272px]"
-                  }
-                  style={i > 0 ? { marginLeft: i === 1 ? 0 : undefined } : undefined}
-                >
-                  <PhotoTile photo={photo} className="h-full" />
-                </div>
-              ))}
+              {/* Supporting photos — 3-column row on mobile, vertical stack on desktop */}
+              <div className="grid grid-cols-3 sm:grid-cols-1 gap-3 sm:gap-4 sm:h-full">
+                {supporting.map((photo) => (
+                  <div key={photo.src} className="relative aspect-square sm:aspect-auto sm:h-full">
+                    <PhotoTile photo={photo} className="absolute inset-0 h-full" />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
