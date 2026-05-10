@@ -1,22 +1,74 @@
 import { motion } from "framer-motion";
-import { ShieldCheck, Users } from "lucide-react";
+import { ShieldCheck, Users, Award } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 
-const galleryPhotos = [
-  { src: "/team/chris-ro.jpeg",        alt: "Chris and Ro — Hurricane Air technicians heading out on a job", tall: true },
-  { src: "/team/van-green.jpeg",        alt: "Hurricane Air branded green service van at a SWFL job site" },
-  { src: "/team/tech-sunglasses.jpeg",  alt: "Hurricane Air technician inspecting an outdoor AC unit" },
-  { src: "/team/ro-maintenance-1.jpeg", alt: "Ro running diagnostics during a scheduled AC maintenance visit" },
-  { src: "/team/brian-truck.jpeg",      alt: "Brian loading a fully stocked Hurricane Air service van" },
-  { src: "/team/joey-condenser.jpeg",   alt: "Joey working on an AC condenser unit", tall: true },
-  { src: "/team/austin-truck.png",      alt: "Austin with a Hurricane Air service van ready for the day" },
-  { src: "/team/van-blue.jpeg",         alt: "Hurricane Air branded blue service van — Just Another Quality Job!" },
-  { src: "/team/tech-gauges.jpeg",      alt: "Hurricane Air technician checking refrigerant pressure with gauges" },
-  { src: "/team/duct-cleaning.jpeg",    alt: "Hurricane Air technician cleaning ceiling ductwork at a customer's home" },
-  { src: "/team/install-condenser.jpeg",alt: "Team installing a new high-efficiency AC condenser at a SWFL property" },
-  { src: "/team/ro-maintenance-2.jpeg", alt: "Ro performing an AC maintenance check at an outdoor unit" },
+interface FeaturePhoto {
+  src: string;
+  alt: string;
+  caption: string;
+}
+
+const featured: FeaturePhoto = {
+  src: "/team/install-condenser.jpeg",
+  alt: "Hurricane Air technicians installing a new high-efficiency condenser at a Southwest Florida home",
+  caption: "New install · Fort Myers",
+};
+
+const supporting: FeaturePhoto[] = [
+  {
+    src: "/team/van-green.jpeg",
+    alt: "Hurricane Air branded service van on a SWFL job site",
+    caption: "Branded fleet · Fully stocked",
+  },
+  {
+    src: "/team/tech-gauges.jpeg",
+    alt: "Hurricane Air technician checking refrigerant pressure with calibrated gauges",
+    caption: "Refrigerant diagnostics",
+  },
+  {
+    src: "/team/duct-cleaning.jpeg",
+    alt: "Hurricane Air technician cleaning ceiling ductwork at a customer's home",
+    caption: "Indoor air quality",
+  },
 ];
+
+function PhotoTile({
+  photo,
+  className,
+  loading = "lazy",
+  showCaption = true,
+}: {
+  photo: FeaturePhoto;
+  className?: string;
+  loading?: "lazy" | "eager";
+  showCaption?: boolean;
+}) {
+  return (
+    <motion.figure
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className={`relative overflow-hidden rounded-3xl shadow-xl group bg-primary ${className ?? ""}`}
+    >
+      <img
+        src={photo.src}
+        alt={photo.alt}
+        loading={loading}
+        decoding="async"
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-primary/55 via-primary/5 to-transparent pointer-events-none" />
+      {showCaption && (
+        <figcaption className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm text-foreground text-[10px] uppercase tracking-widest font-extrabold shadow-sm">
+          <span className="h-1.5 w-1.5 rounded-full bg-secondary" />
+          {photo.caption}
+        </figcaption>
+      )}
+    </motion.figure>
+  );
+}
 
 export function TeamCollage() {
   return (
@@ -27,114 +79,142 @@ export function TeamCollage() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-10 sm:mb-14"
-        >
-          <div className="inline-flex items-center gap-2 mb-3">
-            <span className="h-px w-8 bg-secondary/60" />
-            <span className="text-xs font-bold tracking-[0.3em] uppercase text-secondary">Real People. Real Work.</span>
-            <span className="h-px w-8 bg-secondary/60" />
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight leading-tight">
-            Your neighbors — out in the field,{" "}
-            <span className="text-secondary">every day.</span>
-          </h2>
-          <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-            These aren't stock photos. This is our actual team, on actual jobs, across Lee, Collier, and Charlotte Counties.
-          </p>
-        </motion.div>
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Copy column */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 order-2 lg:order-1"
+          >
+            <div className="inline-flex items-center gap-2 mb-3">
+              <span className="h-px w-8 bg-secondary" />
+              <span className="text-xs font-bold tracking-[0.3em] uppercase text-secondary">
+                Locally Owned · Family Run
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-foreground tracking-tight leading-[1.05] mb-5 sm:mb-6">
+              Your neighbors{" "}
+              <span className="text-secondary">in Fort Myers.</span>{" "}
+              Not a franchise.
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-7 max-w-lg">
+              These aren't stock photos. Hurricane Air is a privately owned, family-run HVAC company —
+              founded and operated right here in Southwest Florida since 2003. Every technician on every
+              job is one of ours.
+            </p>
 
-        {/* Masonry photo grid — all 12 real team photos */}
-        <div
-          className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
-          style={{ gridAutoRows: "200px" }}
-        >
-          {galleryPhotos.map((photo, i) => (
-            <motion.div
-              key={photo.src}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.55, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className={`relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-lg group ${
-                photo.tall ? "row-span-2" : ""
-              }`}
-            >
-              <img
-                src={photo.src}
-                alt={photo.alt}
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            <div className="grid sm:grid-cols-2 gap-3 mb-7 max-w-lg">
+              <TrustCard
+                icon={ShieldCheck}
+                title="Privately Owned"
+                desc="Independent · family-operated since 2003."
+                tone="secondary"
               />
-              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/15 transition-colors duration-500" />
-              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/25 to-transparent pointer-events-none" />
-            </motion.div>
-          ))}
+              <TrustCard
+                icon={Users}
+                title="100% Local Team"
+                desc="W-2 employees · trained in-house · never subbed."
+                tone="accent"
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <Button
+                asChild
+                size="lg"
+                className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-12 px-6 glow-green"
+              >
+                <Link href="/about">Meet the Team</Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-card-border hover:border-secondary/40 hover:text-secondary font-bold h-12 px-6"
+              >
+                <Link href="/careers">We're Hiring</Link>
+              </Button>
+            </div>
+          </motion.div>
+
+          {/* Editorial photo grid */}
+          <div className="lg:col-span-7 order-1 lg:order-2">
+            <div className="grid grid-cols-12 gap-3 sm:gap-4">
+              {/* Featured photo */}
+              <div className="col-span-12 sm:col-span-7 sm:row-span-2 aspect-[4/5] sm:aspect-auto sm:h-[500px] lg:h-[560px] relative">
+                <PhotoTile photo={featured} loading="eager" className="absolute inset-0" />
+
+                {/* Floating "20+ years" badge */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.85, y: 16 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute bottom-3 right-3 sm:bottom-5 sm:right-5 bg-card border border-card-border rounded-2xl p-3 sm:p-4 shadow-2xl flex items-center gap-2.5 sm:gap-3"
+                >
+                  <div className="h-9 w-9 sm:h-11 sm:w-11 rounded-xl bg-secondary/15 border border-secondary/30 flex items-center justify-center shrink-0">
+                    <Award className="h-4 w-4 sm:h-5 sm:w-5 text-secondary" />
+                  </div>
+                  <div className="leading-tight">
+                    <div className="text-base sm:text-xl font-extrabold text-foreground tabular-nums">
+                      20+ years
+                    </div>
+                    <div className="text-[9px] sm:text-[10px] uppercase tracking-widest text-muted-foreground font-bold">
+                      Serving SWFL
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Supporting photos */}
+              {supporting.map((photo, i) => (
+                <div
+                  key={photo.src}
+                  className={
+                    i === 0
+                      ? "col-span-12 sm:col-span-5 aspect-[5/3] sm:aspect-auto sm:h-[242px] lg:h-[272px]"
+                      : "col-span-6 sm:col-span-5 aspect-[5/4] sm:aspect-auto sm:h-[242px] lg:h-[272px]"
+                  }
+                  style={i > 0 ? { marginLeft: i === 1 ? 0 : undefined } : undefined}
+                >
+                  <PhotoTile photo={photo} className="h-full" />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-
-        {/* Trust badges */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 sm:mt-14 grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto"
-        >
-          <div className="flex items-start gap-3 p-4 rounded-2xl bg-card border border-card-border">
-            <div className="h-10 w-10 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center shrink-0">
-              <ShieldCheck className="h-5 w-5 text-secondary" />
-            </div>
-            <div className="leading-tight">
-              <div className="text-sm font-extrabold text-foreground">Privately Owned Since 2003</div>
-              <div className="text-xs text-muted-foreground mt-0.5 leading-snug">
-                Independent, family-operated — not a franchise.
-              </div>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 p-4 rounded-2xl bg-card border border-card-border">
-            <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
-              <Users className="h-5 w-5 text-accent" />
-            </div>
-            <div className="leading-tight">
-              <div className="text-sm font-extrabold text-foreground">100% Local, W-2 Team</div>
-              <div className="text-xs text-muted-foreground mt-0.5 leading-snug">
-                Trained in-house · never subcontracted · always accountable.
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* CTA buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap justify-center gap-3 mt-6"
-        >
-          <Button
-            asChild
-            size="lg"
-            className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold h-12 px-6 glow-green"
-          >
-            <Link href="/about">Meet the Team</Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-card-border hover:border-secondary/40 hover:text-secondary font-bold h-12 px-6"
-          >
-            <Link href="/careers">We're Hiring</Link>
-          </Button>
-        </motion.div>
       </div>
     </section>
+  );
+}
+
+function TrustCard({
+  icon: Icon,
+  title,
+  desc,
+  tone,
+}: {
+  icon: typeof ShieldCheck;
+  title: string;
+  desc: string;
+  tone: "secondary" | "accent";
+}) {
+  const wrapper =
+    tone === "secondary"
+      ? "bg-secondary/10 border-secondary/20"
+      : "bg-accent/10 border-accent/20";
+  const iconColor = tone === "secondary" ? "text-secondary" : "text-accent";
+  return (
+    <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-card border border-card-border">
+      <div className={`h-10 w-10 rounded-xl border flex items-center justify-center shrink-0 ${wrapper}`}>
+        <Icon className={`h-5 w-5 ${iconColor}`} />
+      </div>
+      <div className="leading-tight">
+        <div className="text-sm font-extrabold text-foreground">{title}</div>
+        <div className="text-xs text-muted-foreground mt-0.5 leading-snug">{desc}</div>
+      </div>
+    </div>
   );
 }

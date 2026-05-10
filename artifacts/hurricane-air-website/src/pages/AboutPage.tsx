@@ -1,6 +1,17 @@
-import { Award, Users, Shield, Clock, Star, Heart } from "lucide-react";
+import { Award, Users, Shield, Clock, Star, Heart, Camera } from "lucide-react";
 import { PageLayout } from "@/components/PageLayout";
 import { motion } from "framer-motion";
+
+const teamGallery = [
+  { src: "/team/chris-ro.jpeg",        alt: "Chris and Ro — Hurricane Air technicians ready for another day in SWFL", tall: true },
+  { src: "/team/joey-condenser.jpeg",   alt: "Joey working on an outdoor AC condenser unit" },
+  { src: "/team/ro-maintenance-1.jpeg", alt: "Ro running diagnostics during a scheduled maintenance visit" },
+  { src: "/team/austin-truck.png",      alt: "Austin with a fully stocked Hurricane Air service van" },
+  { src: "/team/brian-truck.jpeg",      alt: "Brian loading the truck before a service call" },
+  { src: "/team/van-blue.jpeg",         alt: "Hurricane Air branded blue service van — Just Another Quality Job", tall: true },
+  { src: "/team/tech-sunglasses.jpeg",  alt: "Hurricane Air technician inspecting an outdoor AC unit" },
+  { src: "/team/ro-maintenance-2.jpeg", alt: "Ro performing an AC maintenance check at an outdoor unit" },
+];
 
 const values = [
   { icon: Shield, label: "Trust", desc: "We show up on time, tell you the truth, and stand behind every job we do." },
@@ -112,6 +123,50 @@ export default function AboutPage() {
             </div>
           </motion.div>
         ))}
+      </div>
+
+      {/* Team in action gallery */}
+      <div className="mt-16">
+        <div className="flex items-end justify-between gap-4 flex-wrap mb-6">
+          <div>
+            <div className="inline-flex items-center gap-2 mb-2">
+              <Camera className="h-4 w-4 text-secondary" />
+              <span className="text-xs font-bold tracking-[0.3em] uppercase text-secondary">Team in Action</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
+              Real photos from real jobs.
+            </h2>
+          </div>
+          <p className="text-sm text-muted-foreground max-w-md">
+            Every image is our actual team in Lee, Collier &amp; Charlotte counties. No stock photography, no national franchise marketing.
+          </p>
+        </div>
+        <div
+          className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
+          style={{ gridAutoRows: "180px" }}
+        >
+          {teamGallery.map((photo, i) => (
+            <motion.div
+              key={photo.src}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.55, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
+              className={`relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-lg group bg-primary ${
+                photo.tall ? "row-span-2" : ""
+              }`}
+            >
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+              />
+              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-primary/40 to-transparent pointer-events-none" />
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {/* Licensing */}
