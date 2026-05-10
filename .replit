@@ -34,3 +34,8 @@ externalPort = 3001
 [[ports]]
 localPort = 19314
 externalPort = 3000
+
+[userenv]
+
+[userenv.shared]
+ADMIN_PASSWORD = "Hurricane"
