@@ -161,28 +161,37 @@ export function Footer() {
 
             <div>
               <h4 className="font-extrabold text-sm uppercase tracking-[0.2em] text-secondary mb-5">Service Area</h4>
-              <ul className="space-y-3 text-sm text-white/70">
-                <li>Lee County</li>
-                <li>Collier County</li>
-                <li>Charlotte County</li>
-              </ul>
-
-              <h4 className="font-extrabold text-sm uppercase tracking-[0.2em] text-secondary mt-7 mb-4">
-                Pelican Bay
-              </h4>
-              <ul className="space-y-2.5 text-sm">
+              <ul className="space-y-2 text-sm">
                 {[
-                  ["AC Repair", "/pelican-bay/ac-repair"],
-                  ["HVAC Replacement", "/pelican-bay/ac-installation"],
-                  ["High-Efficiency AC", "/pelican-bay/energy-efficient-ac"],
-                ].map(([label, href]) => (
-                  <li key={label}>
-                    <Link href={href} className="text-white/70 hover:text-secondary transition-colors inline-block">
-                      {label}
+                  ["Fort Myers", "fort-myers"],
+                  ["Cape Coral", "cape-coral"],
+                  ["Bonita Springs", "bonita-springs"],
+                  ["Estero", "estero"],
+                  ["Lehigh Acres", "lehigh-acres"],
+                  ["Naples", "naples"],
+                  ["Pelican Bay", "pelican-bay"],
+                  ["Marco Island", "marco-island"],
+                  ["Golden Gate", "golden-gate"],
+                  ["Punta Gorda", "punta-gorda"],
+                  ["Port Charlotte", "port-charlotte"],
+                  ["Englewood", "englewood"],
+                ].map(([label, slug]) => (
+                  <li key={slug}>
+                    <Link
+                      href={`/${slug}/ac-repair`}
+                      className="text-white/70 hover:text-secondary transition-colors inline-block"
+                    >
+                      {label} <span className="text-white/30 text-xs">→ AC Repair</span>
                     </Link>
                   </li>
                 ))}
               </ul>
+              <Link
+                href="/service-area"
+                className="inline-block mt-4 text-[11px] font-extrabold uppercase tracking-widest text-secondary hover:text-secondary/80"
+              >
+                View full service map →
+              </Link>
             </div>
 
             {/* Contact glass card */}

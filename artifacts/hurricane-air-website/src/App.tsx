@@ -158,10 +158,8 @@ function Router() {
       <Route path="/schedule" component={SchedulePage} />
       <Route path="/admin" component={AdminPage} />
 
-      {/* Location landing pages (SEO) */}
-      <Route path="/pelican-bay/ac-installation" component={LocationServicePage} />
-      <Route path="/pelican-bay/ac-repair" component={LocationServicePage} />
-      <Route path="/pelican-bay/energy-efficient-ac" component={LocationServicePage} />
+      {/* Location landing pages (SEO) — dynamic /:city/:service */}
+      <Route path="/:location/:service" component={LocationServicePage} />
       <Route path="/reviews" component={ReviewsPage} />
       <Route path="/customer-service" component={CustomerServicePage} />
 
