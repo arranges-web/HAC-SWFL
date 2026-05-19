@@ -73,6 +73,7 @@ import CareersPage from "@/pages/CareersPage";
 import OffersPage from "@/pages/OffersPage";
 import SchedulePage from "@/pages/SchedulePage";
 import AdminPage from "@/pages/AdminPage";
+import LocationServicePage from "@/pages/LocationServicePage";
 import ReviewsPage from "@/pages/ReviewsPage";
 import CustomerServicePage from "@/pages/CustomerServicePage";
 
@@ -156,6 +157,11 @@ function Router() {
       <Route path="/offers" component={OffersPage} />
       <Route path="/schedule" component={SchedulePage} />
       <Route path="/admin" component={AdminPage} />
+
+      {/* Location landing pages (SEO) */}
+      <Route path="/pelican-bay/ac-installation" component={LocationServicePage} />
+      <Route path="/pelican-bay/ac-repair" component={LocationServicePage} />
+      <Route path="/pelican-bay/energy-efficient-ac" component={LocationServicePage} />
       <Route path="/reviews" component={ReviewsPage} />
       <Route path="/customer-service" component={CustomerServicePage} />
 

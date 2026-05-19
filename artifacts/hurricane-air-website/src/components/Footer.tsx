@@ -166,6 +166,23 @@ export function Footer() {
                 <li>Collier County</li>
                 <li>Charlotte County</li>
               </ul>
+
+              <h4 className="font-extrabold text-sm uppercase tracking-[0.2em] text-secondary mt-7 mb-4">
+                Pelican Bay
+              </h4>
+              <ul className="space-y-2.5 text-sm">
+                {[
+                  ["AC Repair", "/pelican-bay/ac-repair"],
+                  ["HVAC Replacement", "/pelican-bay/ac-installation"],
+                  ["High-Efficiency AC", "/pelican-bay/energy-efficient-ac"],
+                ].map(([label, href]) => (
+                  <li key={label}>
+                    <Link href={href} className="text-white/70 hover:text-secondary transition-colors inline-block">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {/* Contact glass card */}
